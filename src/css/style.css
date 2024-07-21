@@ -1,0 +1,440 @@
+@font-face {
+  font-family: "aptosArrow";
+  src: url(../fonts/aptosNarrow.ttf) format(truetype);
+}
+
+:root {
+  --color-principal: rgb(1, 31, 87);
+  --color-principal-transparente: rgba(1, 31, 87, 0.5);
+
+  --color-secundario: rgb(13, 110, 253);
+  --color-secundario-transparente: rgba(13, 109, 253, 0.3);
+
+  --color-blanco: rgb(255, 255, 255);
+  --color-negro: rgb(0, 0, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  background: linear-gradient(white, rgba(137, 176, 235, 0.5));
+  font-family: "aptosArrow", sans-serif !important;
+}
+
+/* ?================Barra de navegacion */
+header .container .col-izquierda {
+  display: flex;
+  align-items: end;
+  flex-flow: row wrap;
+  gap: 1%;
+  width: 50%;
+}
+
+header .container img {
+  width: 20%;
+}
+
+header .container .col-izquierda h1 {
+  color: #000;
+  font-size: 2.5rem;
+  margin: -6px;
+  text-transform: uppercase;
+  text-shadow: 0 0 2px var(--color-secundario);
+}
+
+header .container .header__navbar__container {
+  width: 50%;
+  height: 50px;
+}
+
+header .container .header__navbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: end;
+  align-content: center;
+  gap: 3%;
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+header .container .nav-item {
+  padding: 1% 2%;
+  box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.2);
+  border-radius: 10px;
+
+  &:hover {
+    background-color: hsla(211, 100%, 50%, 0.2);
+    cursor: pointer;
+  }
+}
+
+header .container ul li a {
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: 400;
+  display: block;
+}
+
+/* !================Encabezado */
+section .img_fondo {
+  position: relative;
+  padding: 0;
+}
+
+.encabezado img {
+  width: 100vw;
+  height: 100vh;
+}
+
+.encabezado .img_fondo p {
+  width: 40%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-blanco);
+  background-color: var(--color-principal-transparente);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 1%;
+}
+
+/* !================Etiquetas_Caja */
+section .etiqueta .box {
+  width: 30%;
+  height: 100px;
+  background-color: var(--color-secundario-transparente);
+  position: relative;
+}
+
+section .etiqueta .box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -50px;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 50px solid var(--color-secundario-transparente);
+}
+
+/* !================Etiqueta*/
+.etiqueta__contenedor__principal .etiqueta__contenedor {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.etiqueta__contenedor__principal .etiqueta__titulo {
+  width: 100%;
+  height: 70px;
+  margin: 5% 0;
+  background-color: var(--color-principal-transparente);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.etiqueta__contenedor__principal .etiqueta__titulo p {
+  font-size: 2rem;
+  font-weight: 300;
+  margin: 0;
+  color: var(--color-blanco);
+}
+
+.etiqueta__contenedor__principal .box p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: underline;
+  color: var(--color-negro);
+  margin: 0;
+}
+
+.etiqueta__contenedor__principal .etiqueta__img {
+  display: flex;
+  height: 150px;
+}
+
+section .etiqueta img {
+  width: 25%;
+  border-radius: 50%;
+  transition: all 0.5s;
+  border: 1px solid black;
+}
+
+/* !================Tienda */
+.cotenedor__tienda__principal {
+  margin-top: 5%;
+}
+
+.cotenedor__tienda__principal .tienda__titulo {
+  width: 50%;
+  border-radius: 10px;
+  background-color: var(--color-principal-transparente);
+  margin: 0 auto;
+}
+
+.cotenedor__tienda__principal .tienda__titulo p {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-blanco);
+  margin: 0;
+  letter-spacing: 3px;
+}
+
+.cotenedor__tienda__principal .tienda__logo {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.cotenedor__tienda__principal .tienda__logo img {
+  width: 100%;
+}
+
+.cotenedor__tienda__principal .contenedor__tienda__info {
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+  margin: 0 !important;
+  padding: 0;
+}
+
+.cotenedor__tienda__principal .contenedor__tienda__info .tienda__casa {
+  width: 50%;
+  margin: 0 !important;
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+}
+
+.contenedor__tienda__info .card__casa {
+  border: 3px solid blue;
+}
+
+.cotenedor__tienda__principal
+  .contenedor__tienda__info
+  .tienda__casa
+  .card__casa {
+  border: 1px solid var(--color-negro);
+}
+
+.cotenedor__tienda__principal
+  .contenedor__tienda__info
+  .tienda__casa
+  .card__casa
+  h2 {
+  font-weight: bold;
+  padding: 5% 0;
+}
+
+.cotenedor__tienda__principal
+  .contenedor__tienda__info
+  .tienda__casa
+  .card__casa
+  p {
+  font-size: 1.25rem;
+  font-weight: 300;
+  padding: 5% 0;
+}
+
+section .modal .modal-body ol {
+  list-style: none;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+}
+
+section .modal .modal-body img,
+video {
+  height: 700px;
+  object-fit: cover;
+}
+
+/* !================Footer | Fin de la pagina */
+
+footer {
+  min-height: 180px;
+  background: rgb(1, 31, 87);
+  color: white;
+}
+
+footer .footer-logo {
+  width: 3%;
+  margin: 10px;
+}
+
+footer .iconos_redes_sociales a {
+  width: 50px;
+  height: 50px;
+  padding: 2px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+footer .iconos_redes_sociales i {
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.2s ease-in;
+}
+
+footer .derechos-autor {
+  font-size: 15px;
+  color: #aeaeae;
+  padding: 20px;
+  text-align: center;
+}
+
+/* ?================Seccion_WhatsApp*/
+#whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  animation: pulsate 1s infinite;
+}
+
+#whatsapp-button i {
+  font-size: 50px;
+  color: black;
+  transition: all 0.5s ease-out;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#whatsapp-button i:hover {
+  color: blue;
+}
+
+/* ?================Seccion_Boton*/
+#btnBackToTop.btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  z-index: 9999;
+  display: none;
+}
+
+/* TODO================Media Screem Queri */
+@media (max-width: 425px) {
+  /*! Barra de navegación */
+  .container .col-izquierda img {
+    width: 40%;
+  }
+
+  .container .col-izquierda .texto-titulo {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  /* .container .header__navbar__container .header__navbar {
+    justify-content: center;
+  } */
+
+  /*! Encabezado */
+  section .encabezado .img_fondo img {
+    width: 100%;
+    height: auto;
+  }
+
+  section .encabezado .img_fondo p {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+
+  /*! Etiquetas */
+  .etiqueta__contenedor__principal{
+    margin-top: 3%;
+  }
+
+  .etiqueta__contenedor__principal .etiqueta__contenedor{
+    flex-flow: column wrap;
+    align-content: start;
+    align-items: start;
+  }
+
+  .etiqueta__contenedor__principal .etiqueta__titulo{
+    width: 100%;
+    height: 130px;
+  }
+
+  .etiqueta__contenedor__principal .etiqueta__titulo p{
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2%;
+  }
+
+  .etiqueta__contenedor__principal .box{
+    width: 100% !important;
+    height: 60px !important;
+    border-radius: 10px;
+  }
+
+  section .etiqueta .box::before{
+    display: none;
+  }
+
+  .etiqueta__contenedor__principal .box p{
+    text-decoration: none;
+  }
+
+  .etiqueta__contenedor__principal .etiqueta__img{
+    display: none;
+  }
+
+  /*! Tienda */
+  .cotenedor__tienda__principal .tienda__titulo{
+    width: 100%;
+  }
+
+  .cotenedor__tienda__principal .tienda__logo{
+    width: 60%;
+  }
+
+  .contenedor__tienda__info .tienda__casa{
+    flex-flow: column nowrap;
+    width: 100% !important;
+  }
+
+  .contenedor__tienda__info .card__casa{
+    margin-bottom: 5%;
+  }
+
+  /*! Footer */
+  footer .iconos_redes_sociales img{
+    width: 15%;
+  }
+}
