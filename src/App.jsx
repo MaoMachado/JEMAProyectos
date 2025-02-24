@@ -6,6 +6,8 @@ import {
   ImgComparar,
   JoyasInmobiliarias,
   Contacto,
+  IconoWhatsApp,
+  Footer,
 } from "./index";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <JoyasInmobiliarias />
         <Contacto />
       </main>
+      <IconoWhatsApp />
+      <Footer />
     </>
   );
 }
