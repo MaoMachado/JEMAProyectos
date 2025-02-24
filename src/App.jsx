@@ -1,6 +1,12 @@
 import "./App.css";
 
-import { Header, CardsSection } from "./index";
+import {
+  Header,
+  CardsSection,
+  ImgComparar,
+  JoyasInmobiliarias,
+  Contacto,
+} from "./index";
 
 function App() {
   return (
@@ -8,6 +14,9 @@ function App() {
       <Header />
       <main>
         <CardsSection />
+        <ImgComparar />
+        <JoyasInmobiliarias />
+        <Contacto />
       </main>
     </>
   );
