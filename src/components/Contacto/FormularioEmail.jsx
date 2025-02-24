@@ -13,6 +13,11 @@ const FormContainer = styled.form`
     gap: 7px;
     flex-direction: column;
 
+    label {
+      font-family: "Merriweather_Bold";
+      font-size: 1.2em;
+    }
+
     input,
     textarea {
       padding: 10px;
@@ -21,11 +26,15 @@ const FormContainer = styled.form`
       border: 0;
       outline: 2px solid var(--azulTransparente);
       font-size: 1em;
+      font-family: "Roboto_Bold";
+      font-weight: bold;
     }
 
     textarea {
       height: 100px;
-      font-family: sans-serif;
+      font-family: "Merriweather_Bold";
+      font-weight: bold;
+      font-size: 1em;
 
       &:focus {
         outline: 2px solid black;

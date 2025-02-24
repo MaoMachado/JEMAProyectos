@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const CardContainer = styled.article`
   width: 300px;
   height: 300px;
-  border: 2px solid var(--blueTransparente);
-  border-left: 5px solid var(--blue);
+  border: 2px solid var(--azulTransparente);
+  border-left: 5px solid var(--azul);
   border-radius: 15px;
   overflow: hidden;
   position: relative;

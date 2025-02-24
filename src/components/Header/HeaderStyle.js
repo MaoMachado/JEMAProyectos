@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   height: 300px;
   position: relative;
   margin-bottom: 1rem;
-  border-bottom: 3px solid var(--blueTransparente);
+  border-bottom: 3px solid var(--azulTransparente);
   animation: aparecerIniciando 1s linear;
 
   @keyframes aparecerIniciando {
@@ -48,11 +48,13 @@ export const ContainerInfo = styled.article`
   span {
     width: clamp(300px, 100vw, 550px);
     padding: 10px 20px;
-    background: var(--blue);
+    background: var(--azul);
     color: #fff;
     font-size: 1.5em;
     font-weight: 100;
     border-radius: 10px;
+    font-family: 'Roboto_Ligth';
+    font-weight: 100;
   }
 `;
 
@@ -69,5 +71,7 @@ export const HeaderTitulo = styled.section`
   h2 {
     color: #fff;
     font-size: clamp(2.5em, 10vw, 4em);
+    font-family: 'Roboto_Ligth';
+    font-weight: 100;
   }
 `;

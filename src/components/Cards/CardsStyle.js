@@ -19,9 +19,7 @@ export const CardsContainer = styled.section`
 
   h1 {
     font-size: 2em;
-    font-weight: 500;
-    font-family: sans-serif;
-    color: var(--blue);
+    color: var(--azul);
     text-align: center;
   }
 `;

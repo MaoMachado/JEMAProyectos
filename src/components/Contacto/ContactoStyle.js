@@ -25,12 +25,15 @@ export const ContactoJemaContainer = styled.section`
       padding: 0 10px;
 
       h2 {
-        font-size: 1.5em;
+        color: var(--azul);
+        font-size: 1.8em;
         text-align: center;
       }
 
       p {
         text-align: justify;
+        line-height: 1.5rem;
+        font-size: clamp(0.8em, 1.5vw, 1.2em);
       }
 
       .whatsContainer {
@@ -52,6 +55,12 @@ export const ContactoJemaContainer = styled.section`
       gap: 1rem;
       flex-direction: column;
       align-items: center;
+
+      h2{
+        color: var(--azul);
+        font-size: 1.8em;
+        text-align: center;
+      }
     }
   }
 `;

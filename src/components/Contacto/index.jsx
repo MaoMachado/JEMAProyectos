@@ -21,12 +21,12 @@ export const Contacto = () => {
           </p>
           <div className="whatsContainer">
             <img src={j} alt="Logo de Jema Proyectos" />
-            <FaWhatsapp size={40} color={"var(--blue)"} />
+            <FaWhatsapp size={40} color={"var(--azul)"} />
             <span>316 927 45 23</span>
           </div>
           <div className="whatsContainer">
             <img src={j} alt="Jema Proyectos" />
-            <CiMail size={40} color={"var(--blue)"} />
+            <CiMail size={40} color={"var(--azul)"} />
             <span>gerencia@jemaproyectos.com</span>
           </div>
         </div>

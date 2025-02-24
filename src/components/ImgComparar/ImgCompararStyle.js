@@ -7,6 +7,9 @@ export const ComparedContainer = styled.section`
   justify-content: space-evenly;
   align-items: center;
   width: 90dvw;
+  background-color: rgba(204, 204, 204, 0.2);
+  padding: 10px;
+  border-radius: 10px;
 `;
 
 export const InfoContainerCompared = styled.div`
@@ -14,11 +17,11 @@ export const InfoContainerCompared = styled.div`
   gap: 1rem;
   flex-direction: column;
   flex: 1;
-  font-family: "Roboto";
+  font-family: "Roboto_Ligth";
 
   h2 {
     font-size: 2.4em;
-    color: var(--blue);
+    color: var(--azul);
     text-align: center;
   }
 
