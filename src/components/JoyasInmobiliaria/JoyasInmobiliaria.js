@@ -30,7 +30,7 @@ export const JoyasContainer = styled.section`
   .joyas_cards_container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
 
     @media (max-width: 425px) {

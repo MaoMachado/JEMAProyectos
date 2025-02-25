@@ -14,36 +14,34 @@ const FormContainer = styled.form`
     flex-direction: column;
 
     label {
-      font-family: "Merriweather_Bold";
-      font-size: 1.2em;
+      font-family: var(--fuenteParrafo);
+      font-size: 1.5em;
     }
 
     input,
     textarea {
       padding: 10px;
-      background: transparent;
+      background: var(--blanco);
       border-radius: 15px;
       border: 0;
       outline: 2px solid var(--azulTransparente);
-      font-size: 1em;
-      font-family: "Roboto_Bold";
-      font-weight: bold;
+      font-size: 1.3em;
+      font-family: var(--fuenteParrafo);
     }
 
     textarea {
       height: 100px;
-      font-family: "Merriweather_Bold";
-      font-weight: bold;
-      font-size: 1em;
+      font-family: var(--fuenteParrafo);
+      font-size: 1.3em;
 
       &:focus {
-        outline: 2px solid black;
+        outline: 2px solid var(--azul);
       }
     }
 
     input:focus {
       border: none;
-      outline: 2px solid black;
+      outline: 2px solid var(--azul);
       border-bottom: 0;
     }
   }
@@ -66,7 +64,7 @@ const FormContainer = styled.form`
 
     &:active {
       scale: 0.98;
-      box-shadow: 0 0 10px #000;
+      box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.2);
     }
   }
 `;
@@ -75,7 +73,7 @@ const Popover = styled.div`
   position: fixed;
   top: 50px;
   right: 50%;
-  transform: translateX(50%)
+  transform: translateX(50%);
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;

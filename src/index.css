@@ -1,8 +1,10 @@
-:root{
+:root {
   --blanco: hsl(0, 0%, 100%);
   --negro: hsl(0, 0%, 0%);
   --azul: hsl(216, 55%, 58%);
   --azulTransparente: hsla(216, 65%, 34%, 0.3);
+  --fuenteTitulo: 'Merriweather_Medium';
+  --fuenteParrafo: 'Roboto_ligth';
 }
 
 @font-face {
@@ -47,12 +49,13 @@
   font-style: normal;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body{
+html,
+body {
   font-family: 'Merriweather_Medium';
 }

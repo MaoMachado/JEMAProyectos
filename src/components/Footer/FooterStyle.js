@@ -4,12 +4,12 @@ export const FooterContainer = styled.footer`
   display: grid;
   place-content: center;
   width: 100%;
-  min-height: 100px;
+  min-height: 150px;
   background-color: var(--azul);
 
   .info_footer_container {
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
     height: inherit;
     width: 100%;
     max-width: 90vw;
@@ -17,23 +17,36 @@ export const FooterContainer = styled.footer`
 
     @media (max-width: 450px) {
       flex-direction: column-reverse;
+      align-items: center;
       gap: 1rem;
       padding: 1rem 0;
     }
 
-    p {
-      flex: 2;
-      font-size: clamp(1em, 1.2vw, 1.2em);
-      color: #fff;
-      text-align: justify;
+    .info_container {
+      width: 40%;
+
+      @media (max-width: 450px) {
+        width: 100%;
+      }
+
+      p {
+        color: #fff;
+        text-align: justify;
+        font-family: var(--fuenteParrafo);
+        font-size: clamp(1em, 1.2vw, 1.2em);
+      }
     }
 
     .social_container {
-      flex: 1;
+      width: 400px;
       display: flex;
       gap: 1rem;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
+
+      @media (max-width: 450px) {
+        justify-content: center;
+      }
 
       a {
         color: #fff;

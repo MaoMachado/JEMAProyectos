@@ -6,7 +6,7 @@ export const ContactoJemaContainer = styled.section`
   width: 100%;
   min-height: 200px;
   padding: 1rem 0;
-  background-color: rgba(204, 204, 204, 0.2);
+  background-color: rgba(204, 204, 204, 0.5);
 
   .contactoContainer {
     display: flex;
@@ -30,14 +30,16 @@ export const ContactoJemaContainer = styled.section`
 
       h2 {
         color: var(--azul);
-        font-size: 1.8em;
+        font-size: 2em;
+        font-family: var(--fuenteTitulo);
         text-align: center;
       }
 
       p {
         text-align: justify;
         line-height: 1.5rem;
-        font-size: clamp(0.8em, 1.5vw, 1.2em);
+        font-size: clamp(1.2em, 1.5vw, 1.5em);
+        font-family: var(--fuenteParrafo);
       }
 
       .whatsContainer {
@@ -62,8 +64,9 @@ export const ContactoJemaContainer = styled.section`
 
       h2 {
         color: var(--azul);
-        font-size: 1.8em;
+        font-size: 2em;
         text-align: center;
+        font-family: var(--fuenteTitulo);
       }
     }
   }

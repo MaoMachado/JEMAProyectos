@@ -4,12 +4,13 @@ import styled from "styled-components";
 import { data } from "../../assets/fotosFloresta/dataImg";
 
 const CarrouselContainer = styled.section`
-  width: 600px;
-  height: 500px;
+  width: 100%;
+  height: 600px;
   margin: 0 auto;
 
   @media (max-width: 425px) {
-    width: 400px;
+    width: 100%;
+    height: 400px;
   }
 
   ul,
@@ -24,7 +25,7 @@ const CarrouselContainer = styled.section`
 
   img {
     width: 100%;
-    height: 500px;
+    height: 600px;
   }
 
   /* Slider container */

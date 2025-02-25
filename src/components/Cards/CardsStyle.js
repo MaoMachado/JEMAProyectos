@@ -5,7 +5,9 @@ export const CardsContainer = styled.section`
   gap: 2rem;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   width: 90vw;
+  user-select: none;
   animation: aparecerCargar 2s linear;
 
   @keyframes aparecerCargar {
@@ -18,15 +20,20 @@ export const CardsContainer = styled.section`
   }
 
   h2 {
-    font-size: clamp(1.2em, 3vw, 5em);
     color: var(--azul);
     text-align: center;
+    font-size: clamp(1.7em, 2.5vw, 5em);
+    font-family: "Roboto_Regular";
+    font-weight: 100;
+    width: fit-content;
+    padding-bottom: 2px;
+    border-bottom: 4px solid hsla(0, 0%, 13%, 0.2);
   }
 
   .contenedor {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    justify-content: center;
+    justify-content: space-around;
   }
 `;

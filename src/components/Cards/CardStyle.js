@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.article`
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   border: 2px solid var(--azulTransparente);
   border-left: 5px solid var(--azul);
   border-radius: 15px;
@@ -19,14 +19,15 @@ export const CardContainer = styled.article`
   h3 {
     font-size: 2em;
     text-align: center;
-    color: #000;
+    font-family: "Roboto_Bold";
+    font-style: italic;
   }
 
   .imgCard {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.1;
+    opacity: 0.2;
     position: absolute;
     top: 0;
     filter: grayscale(100%);
