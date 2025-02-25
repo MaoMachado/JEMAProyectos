@@ -17,9 +17,10 @@ export const CardContainer = styled.article`
   }
 
   h3 {
-    font-size: 2em;
     text-align: center;
-    font-family: "Roboto_Bold";
+    font-size: 2em;
+    font-family: va r(--fuenteTitulo);
+    font-weight: 100;
     font-style: italic;
   }
 

@@ -23,7 +23,7 @@ export const CardsContainer = styled.section`
     color: var(--azul);
     text-align: center;
     font-size: clamp(1.7em, 2.5vw, 5em);
-    font-family: "Roboto_Regular";
+    font-family: var(--fuenteTitulo);
     font-weight: 100;
     width: fit-content;
     padding-bottom: 2px;
@@ -32,8 +32,9 @@ export const CardsContainer = styled.section`
 
   .contenedor {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
   }
 `;

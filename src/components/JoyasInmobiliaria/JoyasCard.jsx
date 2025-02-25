@@ -8,33 +8,32 @@ const CardContainer = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 350px;
+  width: 400px;
   min-height: 200px;
   background-color: var(--azul);
   border-radius: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 1rem;
   overflow: hidden;
 
   .imgPortadaCard {
     width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: fill;
   }
 
   h2 {
-    padding-bottom: 5px;
-    border-bottom: 5px solid var(--blueTransparente);
-    border-radius: 7px;
-    font-size: 2em;
+    font-size: 2.5em;
+    font-family: var(--fuenteTitulo);
+    font-weight: 100;
     color: var(--blanco);
   }
 
   p {
-    font-size: 1.2em;
-    text-align: center;
     padding: 0 1rem;
-    line-height: 1.7rem;
     color: var(--blanco);
+    font-family: var(--fuenteParrafo);
+    font-size: 1.5em;
+    text-align: center;
   }
 
   button {
@@ -42,8 +41,9 @@ const CardContainer = styled.section`
     border: 2px solid #fff;
     border-radius: 10px;
     background: transparent;
-    color: #fff;
-    font-size: 1rem;
+    color: var(--blanco);
+    font-size: 1.5em;
+    font-family: var(--fuenteTitulo);
 
     &:hover {
       background-color: #fff;

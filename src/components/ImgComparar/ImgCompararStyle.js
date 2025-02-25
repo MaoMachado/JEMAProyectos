@@ -25,27 +25,28 @@ export const InfoContainerCompared = styled.div`
   h2 {
     color: var(--azul);
     text-align: center;
-    font-size: 2.5em;
+    font-size: clamp(2em, 3vw, 3em);
     font-weight: bold;
-    font-family: "Roboto_Regular";
+    font-family: var(--fuenteTitulo);
   }
 
   p {
     width: 80%;
-    font-size: 1.5em;
+    font-size: clamp(1.4em, 3vw, 2em);
+    font-family: var(--fuenteParrafo);
     text-align: justify;
-    line-height: 1.6rem;
   }
 `;
 
 export const ArticleContainer = styled.article`
   flex: 1;
-  height: 400px;
+  height: 500px;
   display: grid;
   place-content: center;
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
+  border: 2px solid var(--azulTransparente);
   --position: 50%;
 
   @media (max-width: 425px) {
@@ -55,17 +56,14 @@ export const ArticleContainer = styled.article`
 
   img {
     display: block;
-    max-width: 100%;
+    width: 100%;
   }
 
   .image-container {
-    max-width: 100%;
-    max-height: 100vh;
-    aspect-ratio: 1/1;
+    height: 100%;
   }
 
   .slider-image {
-    width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: left;

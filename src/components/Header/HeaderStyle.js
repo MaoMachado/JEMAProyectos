@@ -59,9 +59,9 @@ export const ContainerInfo = styled.article`
     border-radius: 10px;
     backdrop-filter: blur(5px);
     background: var(--azulTransparente);
-    color: #fff;
+    color: var(--blanco);
     font-size: 1.8em;
-    font-weight: bolder;
+    font-family: var(--fuentoParrafo);
     text-align: center;
 
     @media (max-width: 425px) {
@@ -91,5 +91,6 @@ export const HeaderTitulo = styled.section`
     color: #fff;
     font-size: clamp(3em, 10vw, 5.5em);
     font-weight: 100;
+    font-family: var(--fuenteTitulo);
   }
 `;

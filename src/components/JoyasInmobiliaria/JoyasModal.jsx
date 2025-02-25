@@ -52,7 +52,7 @@ const DialogContainer = styled.section`
     }
 
     .joyasInfoContainer {
-      width: 450px;
+      width: 470px;
       display: flex;
       gap: 1rem;
       flex-direction: column;
@@ -66,13 +66,15 @@ const DialogContainer = styled.section`
 
       h2 {
         font-size: 2em;
-        font-family: "Merriweather_Light";
+        font-family: var(--fuenteTitulo);
+        color: var(--blanco);
       }
 
       p {
         text-align: justify;
         font-size: 1.5em;
-        font-family: "Merriweather_Light";
+        font-family: var(--fuenteParrafo);
+        color: var(--blanco);
       }
     }
   }
