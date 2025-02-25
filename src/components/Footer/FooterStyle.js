@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
+  display: grid;
+  place-content: center;
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   background-color: var(--azul);
 
   .info_footer_container {
@@ -13,9 +15,15 @@ export const FooterContainer = styled.footer`
     max-width: 90vw;
     margin: 0 auto;
 
+    @media (max-width: 450px) {
+      flex-direction: column-reverse;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
     p {
       flex: 2;
-      font-size: clamp(0.8em, 1.2vw, 1.2em);
+      font-size: clamp(1em, 1.2vw, 1.2em);
       color: #fff;
       text-align: justify;
     }

@@ -8,6 +8,10 @@ const CarrouselContainer = styled.section`
   height: 500px;
   margin: 0 auto;
 
+  @media (max-width: 425px) {
+    width: 400px;
+  }
+
   ul,
   li {
     list-style: none;

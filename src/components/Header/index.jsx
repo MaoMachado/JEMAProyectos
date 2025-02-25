@@ -10,8 +10,8 @@ export const Header = () => {
       </div>
       <ContainerInfo>
         <HeaderTitulo>
-          <img src={jemaHeader} alt="JEMA" />
-          <h2>Proyectos</h2>
+          <img src={jemaHeader} alt="Logo JEMA" />
+          <h1>Proyectos</h1>
         </HeaderTitulo>
         <span>
           Encontramos, forjamos y entregamos las joyas más valiosas del mercado

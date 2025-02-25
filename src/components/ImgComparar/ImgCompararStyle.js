@@ -3,13 +3,17 @@ import styled from "styled-components";
 export const ComparedContainer = styled.section`
   display: flex;
   gap: 2rem;
-  flex-flow: row wrap;
+  flex-flow: row;
   justify-content: space-evenly;
   align-items: center;
-  width: 90dvw;
+  width: clamp(400px, 100vw, 90vw);
   background-color: rgba(204, 204, 204, 0.2);
   padding: 10px;
   border-radius: 10px;
+
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `;
 
 export const InfoContainerCompared = styled.div`
@@ -43,13 +47,17 @@ export const ArticleContainer = styled.article`
   --position: 50%;
   flex: 1;
 
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+
   img {
     display: block;
     max-width: 100%;
   }
 
   .image-container {
-    max-width: 800px;
+    max-width: 100%;
     max-height: 90vh;
     aspect-ratio: 1/1;
   }

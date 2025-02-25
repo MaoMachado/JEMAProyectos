@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const ContactoJemaContainer = styled.section`
   display: grid;
@@ -16,6 +16,10 @@ export const ContactoJemaContainer = styled.section`
     align-items: center;
     width: clamp(300px, 100vw, 90vw);
     height: 100%;
+
+    @media (max-width: 425px) {
+      gap: 4rem;
+    }
 
     .infoContacto {
       flex: 1;
@@ -56,7 +60,7 @@ export const ContactoJemaContainer = styled.section`
       flex-direction: column;
       align-items: center;
 
-      h2{
+      h2 {
         color: var(--azul);
         font-size: 1.8em;
         text-align: center;

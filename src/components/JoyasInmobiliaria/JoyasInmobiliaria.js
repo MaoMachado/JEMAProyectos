@@ -32,5 +32,9 @@ export const JoyasContainer = styled.section`
     flex-flow: row wrap;
     justify-content: space-around;
     width: 100%;
+
+    @media (max-width: 425px) {
+      gap: 1rem;
+    }
   }
 `;

@@ -18,16 +18,22 @@ const DialogContainer = styled.section`
   .modal {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     gap: 1rem;
-    width: clamp(300px, 100vw, 1000px);
+    width: 90%;
     min-height: 200px;
     padding: 15px;
     border-radius: 20px;
-    box-shadow: 0 0 20px var(--blueTransparente);
+    box-shadow: 0 0 20px var(--azulTransparente);
     background-color: #222;
     transform: ${({ $show }) =>
       $show ? "translateY(0)" : "translateY(-20px)"};
     transition: transform 0.3s ease;
+
+    @media (max-width: 425px) {
+      flex-direction: column;
+      overflow-y: scroll;
+    }
 
     .joyasCarrouselContainer {
       display: flex;

@@ -5,3 +5,10 @@ main{
   gap: 7rem;
   margin: 5rem 0;
 }
+
+@media (max-width: 425px){
+  main{
+    gap: 3rem;
+  }
+}
+

@@ -28,14 +28,16 @@ export const CardsSection = () => {
   return (
     <CardsContainer>
       <header>
-        <h1>
+        <h2>
           Hemos hecho posible el sueño de familias e inversores con nuestros
           servicios:
-        </h1>
+        </h2>
       </header>
-      {cardsInfo.map((card) => {
-        return <Card key={card.id} nombre={card.nombre} img={card.img} />;
-      })}
+      <article className="contenedor">
+        {cardsInfo.map((card) => {
+          return <Card key={card.id} nombre={card.nombre} img={card.img} />;
+        })}
+      </article>
     </CardsContainer>
   );
 };
