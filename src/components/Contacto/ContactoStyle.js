@@ -18,6 +18,7 @@ export const ContactoJemaContainer = styled.section`
     height: 100%;
 
     @media (max-width: 425px) {
+      width: 100%;
       gap: 4rem;
     }
 
@@ -28,10 +29,15 @@ export const ContactoJemaContainer = styled.section`
       gap: 2rem;
       padding: 0 10px;
 
+      @media (max-width: 425px) {
+        align-items: center;
+        padding: 0 1.5rem;
+      }
+
       h2 {
         color: var(--azul);
         font-size: 2em;
-        font-family: var(--fuenteTitulo);
+        font-family: "Roboto";
         text-align: center;
       }
 
@@ -39,7 +45,8 @@ export const ContactoJemaContainer = styled.section`
         text-align: justify;
         line-height: 1.5rem;
         font-size: clamp(1.2em, 1.5vw, 1.5em);
-        font-family: var(--fuenteParrafo);
+        font-family: "Roboto";
+        line-height: 2rem;
       }
 
       .whatsContainer {
@@ -48,6 +55,11 @@ export const ContactoJemaContainer = styled.section`
         gap: 0.7rem;
         font-size: 1.3em;
         flex-wrap: wrap;
+        font-family: "Roboto";
+
+        @media (max-width: 425px) {
+          justify-content: center;
+        }
 
         img {
           width: 35px;

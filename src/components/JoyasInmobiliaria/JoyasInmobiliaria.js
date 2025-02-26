@@ -9,16 +9,20 @@ export const JoyasContainer = styled.section`
 
   .InfoJoyas {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    h2 {
-      text-shadow: 0 0 10px rgba(216, 192, 37, 0.4);
-      font-size: 2.5em;
-      color: var(--azul);
-      padding-bottom: 7px;
+    @media (max-width: 425px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
-      border-bottom: 5px solid var(--blueTransparente);
+    h2 {
+      font-size: 3.2em;
+      font-family: "Roboto";
+      color: var(--azul);
+      text-shadow: 0 0 10px rgba(216, 192, 37, 0.4);
     }
 
     img {

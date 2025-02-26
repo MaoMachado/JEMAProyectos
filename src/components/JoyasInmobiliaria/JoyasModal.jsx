@@ -19,7 +19,7 @@ const DialogContainer = styled.section`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 80%;
+    width: 70%;
     min-height: 200px;
     padding: 20px;
     border-radius: 5px;
@@ -52,7 +52,7 @@ const DialogContainer = styled.section`
     }
 
     .joyasInfoContainer {
-      width: 470px;
+      flex: 1;
       display: flex;
       gap: 1rem;
       flex-direction: column;
@@ -66,14 +66,14 @@ const DialogContainer = styled.section`
 
       h2 {
         font-size: 2em;
-        font-family: var(--fuenteTitulo);
+        font-family: "Roboto";
         color: var(--blanco);
       }
 
       p {
         text-align: justify;
         font-size: 1.5em;
-        font-family: var(--fuenteParrafo);
+        font-family: "Roboto";
         color: var(--blanco);
       }
     }

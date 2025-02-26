@@ -32,7 +32,7 @@ export const FooterContainer = styled.footer`
       p {
         color: #fff;
         text-align: justify;
-        font-family: var(--fuenteParrafo);
+        font-family: "Roboto";
         font-size: clamp(1em, 1.2vw, 1.2em);
       }
     }

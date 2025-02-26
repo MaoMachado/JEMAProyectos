@@ -23,11 +23,9 @@ export const CardsContainer = styled.section`
     color: var(--azul);
     text-align: center;
     font-size: clamp(1.7em, 2.5vw, 5em);
-    font-family: var(--fuenteTitulo);
+    font-family: "Roboto";
     font-weight: 100;
     width: fit-content;
-    padding-bottom: 2px;
-    border-bottom: 4px solid hsla(0, 0%, 13%, 0.2);
   }
 
   .contenedor {

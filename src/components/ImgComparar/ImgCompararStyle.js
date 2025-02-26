@@ -27,14 +27,15 @@ export const InfoContainerCompared = styled.div`
     text-align: center;
     font-size: clamp(2em, 3vw, 3em);
     font-weight: bold;
-    font-family: var(--fuenteTitulo);
+    font-family: "Roboto";
   }
 
   p {
     width: 80%;
     font-size: clamp(1.4em, 3vw, 2em);
-    font-family: var(--fuenteParrafo);
+    font-family: "Roboto";
     text-align: justify;
+    color: var(--negro);
   }
 `;
 

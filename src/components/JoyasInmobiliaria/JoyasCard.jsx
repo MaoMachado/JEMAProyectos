@@ -23,7 +23,7 @@ const CardContainer = styled.section`
 
   h2 {
     font-size: 2.5em;
-    font-family: var(--fuenteTitulo);
+    font-family: "Roboto";
     font-weight: 100;
     color: var(--blanco);
   }
@@ -31,7 +31,7 @@ const CardContainer = styled.section`
   p {
     padding: 0 1rem;
     color: var(--blanco);
-    font-family: var(--fuenteParrafo);
+    font-family: "Roboto";
     font-size: 1.5em;
     text-align: center;
   }
@@ -43,7 +43,7 @@ const CardContainer = styled.section`
     background: transparent;
     color: var(--blanco);
     font-size: 1.5em;
-    font-family: var(--fuenteTitulo);
+    font-family: "Roboto";
 
     &:hover {
       background-color: #fff;

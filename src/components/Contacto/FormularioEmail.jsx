@@ -14,7 +14,7 @@ const FormContainer = styled.form`
     flex-direction: column;
 
     label {
-      font-family: var(--fuenteParrafo);
+      font-family: "Roboto";
       font-size: 1.5em;
     }
 
@@ -26,12 +26,12 @@ const FormContainer = styled.form`
       border: 0;
       outline: 2px solid var(--azulTransparente);
       font-size: 1.3em;
-      font-family: var(--fuenteParrafo);
+      font-family: "Roboto";
     }
 
     textarea {
       height: 100px;
-      font-family: var(--fuenteParrafo);
+      font-family: "Roboto";
       font-size: 1.3em;
 
       &:focus {
@@ -53,7 +53,8 @@ const FormContainer = styled.form`
     background: transparent;
     border: 2px solid var(--azul);
     border-radius: 15px;
-    font-size: 1em;
+    font-size: 1.5em;
+    font-family: "Roboto";
     transition: background 0.1s linear;
 
     &:hover {

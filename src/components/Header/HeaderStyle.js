@@ -4,10 +4,9 @@ import headerPortada from "../../assets/portada.jpg";
 export const HeaderContainer = styled.header`
   display: flex;
   width: 100%;
-  height: 300px;
+  height: 400px;
   position: relative;
-  margin-bottom: 1rem;
-  border-bottom: 3px solid var(--azulTransparente);
+  box-shadow: 0 7px 20px var(--azulTransparente);
   animation: aparecerIniciando 1s linear;
 
   @keyframes aparecerIniciando {
@@ -24,9 +23,8 @@ export const HeaderContainer = styled.header`
     width: 100%;
     height: 100%;
     background-image: url(${headerPortada});
-    background-position: center;
+    background-position: bottom;
     background-size: cover;
-    background-repeat: no-repeat;
   }
 
   .header_oscura {
@@ -61,8 +59,7 @@ export const ContainerInfo = styled.article`
     background: var(--azulTransparente);
     color: var(--blanco);
     font-size: 1.8em;
-    font-family: var(--fuentoParrafo);
-    text-align: center;
+    font-family: "Roboto";
 
     @media (max-width: 425px) {
       background: transparent;
@@ -91,6 +88,6 @@ export const HeaderTitulo = styled.section`
     color: #fff;
     font-size: clamp(3em, 10vw, 5.5em);
     font-weight: 100;
-    font-family: var(--fuenteTitulo);
+    font-family: "Roboto";
   }
 `;

@@ -18,10 +18,10 @@ export const CardContainer = styled.article`
 
   h3 {
     text-align: center;
-    font-size: 2em;
-    font-family: va r(--fuenteTitulo);
+    font-size: clamp(1.5em, 2vw, 3em);
+    font-family: "Roboto";
     font-weight: 100;
-    font-style: italic;
+    color: var(--negro);
   }
 
   .imgCard {
