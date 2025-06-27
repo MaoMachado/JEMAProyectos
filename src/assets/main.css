@@ -1,1 +1,64 @@
-@import './base.css';
+:root {
+  /* Azules principales para el proyecto */
+  --azul-principal: hsl(209, 58%, 28%); /* Color principal*/
+  --azul-principal-50: hsla(209, 58%, 28%, 0.5);
+  --azul-claro: hsl(209, 48%, 35%); /* Para hover effects*/
+  --azul-claro-50: hsla(209, 48%, 35%, 0.5);
+  --azul-oscuro: hsl(209, 75%, 22%); /* Para elementos activos */
+  --azul-oscuro-50: hsla(209, 75%, 22%, 0.5);
+  --azul-suave: hsl(206, 53%, 94%); /* Para fondos mas sutiles*/
+  --azul-suave-50: hsla(206, 53%, 94%, 0.5);
+
+  --gris-claro: hsl(210, 17%, 98%); /* Para fondos y secciones*/
+  --gris-claro-50: hsla(210, 17%, 98%, 0.5);
+
+  --gris-medio: hsl(208, 7%, 46%); /* Para textos secundarios*/
+  --gris-medio-50: hsla(208, 7%, 46%, 0.5);
+  --blanco: hsl(0, 0%, 100%); /* Para contrastes y limpieza*/
+  --gris-oscuro: hsl(210, 10%, 23%); /* Para textos principales*/
+
+  /* Colores de hacento */
+  --naranja: hsl(16, 100%, 60%); /* Para botones de llamada de acción*/
+  --naranja-50: hsla(16, 100%, 60%, 0.5);
+
+  --verde: hsl(134, 61%, 41%); /* Para elementos de éxito o destacados*/
+  --verde-50: hsla(134, 61%, 41%, 0.5);
+
+  --amarillo-suave: hsl(45, 100%, 51%); /* Para advertencias o información importante*/
+  --amarillo-suave-50: hsla(45, 100%, 51%, 0.5);
+
+  /* Tipografía */
+  --fuente-titulo: 'Roboto', sans-serif;
+  --fuente-texto: 'Sourse Sans', sans-serif;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/roboto/Roboto-Regular.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 50% 200%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sourse Sans';
+  src: url('/fonts/sourse-sans/SourceSans3-VF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 50% 200%;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  block-size: 100dvh;
+  background-color: var(--gris-claro);
+}
