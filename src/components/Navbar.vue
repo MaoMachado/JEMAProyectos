@@ -1,20 +1,24 @@
 <script>
 import logoJema from '@/assets/img/Jema.png'
 import InicioIcon from '@/assets/img/inicio.png'
+import JoyasIcon from '@/assets/img/joyas.png'
+import SobreMi from '@/assets/img/sobre-mi.png'
 
 export default {
   name: 'NavbarComponent',
   data() {
     return {
       logoJema,
-      InicioIcon
+      InicioIcon,
+      JoyasIcon,
+      SobreMi
     }
   }
 }
 </script>
 
 <template>
-  <nav>
+  <nav class="nav_container">
     <div class="logo_container">
       <RouterLink to="/"><img :src="logoJema" alt="logoJema" /></RouterLink>
     </div>
@@ -25,20 +29,28 @@ export default {
           Inicio
         </RouterLink>
       </li>
+      <li class="nav_item">
+        <RouterLink to="/joyas-jema" class="nav_link" active-class="active">
+          <img :src="JoyasIcon" alt="Joyas" />
+          Nuestras Joyas
+        </RouterLink>
+      </li>
+      <li class="nav_item">
+        <RouterLink to="/contacto" class="nav_link" active-class="active">
+          <img :src="SobreMi" alt="Icono Sobre Mi">
+          Contactame
+        </RouterLink>
+      </li>
     </ul>
   </nav>
 </template>
 
 <style scoped>
-nav {
+.nav_container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
-  inline-size: 100%;
-  block-size: 100%;
   padding: 1rem;
-  background-color: var(--blanco);
 
   &>.logo_container {
     inline-size: 200px;
@@ -55,7 +67,8 @@ nav {
   &>.nav_menu {
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
+    flex-direction: column;
     inline-size: 100%;
 
     &>.nav_item {

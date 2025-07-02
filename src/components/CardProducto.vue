@@ -1,0 +1,166 @@
+<script>
+export default {
+  name: 'CardProducto',
+  props: {
+    titulo: String,
+    imagen: String,
+    galeria: {
+      type: Array,
+      default: () => [],
+    },
+    numeroContacto: {
+      type: String,
+      default: '3165124487',
+    },
+    descripcion: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      mostrarGaleria: false
+    }
+  },
+  methods: {
+    cerrarGaleria() {
+      this.mostrarGaleria = false
+    },
+
+    contactar() {
+      const whatsappURL = `https://wa.me/57${this.numeroContacto}?text=Hola%20estoy%20interesado%20en%20${encodeURIComponent(this.titulo)}`
+      window.open(whatsappURL, '_blank')
+    }
+  }
+}
+</script>
+
+<template>
+  <section class="card_producto">
+    <h2 class="titulo">{{ titulo }}</h2>
+    <img :src="imagen" :alt="titulo" class="imagen_principal">
+    <p v-if="descripcion" class="descripcion">
+      {{ descripcion }}
+    </p>
+
+    <div class="botones">
+      <button v-if="galeria.length > 0" @click="mostrarGaleria = true" class="btn">Ver Galería</button>
+      <button @click="contactar" class="btn btn_secundario">Contactar</button>
+    </div>
+
+    <!-- Modal Galeria -->
+    <div v-if="mostrarGaleria && galeria.length > 0" class="modal_overlay" @click.self="cerrarGaleria">
+      <section class="modal_contenido">
+        <h3>Galería de {{ titulo }}</h3>
+
+        <article class="galeria">
+          <img v-for="(img, index) in galeria" :key="index" :src="img" alt="Vista Galeria" class="img_miniatura">
+        </article>
+
+        <button @click="cerrarGaleria" class="btn btn_cerrar">Cerrar</button>
+      </section>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.card_producto {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background: var(--blanco);
+
+  &>.imagen_principal {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 0.8rem;
+  }
+
+  &>.titulo {
+    font-size: 1.5em;
+  }
+
+  &>.botones {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &>.btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--naranja);
+      color: var(--blanco);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      font-family: var(--fuente-titulo);
+      transition: all 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+    }
+
+    &>.btn_secundario {
+      background: var(--verde);
+    }
+  }
+
+  &>.modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: grid;
+    place-content: center;
+    z-index: 100;
+
+    &>.modal_contenido {
+      max-inline-size: 800px;
+      inline-size: 100%;
+      max-block-size: 100%;
+      overflow-y: auto;
+      padding: 2rem;
+      background: var(--blanco);
+      border-radius: 1rem;
+      text-align: center;
+
+      &>.galeria {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+
+        &>.img_miniatura {
+          width: 150px;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 0.5rem;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      &>.btn_cerrar {
+        margin-top: 1rem;
+        background: var(--azul-principal);
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
+}
+</style>

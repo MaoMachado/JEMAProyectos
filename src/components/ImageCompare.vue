@@ -58,16 +58,17 @@ const resetSlider = () => {
       <div class="image-overlay"
         :style="{ clipPath: `polygon(${porcentaje}% 0, 100% 0, 100% 100%, ${porcentaje}% 100%)` }">
         <img :src="afterImage" alt="Resultado final" />
-        <div class="image-label after-label" :style="{ right: `${100 - porcentaje}%` }">Después</div>
       </div>
+
+      <!-- Etiqueta "Después" fuera del overlay para que no se recorte -->
+      <div class="image-label after-label" :style="{ left: `${porcentaje}%` }">Después</div>
 
       <!-- Slider handle -->
       <div class="slider-handle" :style="{ left: porcentaje + '%' }">
         <div class="handle-circle">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M8 5L16 12L8 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M16 5L24 12L16 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            <path d="M8 5L16 12L8 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M16 5L24 12L16 19" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
         </div>
@@ -97,12 +98,9 @@ const resetSlider = () => {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 1rem;
   background: var(--blanco);
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  inline-size: 100%;
-  margin: 0 auto;
+  border-radius: 0.5rem;
   user-select: none;
 }
 
@@ -118,11 +116,12 @@ const resetSlider = () => {
 .image-compare {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 450px;
   border-radius: 0.8rem;
   overflow: hidden;
   cursor: ew-resize;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background: var(--gris-claro);
 }
 
 .image-base,
@@ -159,16 +158,21 @@ const resetSlider = () => {
   font-size: 0.9em;
   color: var(--blanco);
   backdrop-filter: blur(10px);
-  z-index: 10;
+  z-index: 15;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .before-label {
   left: 1rem;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
+  transform: none;
 }
 
 .after-label {
-  background: rgba(16, 100, 60, 0.8);
+  background: rgba(16, 100, 60, 0.9);
+  transform: translateX(-50%);
 }
 
 .slider-handle {
@@ -178,7 +182,7 @@ const resetSlider = () => {
   height: 100%;
   background: var(--azul-principal);
   cursor: ew-resize;
-  z-index: 5;
+  z-index: 10;
   transform: translateX(-50%);
 }
 
@@ -198,6 +202,14 @@ const resetSlider = () => {
   color: var(--blanco);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
+  z-index: 20;
+}
+
+.handle-circle svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+  fill: none;
 }
 
 .handle-circle:hover {
@@ -211,8 +223,9 @@ const resetSlider = () => {
   width: 2px;
   height: 100%;
   background: var(--azul-principal);
-  z-index: 3;
+  z-index: 8;
   transform: translateX(-50%);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .controls {
