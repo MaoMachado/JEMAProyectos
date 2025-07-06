@@ -1,6 +1,7 @@
 import e from "express";
 import dontenv from 'dotenv';
 import http from 'http';
+import cors from 'cors';
 import { Server } from "socket.io";
 import chat from "./chat.js";
 
@@ -12,12 +13,19 @@ const PORT = process.env.PORT || 4000;
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin: 'https://jemaproyectos-front.onrender.com',
     methods: ['GET', 'POST']
   }
 });
 
+app.use(cors({ origin: 'https://jemaproyectos-front.onrender.com' }));
+
+io.on('connection', (socket) => {
+  console.log('Nuevo Cliente')
+})
+
 app.use(e.json());
+
 app.get('/', (req, res) => {
   res.send('Servidor Funcionando');
 })
