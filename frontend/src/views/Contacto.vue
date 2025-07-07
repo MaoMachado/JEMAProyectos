@@ -18,9 +18,12 @@ export default {
       nombre: '',
       email: '',
       mensaje: '',
-      error: {}
+      error: {},
+      whatsappNumber: '573169274523',
+      whatasppMessage: 'Hola, me gustaria tener mas info'
     }
   },
+  
   methods: {
     validarFormulario() {
       this.error = {};
