@@ -32,7 +32,7 @@ export default {
 
 <template>
   <section class="joyas_container">
-    <header>
+    <header class="header_joyas_container">
       <h1>{{ titulo }} <img :src="Joya" alt="Joya" /></h1>
       <p>Descubre productos únicos diseñados para complementar tus proyectos y tu crecimiento personal.</p>
     </header>
@@ -105,6 +105,41 @@ export default {
       width: 100%;
       text-align: center;
       font-size: clamp(1.2em, 5vw, 2em);
+    }
+  }
+}
+
+@media screen and (max-width: 767px){
+  .joyas_container{
+
+    &::before{
+      display: none;
+    }
+
+    & > .header_joyas_container{
+      margin-top: 0.5rem;
+      background: var(--azul-suave-50);
+      padding: 0.5rem;
+
+      & > h1{
+        /* flex-direction: column; */
+        gap: 0;
+        font-size: 2.1em;
+        margin: 0;
+      }
+      & > p{
+        font-size: 1.2em;
+        margin: 0;
+      }
+    }
+
+    & > .joyas_container{
+      padding: 0.5rem;
+
+      & >.titulo_joyas{
+        font-size: 2.2em;
+        margin: 0;
+      }
     }
   }
 }

@@ -115,4 +115,67 @@ export default {
   }
 
 }
+
+@media screen and (max-width: 767px) {
+  .inicio_container {
+    gap: 1rem;
+
+    .header_inicio {
+      display: none;
+      margin-top: 1rem;
+      background: var(--azul-suave-50);
+      padding: 0.5rem;
+      box-shadow: inset 0 0 5px var(--azul-claro-50);
+      border-radius: 0.5rem;
+
+      h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .home_container {
+
+      .quien_soy {
+        width: 100%;
+        gap: 1rem;
+        padding: 0.5rem;
+
+        h2 {
+          margin: 0;
+          width: inherit;
+          font-size: 2em;
+        }
+
+        p {
+          margin: 0;
+          width: inherit;
+          font-size: 1em;
+        }
+      }
+
+      .que_hago {
+        background: var(--azul-suave-50);
+        padding: 0.5rem;
+
+        h2 {
+          margin: 0;
+          font-size: 2em;
+        }
+
+        ul {
+          text-align: center;
+        }
+      }
+
+      .imagen_comparativa {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>
