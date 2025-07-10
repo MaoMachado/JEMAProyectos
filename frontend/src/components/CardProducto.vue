@@ -84,15 +84,37 @@ export default {
   text-align: center;
   background: var(--blanco);
 
+  &:hover > .titulo > .icono_sell{
+    filter: grayscale(0);
+    scale: 1.15;
+  }
+
+  &:hover > .imagen_principal{
+    transform: translateY(-5px) scale(1.05);
+  }
+
   &>.imagen_principal {
     width: 100%;
     height: 180px;
     object-fit: cover;
     border-radius: 0.8rem;
+    transition: transform 0.2s ease;
   }
 
   &>.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: fit-content;
+    margin: 0;
     font-size: 1.5em;
+
+    & > .icono_sell{
+      width: 70px;
+      height: 70px;
+      filter: grayscale(100%);
+      transition: all 0.2s ease;
+    }
   }
 
   &>.botones {
@@ -130,20 +152,24 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: grid;
     place-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
     z-index: 100;
 
     &>.modal_contenido {
-      max-inline-size: 800px;
-      inline-size: 100%;
+      inline-size: clamp(300px, 100%, 1000px);
       max-block-size: 100%;
+      margin-inline: auto;
       overflow-y: auto;
       padding: 2rem;
       background: var(--blanco);
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       text-align: center;
+
+      & > h3{
+        font-size: 2em;
+      }
 
       &>.galeria {
         display: flex;
@@ -152,11 +178,15 @@ export default {
         justify-content: center;
 
         &>.img_miniatura {
-          width: 150px;
-          height: 100px;
+          width: 300px;
+          height: 150px;
           object-fit: cover;
           border-radius: 0.5rem;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+          &:hover{
+            scale: 1.1;
+          }
         }
       }
 

@@ -28,28 +28,25 @@ export default {
     const route = useRoute();
     const ChatCliente = ref(null);
     const mostrarMenu = ref(false);
+    const esDesktop = ref(window.innerWidth >= 768);
+    const esRutaAdmin = computed(() => route.path.startsWith('/admin'));
 
-    const esDesktop = computed(() => window.innerWidth >= 768);
-
-    const esRutaAdmin = computed(() =>
-      route.path.startsWith('/admin')
-    );
+    const handleResize = () => {
+      esDesktop.value = window.innerWidth >= 768;
+      mostrarMenu.value = esDesktop.value;
+    };
 
     onMounted(() => {
-      const handleResize = () => {
-        mostrarMenu.value = window.innerWidth >= 768;
-      };
-
-      handleResize();
       window.addEventListener('resize', handleResize);
+      handleResize();
 
-      watch(route, () =>{
+      watch(route, () => {
         mostrarMenu.value = window.innerWidth >= 768;
-      })
-
-      onBeforeUnmount(() => {
-        window.removeEventListener('resize', handleResize);
       });
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', handleResize);
     });
 
     watch(esRutaAdmin, async (isAdmin) => {
@@ -72,7 +69,7 @@ export default {
       mostrarMenu,
       esDesktop
     };
-  },
+  }
 }
 </script>
 
@@ -97,7 +94,11 @@ export default {
       <router-view />
     </main>
 
-    <BurbujaChat />
+    <!-- Chat solo en mobile -->
+    <BurbujaChat v-if="!esRutaAdmin && !esDesktop" />
+
+    <!-- Chat fijo en escritorio -->
+    <component :is="ChatCliente" v-show="!esRutaAdmin && esDesktop" />
   </div>
 </template>
 

@@ -17,8 +17,8 @@ export default {
     }
   },
 
-  methods:{
-    cerrarMenu(){
+  methods: {
+    cerrarMenu() {
       this.$emit('cerrar-menu')
     }
   },
@@ -59,10 +59,6 @@ export default {
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-
-  &>.menu_mobil {
-    display: none;
-  }
 
   &>.logo_container {
     inline-size: 200px;

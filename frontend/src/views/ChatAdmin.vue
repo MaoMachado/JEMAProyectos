@@ -1,24 +1,63 @@
 <script>
 import { getSocketAdmin } from '@/services/chatService';
 
+import user from '@/assets/img/usuario_registro.png';
+import eliminarChat from '@/assets/img/cerrar.gif';
+
 export default {
   name: 'ChatAdmin',
+
   data() {
     return {
       socket: null,
       salas: {},
       salaActiva: null,
       mensaje: '',
-      mensajesPorSala: {}
+      mensajesPorSala: {},
+      user,
+      eliminarChat
     }
   },
 
   mounted() {
     this.socket = getSocketAdmin();
     this.setupSocketListeners();
+
+    localStorage.removeItem('admin_salas')
+
+    const mensajesGuardados = localStorage.getItem('admin_mensajes');
+    const salaActivaGuardada = localStorage.getItem('admin_sala_activa');
+
+    if (salaActivaGuardada && this.salas[salaActivaGuardada]) {
+      this.salaActiva = salaActivaGuardada;
+      this.socket.emit('adminEntraSala', { salaId: salaActivaGuardada })
+    }
+
+    if (mensajesGuardados) {
+      try {
+        this.mensajesPorSala = JSON.parse(mensajesGuardados);
+      } catch (e) {
+        console.error('Error cargando mensajes del localStorage', e);
+      }
+    }
+
+    this.salaActivaPendiente = salaActivaGuardada;
+  },
+
+  beforeUnmount() {
+    // ✅ Limpiar todos los listeners
+    this.socket.off('nuevaSala');
+    this.socket.off('salaCerrada');
+    this.socket.off('mensajePrivado');
   },
 
   methods: {
+    debugSalas() {
+      console.log('Socket ID del admin:', this.socket?.id);
+      console.log('Salas disponibles:', this.salas);
+      console.log('Salas filtradas:', this.salasFiltradas);
+    },
+
     setupSocketListeners() {
       // Limpiar listeners anteriores para evitar duplicados
       this.socket.off('nuevaSala');
@@ -26,9 +65,19 @@ export default {
       this.socket.off('mensajePrivado');
 
       this.socket.on('nuevaSala', ({ salaId, nombre }) => {
-        this.salas[salaId] = nombre || salaId;
-        if (!this.mensajesPorSala[salaId]) {
-          this.mensajesPorSala[salaId] = [];
+        if (salaId !== this.socket.id && !this.salas[salaId]) {
+          this.salas[salaId] = nombre || salaId;
+
+          if (!this.mensajesPorSala[salaId]) {
+            this.mensajesPorSala[salaId] = [];
+          }
+
+          if (this.salaActivaPendiente && this.salaActivaPendiente === salaId) {
+            this.seleccionarSala(salaId);
+            this.salaActivaPendiente = null;
+          }
+
+          this.guardarEstadoLocal();
         }
       });
 
@@ -36,6 +85,8 @@ export default {
         delete this.salas[salaId];
         delete this.mensajesPorSala[salaId];
         if (this.salaActiva === salaId) this.salaActiva = null;
+
+        this.guardarEstadoLocal();
       });
 
       this.socket.on('mensajePrivado', ({ salaId, texto, usuario }) => {
@@ -45,14 +96,17 @@ export default {
 
         if (usuario !== 'admin') {
           this.mensajesPorSala[salaId].push({ texto, usuario });
+          this.guardarEstadoLocal();
         }
       });
     },
 
     seleccionarSala(salaId) {
-      if (!salaId) return; // ✅ Validación adicional
+      if (!salaId) return;
       this.salaActiva = salaId;
       this.socket.emit('adminEntraSala', { salaId });
+
+      localStorage.setItem('admin_sala_activa', salaId)
     },
 
     enviarMensaje() {
@@ -76,82 +130,219 @@ export default {
         usuario: 'admin'
       });
 
+      this.guardarEstadoLocal();
+
       this.mensaje = '';
+    },
+
+    guardarEstadoLocal() {
+      localStorage.setItem('admin_mensajes', JSON.stringify(this.mensajesPorSala));
+    },
+
+    eliminarSala(salaId) {
+      if (!salaId) return;
+
+      // Eliminar sala y mensaje del estado local
+      delete this.salas[salaId];
+      delete this.mensajesPorSala[salaId];
+
+      if (this.salaActiva === salaId) {
+        this.salaActiva = null;
+        localStorage.removeItem('admin_sala_activa')
+      }
+
+      this.guardarEstadoLocal();
+
+      this.socket.emit('cerrarSalaManual', { salaId })
     }
   },
 
   computed: {
     mensajes() {
       return this.mensajesPorSala[this.salaActiva] || [];
+    },
+
+    salasFiltradas() {
+      const result = {};
+
+      Object.keys(this.salas).forEach(salaId => {
+        const tieneMensajes = this.mensajesPorSala[salaId] && this.mensajesPorSala[salaId].length > 0;
+        const esUsuarioReal = this.salas[salaId] && this.salas[salaId] !== salaId; // Tiene nombre personalizado
+
+        if (tieneMensajes || esUsuarioReal) {
+          result[salaId] = this.salas[salaId];
+        }
+      });
+
+      return result;
     }
   },
-
-  beforeUnmount() {
-    // ✅ Limpiar todos los listeners
-    this.socket.off('nuevaSala');
-    this.socket.off('salaCerrada');
-    this.socket.off('mensajePrivado');
-  }
 }
 </script>
 
 <template>
   <section class="chat_admin">
-    <h2>Chat con clientes</h2>
+    <h2>CHATS CON CLIENTES</h2>
 
     <aside class="salas">
       <h3>Salas activas</h3>
-      <ul>
-        <li v-for="(nombre, salaId) in salas" :key="salaId" @click="seleccionarSala(salaId)"
+      <ul class="lista_salas">
+        <li v-for="(nombre, salaId) in salasFiltradas" :key="salaId" @click="seleccionarSala(salaId)" class="sala"
           :class="{ activa: salaActiva === salaId }">
+          <img class="img_user_chat" :src="user" alt="Icono del usuario">
           {{ nombre }}
+          <button class="btn_eliminar_chat" @click.stop="eliminarSala(salaId)">
+            <img class="img_eliminar" :src="eliminarChat" alt="Icono de eliminar el chat">
+          </button>
         </li>
       </ul>
     </aside>
 
-    <div class="mensajes">
-      <div v-for="(msg, i) in mensajes" :key="i" :class="['mensaje', msg.usuario === 'admin' ? 'admin' : 'cliente']">
-        <strong>{{ msg.usuario }}: </strong> {{ msg.texto }}
-      </div>
-    </div>
+    <section class="chat_admin_container">
+      <article class="mensajes">
+        <div v-for="(msg, i) in mensajes" :key="i" :class="['mensaje', msg.usuario === 'admin' ? 'admin' : 'cliente']">
+          <strong>{{ msg.usuario }}: </strong> {{ msg.texto }}
+        </div>
+      </article>
 
-    <div class="input_mensaje">
-      <input v-model="mensaje" @keyup.enter="enviarMensaje" placeholder="Escribe una respuesta..." />
-      <button @click="enviarMensaje">Enviar</button>
-    </div>
+      <div class="input_mensaje">
+        <input v-model="mensaje" @keyup.enter="enviarMensaje" placeholder="Escribe una respuesta..." />
+        <button @click="enviarMensaje">Enviar</button>
+      </div>
+    </section>
   </section>
 </template>
 
 
 <style scoped>
-.salas {
-  margin-bottom: 1rem;
-}
-
-.salas ul {
-  list-style: none;
-  padding: 0;
-}
-
-.salas li {
+.chat_admin {
+  inline-size: clamp(300px, 100%, 1500px);
+  margin-inline: auto;
   padding: 0.5rem;
-  cursor: pointer;
-  background: #eee;
-  margin-bottom: 0.3rem;
+
+  &:hover {
+    background: var(--azul-suave);
+  }
+
+  &>h2 {
+    text-align: center;
+  }
 }
 
-.salas li.activa {
-  background: #007bff;
-  color: white;
+.salas {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  &>h3 {
+    text-align: center;
+  }
+
+  &>.lista_salas {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    list-style: none;
+
+    &>.sala {
+      display: flex;
+      align-items: center;
+      column-gap: 0.5rem;
+      justify-content: space-around;
+      width: 300px;
+      padding: 0.25rem 0.5rem;
+      background: var(--verde-50);
+      outline: 1px solid var(--verde);
+      border-radius: 0.25rem;
+      cursor: pointer;
+
+      &>.img_user_chat {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+      }
+
+      &>.btn_eliminar_chat {
+        width: 30px;
+        height: 30px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        &>.img_eliminar {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &.activa {
+        background: #007bff;
+        color: white;
+      }
+    }
+  }
 }
 
-.mensaje.admin {
-  background-color: #a2d2ff;
-  text-align: right;
+.chat_admin_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  row-gap: 0.5rem;
+  inline-size: clamp(300px, 100%, 400px);
+  block-size: 250px;
+  margin-inline: auto;
+
+  &>.mensajes {
+    &.admin {
+      background-color: #a2d2ff;
+      text-align: right;
+    }
+
+    &.cliente {
+      background-color: #e0e0e0;
+      text-align: left;
+    }
+  }
+
+  &>.input_mensaje {
+    display: flex;
+    column-gap: 0.25rem;
+
+    &>input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1em;
+      font-family: var(--fuente-parrafo);
+      border: none;
+      outline: 1px solid var(--verde-50);
+    }
+
+    &>button {
+      padding-inline: 0.5rem;
+      border: none;
+    }
+  }
 }
 
-.mensaje.cliente {
-  background-color: #e0e0e0;
-  text-align: left;
+@media screen and (max-width: 767px) {
+  .chat_admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    block-size: 100dvh;
+
+    &>h2 {
+      font-size: 1.8em;
+    }
+  }
+
+  .chat_admin_container {
+    height: 100%;
+
+    &>.mensajes {
+      height: 100%;
+    }
+  }
 }
 </style>

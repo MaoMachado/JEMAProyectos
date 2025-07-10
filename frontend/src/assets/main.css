@@ -169,7 +169,6 @@ p {
   font-size: var(--size-base);
   color: var(--gris-oscuro);
   line-height: var(--leading-relaxed);
-  margin-bottom: var(--spacing-md);
 }
 
 /* ===== UTILIDADES CSS ===== */

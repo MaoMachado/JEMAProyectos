@@ -23,7 +23,7 @@ export default {
     const chatRef = ref(null);
     const bloquearOcultar = ref(false);
 
-    const esRutaAdmin = computed(() => route.path.startsWith('./admin'));
+    const esRutaAdmin = computed(() => route.path.startsWith('/admin'));
 
     watch(esRutaAdmin, async (isAdmin) => {
       if (!isAdmin) {
@@ -40,7 +40,7 @@ export default {
     }, { immediate: true });
 
     const handleClickOutSide = (e) => {
-      if (bloquearOcultar.value) return; // 👈 Ignora el click si venimos de registrar nombre
+      if (bloquearOcultar.value) return;
 
       if (!chatRef.value) return;
       if (!chatRef.value.contains(e.target)) {

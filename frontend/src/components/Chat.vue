@@ -31,6 +31,11 @@ export default {
 
       this.socket.on('asignarSala', ({ salaId }) => {
         this.salaId = salaId;
+
+        const nombre = localStorage.getItem('chat_nombre')
+        if (nombre) {
+          this.socket.emit('nombreCliente', { salaId, nombre })
+        }
       });
 
       this.socket.on('mensajePrivado', (data) => {
@@ -89,15 +94,15 @@ export default {
     const nombreGuardado = localStorage.getItem('chat_nombre');
     const mensajeGuardado = localStorage.getItem('chat_mensajes');
 
-    if(nombreGuardado){
+    if (nombreGuardado) {
       this.nombre = nombreGuardado
       this.registrado = true;
     }
 
-    if(mensajeGuardado){
-      try{
+    if (mensajeGuardado) {
+      try {
         this.mensajes = JSON.parse(mensajeGuardado);
-      }catch(e){
+      } catch (e) {
         this.mensajes = [];
         console.error('Sin mensajes: ', e);
       }
@@ -111,6 +116,19 @@ export default {
       // Reconfigurar listeners cuando se reconecta
       this.setupSocketListeners();
     });
+
+    this.socket.on('chatCerrado', () => {
+      alert('El admin a cerrado el chat')
+
+      localStorage.removeItem('chat_nombre');
+      localStorage.removeItem('chat_mensajes');
+
+      /**Resetear el estado del componente */
+      this.nombre = '';
+      this.mensajes = [];
+      this.registrado = false;
+      this.conectado = false;
+    })
   },
 
   beforeUnmount() {
@@ -121,12 +139,12 @@ export default {
     this.socket.off('connect');
   },
 
-  watch:{
-    mensajes(){
-      this.$nextTick(()=>{
+  watch: {
+    mensajes() {
+      this.$nextTick(() => {
         const contenedor = this.$refs.contenedorMensajes;
 
-        if(contenedor){
+        if (contenedor) {
           contenedor.scrollTop = contenedor.scrollHeigth;
         }
       })
@@ -170,50 +188,103 @@ export default {
 
 <style scoped>
 .chat_container {
-  display: flex;
-  flex-direction: column;
   position: fixed;
-  bottom: 10px;
+  bottom: 0;
+  z-index: 100;
 
   &>.chat_mensaje {
-    max-height: 300px;
-    overflow-y: auto;
+    display: grid;
+    place-content: center;
+    inline-size: 250px;
+    block-size: 50vh;
 
-    &>.mensaje {
-      padding: 0.5rem;
-      margin: 0.3rem 0;
-      background: var(--azul-oscuro-50);
-      border-radius: 0.5rem;
-      color: var(--blanco);
-    }
-
-    &>.chat_input {
+    &>.registro {
       display: flex;
-      gap: 0.5rem;
+      width: 100%;
+      outline: 2px solid var(--verde);
 
-      &>input {
-        flex: 1;
-        padding: 0.5rem;
-        border-radius: 0.5;
-        border: 1px solid var(--naranja);
+      &>.registro_nombre {
+        width: 100%;
+        padding-inline: 0.5rem;
+        border: none;
+        /* font-size: 1em; */
+
+        &:focus {
+          border: none;
+          outline: none;
+        }
       }
 
-      &>button {
-        padding: 0.5rem 1rem;
-        border: none;
-        background: var(--azul-principal);
-        color: white;
-        border-radius: 0.5rem;
+      &>.registro_btn {
         cursor: pointer;
+        border: none;
+
+        &>img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+
+    &>.chat_usuario_container {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      row-gap: 0.5rem;
+      height: 50vh;
+      padding: 0.5rem;
+
+      &>.historial_chat_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        height: 100%;
+        overflow-y: auto;
+
+        &>p {
+          background: var(--azul-principal);
+          color: var(--blanco);
+          margin: 0;
+          padding: 0.25rem;
+          border-radius: 0.25rem;
+          outline: 1px solid var(--verde-50);
+        }
+      }
+
+      &>.container_inferior {
+        display: flex;
+        align-items: center;
+        outline: 1px solid var(--verde-50);
+
+        &>.input_chat {
+          width: 100%;
+          height: 100%;
+          border: none;
+          padding-inline: 1rem;
+
+          &:focus {
+            border: none;
+            outline: none;
+            font-size: 1em;
+          }
+        }
+
+        &>.btn_chat {
+          border: none;
+          cursor: pointer;
+
+          &>img {
+            width: 30px;
+            height: 30px;
+          }
+        }
       }
     }
   }
-
 }
 
 @media screen and (max-width: 767px) {
   .chat_container {
-    /* display: none; */
     bottom: 50px;
     right: 0;
     width: 100dvw;

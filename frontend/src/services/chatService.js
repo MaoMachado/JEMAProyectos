@@ -22,18 +22,3 @@ export const getSocketAdmin = () => {
 
   return socketAdmin;
 }
-
-
-
-// // Socket para el chat del cliente
-// const socketCliente = io('http://localhost:4000', {
-//   query: { tipo: 'cliente' }
-// });
-
-// // Socket para el chat del admin
-// const socketAdmin = io('http://localhost:4000', {
-//   query: { tipo: 'admin' }
-// });
-
-// export { socketCliente, socketAdmin };
-// export default socketCliente; // Para mantener compatibilidad
