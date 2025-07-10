@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jemaproyectos-front.onrender.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /chat-admin

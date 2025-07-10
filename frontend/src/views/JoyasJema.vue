@@ -21,7 +21,8 @@ export default {
       Joya,
       imagenPrincipal: img1,
       galeria: [img1, img2, img3, img4, img5],
-      pdfsImg: [pdf1, pdf2]
+      pdfsImg: [pdf1, pdf2],
+      numCell: 3169274523
     }
   },
   components: {
@@ -40,15 +41,12 @@ export default {
     <section class="joyas_container">
       <h2 class="titulo_joyas">Viviendas Jema</h2>
       <CardProducto titulo="Floresta" descripcion="Casa Ubicada en el barrio floresta" :imagen="imagenPrincipal"
-        :galeria="galeria" numeroContacto="3165124487" />
-      <CardProducto titulo="Floresta" :imagen="imagenPrincipal" :galeria="galeria" numeroContacto="3165124487" />
-      <CardProducto titulo="Floresta" :imagen="imagenPrincipal" :galeria="galeria" numeroContacto="3165124487" />
+        :galeria="galeria" :numeroContacto="numCell" />
     </section>
 
     <section class="joyas_container">
       <h2 class="titulo_joyas">Contenido Digital JEMA</h2>
-      <CardProducto titulo="Libro PDF" :imagen="pdfsImg[0]" numeroContacto="3165124487" />
-      <CardProducto titulo="Libro PDF" :imagen="pdfsImg[1]" numeroContacto="3165124487" />
+      <CardProducto titulo="Libro PDF" :imagen="pdfsImg[0]" :numeroContacto="numCell" />
     </section>
   </section>
 </template>
