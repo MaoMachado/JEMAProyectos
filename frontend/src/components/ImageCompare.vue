@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 
 // Importar imágenes correctamente para Vite
-import beforeImage from '@/assets/img/J.png'
-import afterImage from '@/assets/img/joya.png'
+import beforeImage from '@/assets/img/antes.webp'
+import afterImage from '@/assets/img/despues.webp'
 
 const porcentaje = ref(50)
 const isDragging = ref(false)
@@ -45,7 +45,7 @@ const resetSlider = () => {
 
 <template>
   <div class="image-compare-container">
-    <h3 class="compare-title">Comparación de Proyectos</h3>
+    <h3 class="compare-title">Mira la comparación de un proyecto</h3>
 
     <div ref="containerRef" class="image-compare" @mousedown="handleMouseDown">
       <!-- Imagen base (antes) -->

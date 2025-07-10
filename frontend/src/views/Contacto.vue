@@ -20,7 +20,8 @@ export default {
       mensaje: '',
       error: {},
       whatsappNumber: '573169274523',
-      whatasppMessage: 'Hola, me gustaria tener mas info'
+      whatasppMessage: 'Hola, me gustaria tener mas info',
+      urlFacebook: "https://www.facebook.com/profile.php?id=61554872667407&rdid=QOlhmLX6wjcJ65CM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15ysM2BARH%2F",
     }
   },
 
@@ -123,9 +124,10 @@ export default {
     <article class="redes_container">
       <h2>O siguenos en nuestras redes sociales</h2>
       <section class="iconos_redes">
-        <a href="#"><img :src="whatsappIcon" alt="Icono de whatsapp"></a>
-        <a href="#"><img :src="facebookIcon" alt="Icono de facebook"></a>
-        <a href="#"><img :src="instagramIcon" alt="Icono de instagram"></a>
+        <a :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatasppMessage)}`" target="_blank"
+          rel="noopener"><img :src="whatsappIcon" alt="Icono de whatsapp"></a>
+        <a :href="urlFacebook" target="_blank" rel="noopener"><img :src="facebookIcon" alt="Icono de facebook"></a>
+        <a href="#" target="_blank" rel="noopener"><img :src="instagramIcon" alt="Icono de instagram"></a>
       </section>
     </article>
   </section>
@@ -368,37 +370,37 @@ export default {
   }
 }
 
-@media screen and (max-width: 767px){
-  .contacto_container{
+@media screen and (max-width: 767px) {
+  .contacto_container {
     padding: 0.5rem;
 
-    &::before{
+    &::before {
       display: none;
     }
 
-    & > .titulo_contacto{
+    &>.titulo_contacto {
       align-items: center;
       justify-content: space-around;
       width: 100%;
       margin: 0;
       font-size: 2.5em;
 
-      & > img{
+      &>img {
         width: 40px;
         height: 40px;
         margin: 0;
       }
 
-      & > span{
+      &>span {
         display: none;
       }
     }
 
-    & > .intro_contacto{
+    &>.intro_contacto {
       margin: 0;
     }
 
-    & > .redes_container{
+    &>.redes_container {
       display: flex;
       flex-direction: column;
       row-gap: 1rem;
@@ -407,7 +409,7 @@ export default {
       padding: 0.5rem;
       border-radius: 0.5rem;
 
-      & > h2{
+      &>h2 {
         margin: 0;
         text-align: center;
       }
