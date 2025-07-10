@@ -70,7 +70,7 @@ export default {
       Escríbeme y con gusto te responderé personalmente.
     </p>
 
-    <form @submit="onSubmit" action="https://formsubmit.co/machado-mario@outlook.com" method="post"
+    <form @submit="onSubmit" action="https://formsubmit.co/jdmachadoa@gmail.com" method="post"
       class="form_content">
       <fieldset class="form_container">
         <legend class="form_legend">Formulario Envio Correo</legend>
