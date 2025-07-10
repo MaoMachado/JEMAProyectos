@@ -23,7 +23,7 @@ export default {
       whatasppMessage: 'Hola, me gustaria tener mas info'
     }
   },
-  
+
   methods: {
     validarFormulario() {
       this.error = {};
@@ -62,7 +62,7 @@ export default {
 
 <template>
   <section class="contacto_container">
-    <h1 class="titulo_contacto">Contactame <img :src="JIcon" alt="Icono De J Jema"> EMA</h1>
+    <h1 class="titulo_contacto">Contactame <img :src="JIcon" alt="Icono De J Jema"> <span>EMA</span></h1>
 
     <p class="intro_contacto">
       ¿Quieres saber más sobre nuestros servicios o tienes una idea que quieres hacer realidad? <br />
@@ -363,6 +363,53 @@ export default {
             filter: grayscale(0);
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px){
+  .contacto_container{
+    padding: 0.5rem;
+
+    &::before{
+      display: none;
+    }
+
+    & > .titulo_contacto{
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      margin: 0;
+      font-size: 2.5em;
+
+      & > img{
+        width: 40px;
+        height: 40px;
+        margin: 0;
+      }
+
+      & > span{
+        display: none;
+      }
+    }
+
+    & > .intro_contacto{
+      margin: 0;
+    }
+
+    & > .redes_container{
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+      margin-block-end: 1rem;
+      background: var(--azul-suave-50);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+
+      & > h2{
+        margin: 0;
+        text-align: center;
       }
     }
   }

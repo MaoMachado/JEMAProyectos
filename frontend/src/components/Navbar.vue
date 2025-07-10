@@ -6,14 +6,22 @@ import SobreMi from '@/assets/img/sobre-mi.png'
 
 export default {
   name: 'NavbarComponent',
+
   data() {
     return {
       logoJema,
       InicioIcon,
       JoyasIcon,
-      SobreMi
+      SobreMi,
+      mostrarMenu: false
     }
-  }
+  },
+
+  methods: {
+    cerrarMenu() {
+      this.$emit('cerrar-menu')
+    }
+  },
 }
 </script>
 
@@ -24,19 +32,19 @@ export default {
     </div>
     <ul class="nav_menu">
       <li class="nav_item">
-        <RouterLink to="/" class="nav_link" active-class="active">
+        <RouterLink to="/" class="nav_link" active-class="active" @click="cerrarMenu">
           <img :src="InicioIcon" alt="Inicio" />
           Inicio
         </RouterLink>
       </li>
       <li class="nav_item">
-        <RouterLink to="/joyas-jema" class="nav_link" active-class="active">
+        <RouterLink to="/joyas-jema" class="nav_link" active-class="active" @click="cerrarMenu">
           <img :src="JoyasIcon" alt="Joyas" />
           Nuestras Joyas
         </RouterLink>
       </li>
       <li class="nav_item">
-        <RouterLink to="/contacto" class="nav_link" active-class="active">
+        <RouterLink to="/contacto" class="nav_link" active-class="active" @click="cerrarMenu">
           <img :src="SobreMi" alt="Icono Sobre Mi">
           Contactame
         </RouterLink>
@@ -102,6 +110,23 @@ export default {
       }
     }
 
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .nav_container {
+    padding: 0;
+
+    .logo_container {
+      width: 100%;
+      margin-inline: auto;
+      padding: 0.5rem;
+      border: none;
+    }
+
+    .nav_menu {
+      padding: 0.5rem;
+    }
   }
 }
 </style>
