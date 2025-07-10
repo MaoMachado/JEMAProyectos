@@ -21,8 +21,5 @@ export const getSocketAdmin = () => {
   }
 
   return socketAdmin;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dev
+
