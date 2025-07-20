@@ -15,6 +15,7 @@ import pdf2 from '@/assets/contenidoDigital/pdf_2.png'
 
 export default {
   name: 'JoyasJemaView',
+
   data() {
     return {
       titulo: 'NUESTRAS JOYAS',
@@ -25,30 +26,45 @@ export default {
       numCell: 3169274523
     }
   },
+
   components: {
     CardProducto
+  },
+
+  mounted() {
+    document.title = 'JEMA - Joyas Únicas y Exclusivas | Venta de Joyas';
+    document.querySelector('meta[name="description"]').setAttribute('content',
+      'JEMA - Joyas únicas y exclusivas. Descubre nuestra colección de joyas especiales. Venta de joyas únicas.');
+  },
+
+  beforeUnmount() {
+    document.title = 'JEMA - Joyas Personalizadas y Únicas | Diseño Artesanal';
   }
 }
 </script>
 
 <template>
-  <section class="joyas_container">
-    <header class="header_joyas_container">
-      <h1>{{ titulo }} <img :src="Joya" alt="Joya" /></h1>
-      <p>Descubre productos únicos diseñados para complementar tus proyectos y tu crecimiento personal.</p>
+  <main class="joyas_container" role="main" aria-labelledby="titulo-header-title">
+    <header class="header_joyas_container" aria-labelledby="joyas-header-title">
+      <h1 class="titulo-header-joyas" id="joyas-header-title">
+        {{ titulo }}
+        <img :src="Joya" alt="Joyas únicas JEMA" loading="lazy" />
+      </h1>
+      <p>
+        Descubre joyas únicas y exclusivas que se adaptan a tu estilo personal.
+        Cada pieza es cuidadosamente seleccionada para ofrecerte la mejor calidad y diseño.
+      </p>
+      <p>
+        Nuestras joyas te están esperando. Encuentra piezas que reflejen tu personalidad y elegancia.
+      </p>
     </header>
 
-    <section class="joyas_container">
-      <h2 class="titulo_joyas">Viviendas Jema</h2>
-      <CardProducto titulo="Floresta" descripcion="Casa Ubicada en el barrio floresta" :imagen="imagenPrincipal"
-        :galeria="galeria" :numeroContacto="numCell" />
+    <section class="joyas-ventas-contenido" aria-labelledby="joyas-ventas-title">
+      <h2 class="titulo_joyas" id="joyas-ventas-title">Joyas Jema</h2>
+      <CardProducto titulo="Floresta" descripcion="Casa ubicada en el barrio La Floresta - Venta de joyas únicas"
+        :imagen="imagenPrincipal" :galeria="galeria" :numeroContacto="numCell" />
     </section>
-
-    <section class="joyas_container">
-      <h2 class="titulo_joyas">Contenido Digital JEMA</h2>
-      <CardProducto titulo="Libro PDF" :imagen="pdfsImg[0]" :numeroContacto="numCell" />
-    </section>
-  </section>
+  </main>
 </template>
 
 <style scoped>
@@ -56,6 +72,10 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  inline-size: clamp(300px, 100vw, 100%);
+  padding: 1rem;
+  position: relative;
+  animation: fadeIn 0.5s ease-in-out;
 
   &::before {
     content: '';
@@ -72,73 +92,120 @@ export default {
     z-index: 1;
   }
 
-  header {
+  .header_joyas_container {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    inline-size: 80%;
+    margin-inline: auto;
 
-    &>h1 {
+    &>.titulo-header-joyas {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      font-size: clamp(1.5em, 8vw, 3em);
+      column-gap: 0.5rem;
+      font-size: clamp(1.3em, 8vw, 3em);
 
+      &:hover {
+        transform: scale(1.02);
+        transition: transform 0.2s ease;
+      }
 
       &>img {
-        inline-size: 100px;
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
       }
+    }
+
+    p {
+      font-size: 1.3em;
+      font-weight: 300;
+      text-align: justify;
     }
   }
 
-  .joyas_container {
+  .joyas-ventas-contenido {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    inline-size: clamp(300px, 100vw, 100%);
+    inline-size: clamp(300px, 100vw, 95%);
     margin-inline: auto;
     padding: 1rem;
+    background: var(--azul-suave);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-xl);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-2xl);
+    }
 
     &>.titulo_joyas {
       width: 100%;
       text-align: center;
-      font-size: clamp(1.2em, 5vw, 2em);
+      font-size: 2.5em;
+      color: var(--azul-oscuro, #1e4971);
+      margin-bottom: 1rem;
     }
   }
 }
 
-@media screen and (max-width: 767px){
-  .joyas_container{
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    &::before{
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .joyas_container {
+    padding: 0.25rem;
+    animation: fadeIn 0.5s ease-in-out;
+
+    &::before {
       display: none;
     }
 
-    & > .header_joyas_container{
+    &>.header_joyas_container {
+      row-gap: 1rem;
+      width: 100%;
       margin-top: 0.5rem;
-      background: var(--azul-suave-50);
       padding: 0.5rem;
 
-      & > h1{
-        /* flex-direction: column; */
-        gap: 0;
-        font-size: 2.1em;
+      &>.titulo-header-joyas {
+        flex-direction: column;
+        font-size: 2em;
         margin: 0;
       }
-      & > p{
+
+      &>p {
         font-size: 1.2em;
         margin: 0;
       }
     }
 
-    & > .joyas_container{
-      padding: 0.5rem;
+    &>.joyas-ventas-contenido {
+      width: 95vw;
+      padding: 0.25rem;
+      box-shadow: var(--shadow-xl);
 
-      & >.titulo_joyas{
+      &>.titulo_joyas {
         font-size: 2.2em;
         margin: 0;
       }
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .joyas_container {
+    animation: none;
   }
 }
 </style>

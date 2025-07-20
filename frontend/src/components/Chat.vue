@@ -285,10 +285,8 @@ export default {
 
 @media screen and (max-width: 767px) {
   .chat_container {
-    bottom: 50px;
+    width: 95dvw;
     right: 0;
-    width: 100dvw;
-    padding: 0.5rem;
     z-index: 20;
 
     &>.chat_mensaje {
@@ -297,12 +295,12 @@ export default {
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 50dvh;
+      height: 70dvh;
       padding: 0.5rem;
       background: var(--azul-claro-50);
-      backdrop-filter: blur(5px);
-      border-radius: 0.5rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 0.25rem;
+      box-shadow: var(--shadow-lg);
 
       &>.registro {
         width: 80%;

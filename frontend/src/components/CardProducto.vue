@@ -78,11 +78,13 @@ export default {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  width: 300px;
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   text-align: center;
   background: var(--blanco);
+  z-index: 50;
 
   &:hover > .titulo > .icono_sell{
     filter: grayscale(0);
@@ -111,7 +113,8 @@ export default {
 
     & > .icono_sell{
       width: 70px;
-      height: 70px;
+      height: 30px;
+      object-fit: cover;
       filter: grayscale(100%);
       transition: all 0.2s ease;
     }

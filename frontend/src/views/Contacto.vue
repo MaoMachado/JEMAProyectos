@@ -7,6 +7,7 @@ import whatsappIcon from '@/assets/img/whatsapp_icon.png';
 
 export default {
   name: 'ContactoView',
+
   data() {
     return {
       JIcon,
@@ -15,6 +16,7 @@ export default {
       instagramIcon,
       whatsappIcon,
       enviado: false,
+      enviando: false,
       nombre: '',
       email: '',
       mensaje: '',
@@ -29,54 +31,123 @@ export default {
     validarFormulario() {
       this.error = {};
 
-      if (!this.nombre || !this.email || !this.mensaje) {
+      if (!this.nombre.trim()) {
         this.error.nombre = 'El nombre es obligatorio';
-        this.error.email = 'El Correo es obligatorio';
-        this.error.mensaje = 'El mensaje es obligatorio';
-      } else if (this.nombre.length < 3 || this.mensaje.length < 3) {
-        this.error.nombre = 'El nombre debe tener minimo 3 caracteres';
-        this.error.mensaje = 'El mensaje debe tener minimo 3 caracteres';
-      }
+      } else if (this.nombre.this().length < 3) {
+        this.error.nombre = 'El nombre debe tener mínimo 3 caracteres';
+      } else if (this.nombre.trim().length > 50) {
+        this.error.nombre = 'El nombre no puede exceder 50 caracteres';
+      };
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(this.email)) {
-        this.error.email = 'El email no es válido'
-      }
+      if (!this.email.trim()) {
+        this.error.email = 'El email es obligatorio';
+      } else {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.email.trim())) {
+          this.error.email = 'El email no es válido';
+        }
+      };
+
+      if (!this.mensaje.trim()) {
+        this.error.mensaje = 'El mensaje es obligatorio';
+      } else if (this.mensaje.trim().length < 10) {
+        this.error.mensaje = 'El mensaje debe tener mínimo 10 caracteres';
+      } else if (this.mensaje.trim().length > 500) {
+        this.error.mensaje = 'El mensaje no puede exceder 500 caracteres';
+      };
 
       return Object.keys(this.error).length === 0;
     },
 
-    onSubmit(e) {
+    validarNombre() {
+      if (this.nombre.trim().length > 0 && this.nombre.trim().length < 3) {
+        this.error.nombre = 'El nombre debe tener mínimo 3 caracteres';
+      } else {
+        delete this.error.nombre;
+      }
+    },
+
+    validarEmail() {
+      if (this.email.trim().length > 0) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.email.trim())) {
+          this.error.email = 'El email no es válido';
+        } else {
+          delete this.error.email;
+        }
+      }
+    },
+
+    validarMensaje() {
+      if (this.mensaje.trim().length > 0 && this.mensaje.trim().length < 10) {
+        this.error.mensaje = 'El mensaje debe tener mínimo 10 caracteres';
+      } else {
+        delete this.error.mensaje;
+      }
+    },
+
+    async onSubmit(e) {
       if (!this.validarFormulario()) {
         e.preventDefault();
-      } else {
+        return;
+      }
+
+      this.enviando = true;
+
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         this.enviado = true;
+        this.enviando = false;
+
+        // Limpiar formulario
+        this.nombre = '';
+        this.email = '';
+        this.mensaje = '';
+        this.error = {};
+      } catch (error) {
+        console.error('Error al enviar:', error);
+        this.enviando = false;
       }
     },
 
     cerrarDialogo() {
       this.enviado = false;
     }
+  },
+
+  mounted() {
+    document.title = 'JEMA - Contacto | Joyas Únicas y Exclusivas';
+    document.querySelector('meta[name="description"]').setAttribute('content',
+      'Contacta con JEMA para joyas únicas y exclusivas. Formulario de contacto directo y redes sociales.');
+  },
+
+  beforeUnmount() {
+    document.title = 'JEMA - Joyas Personalizadas y Únicas | Diseño Artesanal';
   }
 }
 </script>
 
 <template>
-  <section class="contacto_container">
-    <h1 class="titulo_contacto">Contactame <img :src="JIcon" alt="Icono De J Jema"> <span>EMA</span></h1>
+  <main class="contacto_container" role="main" aria-labelledby="titulo_contacto">
+    <header class="header-contacto" aria-labelledby="titulo_contacto">
+      <h1 class="titulo_contacto" id="titulo-contacto">CONTACTAME<img :src="JIcon"
+          alt="Icono De J Jema"><span>EMA</span></h1>
 
-    <p class="intro_contacto">
-      ¿Quieres saber más sobre nuestros servicios o tienes una idea que quieres hacer realidad? <br />
-      Escríbeme y con gusto te responderé personalmente.
-    </p>
+      <p class="intro_contacto">
+        ¿Quieres saber más sobre nuestros servicios o tienes una idea que quieres hacer realidad? <br />
+        Escríbeme y con gusto te responderé personalmente.
+      </p>
+    </header>
 
-    <form @submit="onSubmit" action="https://formsubmit.co/jdmachadoa@gmail.com" method="post"
-      class="form_content">
+    <form @submit="onSubmit" action="https://formsubmit.co/jdmachadoa@gmail.com" method="post" class="form_content"
+      role="form" aria-labelledby="form-legend">
       <fieldset class="form_container">
-        <legend class="form_legend">Formulario Envio Correo</legend>
+        <legend class="form_legend" id="form-legend">Formulario De Contacto</legend>
 
         <div class="input_content form_nombre">
-          <input type="text" name="nombre" id="nombre" v-model="nombre" />
+          <input type="text" name="nombre" id="nombre" v-model="nombre" @blur="validarNombre" aria-required="true"
+            aria-describedby="nombre-error" />
           <label for="nombre">Nombre Y Apellido</label>
           <div v-if="error.nombre" class="error">
             <p>{{ error.nombre }}</p>
@@ -84,7 +155,8 @@ export default {
         </div>
 
         <div class="input_content form_email">
-          <input type="email" name="email" id="email" v-model="email" />
+          <input type="email" name="email" id="email" v-model="email" @blur="validarEmail" aria-required="true"
+            aria-describedby="email-error" />
           <label for="email">Email</label>
           <div v-if="error.email" class="error">
             <p>{{ error.email }}</p>
@@ -92,7 +164,8 @@ export default {
         </div>
 
         <div class="input_content form_mensaje">
-          <textarea name="mensaje" id="mensaje" rows="5" v-model="mensaje"></textarea>
+          <textarea name="mensaje" id="mensaje" rows="5" v-model="mensaje" @blur="validarMensaje" aria-required="true"
+            aria-describedby="mensaje-error"></textarea>
           <label for="mensaje">Tu Mensaje</label>
           <div v-if="error.mensaje" class="error">
             <p>{{ error.mensaje }}</p>
@@ -100,9 +173,10 @@ export default {
 
         </div>
 
-        <button :disabled="enviado" type="submit" class="form_button">
-          <span>Enviar</span>
-          <img :src="EnvioCorreoIcon" alt="Icono de enviar correo">
+        <button :disabled="enviado || enviando" type="submit" class="form_button" :aria-busy="enviado">
+          <span v-if="!enviando">Enviar</span>
+          <span v-else>Enviando...</span>
+          <img v-if="!enviando" :src="EnvioCorreoIcon" alt="Icono de enviar correo">
         </button>
       </fieldset>
 
@@ -119,18 +193,20 @@ export default {
           <button class="btn_cerrar" @click="cerrarDialogo">Cerrar</button>
         </section>
       </div>
-    </form>
 
-    <article class="redes_container">
-      <h2>O siguenos en nuestras redes sociales</h2>
-      <section class="iconos_redes">
-        <a :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatasppMessage)}`" target="_blank"
-          rel="noopener"><img :src="whatsappIcon" alt="Icono de whatsapp"></a>
-        <a :href="urlFacebook" target="_blank" rel="noopener"><img :src="facebookIcon" alt="Icono de facebook"></a>
-        <a href="#" target="_blank" rel="noopener"><img :src="instagramIcon" alt="Icono de instagram"></a>
+      <section class="redes_container" aria-labelledby="redes-container" role="dialog" aria-modal="true">
+        <h3>También puedes seguirme en redes sociales</h3>
+        <div class="iconos_redes">
+          <a :href="`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatasppMessage)}`" target="_blank"
+            rel="noopener noreferer"><img :src="whatsappIcon" alt="Icono de whatsapp" loading="lazy" /></a>
+          <a :href="urlFacebook" target="_blank" rel="noopener noreferer"><img :src="facebookIcon"
+              alt="Icono de facebook" loading="lazy" /></a>
+          <a href="#" target="_blank" rel="noopener noreferer"><img :src="instagramIcon" alt="Icono de instagram"
+              loading="lazy" /></a>
+        </div>
       </section>
-    </article>
-  </section>
+    </form>
+  </main>
 </template>
 
 <style scoped>
@@ -141,6 +217,7 @@ export default {
   inline-size: clamp(300px, 100vw, 100%);
   padding: 1rem;
   position: relative;
+  animation: fadeIn 0.5s ease-in-out;
   /* background: url('../assets/background/fondo_contacto.svg') center / cover no-repeat fixed; */
 
   &::before {
@@ -158,63 +235,86 @@ export default {
     z-index: 1;
   }
 
-  &>.titulo_contacto {
-    display: flex;
-    justify-content: center;
-    font-size: clamp(1.5em, 8vw, 3em);
+  &>.header-contacto {
+    &>.titulo_contacto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: clamp(1.5em, 8vw, 3em);
 
 
-    &>img {
-      width: 50px;
-      margin-inline-start: 1rem;
+      &>img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+    }
+
+    &>.intro_contacto {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 300;
+      color: var(--azul-oscuro);
     }
   }
 
-  &>.intro_contacto {
-    text-align: center;
-    font-size: 1.1em;
-    color: var(--azul-oscuro);
-    line-height: 1.6;
-  }
-
   &>.form_content {
-    inline-size: clamp(300px, 100dvw, 50%);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    align-items: center;
+    inline-size: 90%;
     background: var(--blanco);
     margin-inline: auto;
-    padding: 0.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-xl);
 
     &>.form_container {
+      flex-basis: 500px;
       display: flex;
       gap: 0.5rem;
       flex-direction: column;
       align-items: center;
       padding: 0.5rem;
-      border-radius: 0.3rem;
+      border-radius: 0.25rem;
       border-color: var(--azul-suave);
 
       &:hover {
         border-color: var(--azul-oscuro);
-        background: var(--azul-suave);
       }
 
       &>.form_legend {
         margin-inline-start: 1rem;
-        padding: 0.1rem 0.5rem;
+        padding: 0.25rem 0.5rem;
         background: var(--azul-suave-50);
+        border-radius: 0.25rem;
         font-family: var(--fuente-titulo);
-        border-radius: 0.5rem;
+        font-size: 1.1em;
       }
 
       &>.input_content {
         position: relative;
         width: 100%;
+        font-size: 1.1em;
+
+        & input:valid,
+        & textarea:valid {
+          border-color: var(--verde);
+        }
+
+        & input:invalid:not(:placeholder-shown),
+        & textarea:invalid:not(:placeholder-shown) {
+          border-color: var(--naranja);
+        }
 
         &>label {
           position: absolute;
           right: 15px;
           top: 5px;
-          opacity: 0.5;
           font-family: var(--fuente-texto);
+          font-weight: 300;
         }
 
         &>input,
@@ -223,17 +323,21 @@ export default {
           padding: 0.5rem;
           border: none;
           border-inline-end: 5px solid var(--azul-oscuro);
-          border-radius: 0.5rem 0 0 0.5rem;
+          /* border-radius: 0.5rem 0 0 0.5rem; */
+          font-size: 1em;
+          transition: border 0.2s ease-out;
 
           &:focus {
-            outline: 1px solid var(--azul-oscuro);
-            border: none;
+            outline: none;
+            border-inline-start: 3px solid var(--naranja);
+            border-inline-end: 5px solid var(--azul-oscuro);
           }
         }
 
         &>input:focus+label,
         &>textarea:focus+label {
-          opacity: 1;
+          opacity: 0;
+          transition: opacity 0.2s ease-out;
         }
 
         &>.error {
@@ -282,7 +386,31 @@ export default {
       }
     }
 
+    &>.redes_container {
 
+      &>h3 {
+        font-size: 1.25em;
+      }
+
+      &>.iconos_redes {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        &>a {
+
+          &>img {
+            width: 50px;
+            object-fit: cover;
+            filter: grayscale(100%);
+
+            &:hover {
+              filter: grayscale(0);
+            }
+          }
+        }
+      }
+    }
   }
 
   &>.modal_overlay {
@@ -340,80 +468,61 @@ export default {
       }
     }
   }
-
-  &>.redes_container {
-    margin-inline: auto;
-
-    &>h2 {
-      font-size: 1.5em;
-      opacity: 0.8;
-    }
-
-    &>.iconos_redes {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-
-      &>a {
-
-        &>img {
-          width: 50px;
-          object-fit: cover;
-          filter: grayscale(100%);
-
-          &:hover {
-            filter: grayscale(0);
-          }
-        }
-      }
-    }
-  }
 }
 
 @media screen and (max-width: 767px) {
   .contacto_container {
     padding: 0.5rem;
+    animation: fadeIn 0.5s ease-in-out;
 
     &::before {
       display: none;
     }
 
-    &>.titulo_contacto {
-      align-items: center;
-      justify-content: space-around;
+    &>.header-contacto {
+      &>.titulo_contacto {
+        align-items: center;
+        font-size: 2em;
+        gap: 1rem;
+
+        &>img {
+          width: 40px;
+          height: 40px;
+          margin: 0;
+        }
+
+        &>span {
+          display: none;
+        }
+      }
+
+      &>.intro_contacto {
+        margin: 0;
+        text-align: justify;
+      }
+    }
+
+    &>.form_content {
       width: 100%;
-      margin: 0;
-      font-size: 2.5em;
-
-      &>img {
-        width: 40px;
-        height: 40px;
-        margin: 0;
-      }
-
-      &>span {
-        display: none;
-      }
-    }
-
-    &>.intro_contacto {
-      margin: 0;
-    }
-
-    &>.redes_container {
-      display: flex;
-      flex-direction: column;
       row-gap: 1rem;
-      margin-block-end: 1rem;
-      background: var(--azul-suave-50);
-      padding: 0.5rem;
-      border-radius: 0.5rem;
 
-      &>h2 {
-        margin: 0;
-        text-align: center;
+      &>.redes_container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-block-end: 1rem;
+        background: var(--azul-suave-50);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+
+        &>h3 {
+          margin: 0;
+          text-align: center;
+        }
       }
     }
+
+
   }
 }
 
@@ -432,6 +541,28 @@ export default {
 @keyframes stroke {
   100% {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contacto_container {
+    animation: none;
+  }
+
+  .check_icon {
+    animation: none;
   }
 }
 </style>

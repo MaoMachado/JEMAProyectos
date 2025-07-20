@@ -94,10 +94,16 @@ export default {
 
 @media screen and (max-width: 767px) {
   .burbuja_chat {
+    display: block;
     position: absolute;
     bottom: 0;
-    right: 5px;
-    display: block;
+    right: 10px;
+    bottom: 10px;
+    z-index: 110;
+    height: 45px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
 
     &>button {
       width: 45px;
@@ -107,6 +113,7 @@ export default {
 
       &>img {
         width: 100%;
+        height: 100%;
       }
     }
   }
