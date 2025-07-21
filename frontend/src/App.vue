@@ -127,7 +127,6 @@ export default {
     width: 250px;
     height: 100dvh;
     background-color: var(--azul-suave);
-    z-index: 100;
 
     &>.menu_mobil {
       display: none;

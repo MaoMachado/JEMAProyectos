@@ -181,36 +181,38 @@ export default {
 </script>
 
 <template>
-  <section class="chat_admin">
-    <h2>CHATS CON CLIENTES</h2>
+  <main class="chat_admin" role="main" aria-labelledby="chat-admin-title">
+    <h2 id="chat-admin-title">CHATS CON CLIENTES</h2>
 
     <aside class="salas">
       <h3>Salas activas</h3>
-      <ul class="lista_salas">
+      <ul class="lista_salas" role="listbox" aria-label="Salas activas">
         <li v-for="(nombre, salaId) in salasFiltradas" :key="salaId" @click="seleccionarSala(salaId)" class="sala"
-          :class="{ activa: salaActiva === salaId }">
-          <img class="img_user_chat" :src="user" alt="Icono del usuario">
+          :class="{ activa: salaActiva === salaId }" role="option" :aria-selected="salaActiva === salaId">
+          <img class="img_user_chat" :src="user" alt="Icono del usuario" loading="lazy" />
           {{ nombre }}
-          <button class="btn_eliminar_chat" @click.stop="eliminarSala(salaId)">
-            <img class="img_eliminar" :src="eliminarChat" alt="Icono de eliminar el chat">
+          <button type="button" class="btn_eliminar_chat" @click.stop="eliminarSala(salaId)"
+            @keydown.enter.stop="eliminarSala(salaId)" aria-label="Eliminar sala {{ nombre }}">
+            <img class="img_eliminar" :src="eliminarChat" alt="Icono de eliminar el chat" loading="lazy" />
           </button>
         </li>
       </ul>
     </aside>
 
-    <section class="chat_admin_container">
+    <section class="chat_admin_container" aria-label="Mensaje del chat">
       <article class="mensajes">
         <div v-for="(msg, i) in mensajes" :key="i" :class="['mensaje', msg.usuario === 'admin' ? 'admin' : 'cliente']">
           <strong>{{ msg.usuario }}: </strong> {{ msg.texto }}
         </div>
       </article>
 
-      <div class="input_mensaje">
-        <input v-model="mensaje" @keyup.enter="enviarMensaje" placeholder="Escribe una respuesta..." />
-        <button @click="enviarMensaje">Enviar</button>
+      <div class="input_mensaje" role="form" aria-label="Enviar mensaje">
+        <input v-model="mensaje" @keyup.enter="enviarMensaje" placeholder="Escribe una respuesta..."
+          aria-label="Escribe una respuesta" />
+        <button type="button" @click="enviarMensaje" aria-label="Enviar mensaje">Enviar</button>
       </div>
     </section>
-  </section>
+  </main>
 </template>
 
 

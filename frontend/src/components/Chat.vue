@@ -190,7 +190,6 @@ export default {
 .chat_container {
   position: fixed;
   bottom: 0;
-  z-index: 100;
 
   &>.chat_mensaje {
     display: grid;

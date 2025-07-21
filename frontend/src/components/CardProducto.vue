@@ -36,40 +36,74 @@ export default {
     },
 
     contactar() {
-      const whatsappURL = `https://wa.me/57${this.numeroContacto}?text=Hola%20estoy%20interesado%20en%20${encodeURIComponent(this.titulo)}`
+      const whatsappURL = `https://wa.me/${this.numeroContacto.startsWith('57') ? this.numeroContacto : '57' + this.numeroContacto}?text=Hola%20estoy%20interesado%20en%20${encodeURIComponent(this.titulo)}`
       window.open(whatsappURL, '_blank')
+    },
+
+    handleKeyDown(e) {
+      if (this.mostrarGaleria && e.key === 'Escape') {
+        this.cerrarGaleria();
+      }
     }
-  }
+  },
+
+  watch: {
+    mostrarGaleria(val) {
+      document.body.style.overflow = val ? 'hidden' : '';
+
+      if (val) {
+        this.$nextTick(() => {
+          this.$refs.btnCerrarGaleria?.focus();
+        })
+      }
+    }
+  },
+
+  mounted() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+    document.body.style.overflow = '';
+  },
 }
 </script>
 
 <template>
   <section class="card_producto">
-    <h2 class="titulo">{{ titulo }}
-      <img class="icono_sell" :src="SellJoya" alt="Icono de sell">
-    </h2>
-    <img :src="imagen" :alt="titulo" class="imagen_principal">
+    <h3 class="titulo">{{ titulo }}
+      <img class="icono_sell" :src="SellJoya" alt="Icono de sell" loading="lazy">
+    </h3>
+    <img :src="imagen" :alt="`Imagen principal de ${titulo}`" class=" imagen_principal" loading="lazy" />
     <p v-if="descripcion" class="descripcion">
       {{ descripcion }}
     </p>
 
     <div class="botones">
-      <button v-if="galeria.length > 0" @click="mostrarGaleria = true" class="btn">Ver Galería</button>
-      <button @click="contactar" class="btn btn_secundario">Contactar</button>
+      <button type="button" v-if="galeria.length > 0" @click="mostrarGaleria = true" class="btn"
+        aria-label="Ver galeria de {{ titulo }}">Ver Galería</button>
+      <button type="button" @click="contactar" class="btn btn_secundario"
+        aria-label="Contacto por whatsapp sobre {{ titulo }}">Contactar</button>
     </div>
 
     <!-- Modal Galeria -->
-    <div v-if="mostrarGaleria && galeria.length > 0" class="modal_overlay" @click.self="cerrarGaleria">
-      <section class="modal_contenido">
-        <h3>Galería de {{ titulo }}</h3>
+    <transition name="fade-modal">
+      <div v-if="mostrarGaleria && galeria.length > 0" class="modal_overlay" @click.self="cerrarGaleria" role="dialog"
+        aria-modal="true" aria-labelledby="galeria-titulo">
+        <section class="modal_contenido">
+          <h4 id="galeria-titulo">Galería de {{ titulo }}</h4>
 
-        <article class="galeria">
-          <img v-for="(img, index) in galeria" :key="index" :src="img" alt="Vista Galeria" class="img_miniatura">
-        </article>
+          <article class="galeria">
+            <img v-for="(img, index) in galeria" :key="index" :src="img"
+              :alt="`Vista ${index + 1} de la galeria de ${titulo}`" class="img_miniatura" loading="lazy" />
+          </article>
 
-        <button @click="cerrarGaleria" class="btn btn_cerrar">Cerrar</button>
-      </section>
-    </div>
+          <button type="button" @click="cerrarGaleria" class="btn btn_cerrar"
+            aria-label="Botón para cerrar la galeria de fotos" ref="btnCerrarGaleria">Cerrar</button>
+        </section>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -86,12 +120,12 @@ export default {
   background: var(--blanco);
   z-index: 50;
 
-  &:hover > .titulo > .icono_sell{
+  &:hover>.titulo>.icono_sell {
     filter: grayscale(0);
     scale: 1.15;
   }
 
-  &:hover > .imagen_principal{
+  &:hover>.imagen_principal {
     transform: translateY(-5px) scale(1.05);
   }
 
@@ -111,7 +145,7 @@ export default {
     margin: 0;
     font-size: 1.5em;
 
-    & > .icono_sell{
+    &>.icono_sell {
       width: 70px;
       height: 30px;
       object-fit: cover;
@@ -158,7 +192,6 @@ export default {
     place-content: center;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
-    z-index: 100;
 
     &>.modal_contenido {
       inline-size: clamp(300px, 100%, 1000px);
@@ -170,7 +203,7 @@ export default {
       border-radius: 0.5rem;
       text-align: center;
 
-      & > h3{
+      &>h4 {
         font-size: 2em;
       }
 
@@ -187,7 +220,7 @@ export default {
           border-radius: 0.5rem;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-          &:hover{
+          &:hover {
             scale: 1.1;
           }
         }
@@ -202,9 +235,27 @@ export default {
         border-radius: 0.5rem;
         cursor: pointer;
         font-weight: bold;
+        font-size: 1em;
       }
     }
   }
+}
+
+.fade-modal-enter-active,
+.fade-modal-leave-active {
+  transition: opacity 0.3s cubic-bezier(.4, 0, .2, 1), transform 0.3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.fade-modal-enter-from,
+.fade-modal-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.fade-modal-enter-to,
+.fade-modal-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 
 @media screen and (max-width: 767px) {
@@ -217,7 +268,7 @@ export default {
 
     &:hover {
       background: var(--azul-claro-50);
-      transition: backgraund 0.2s ease-in-out;
+      transition: background 0.2s ease-in-out;
     }
 
     &>.titulo {

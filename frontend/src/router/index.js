@@ -5,6 +5,7 @@ import Home from "@/views/Home.vue";
 import JoyasJema from "@/views/JoyasJema.vue";
 import Contacto from "@/views/Contacto.vue";
 import ChatAdmin from "@/views/ChatAdmin.vue";
+import NotFount from "@/views/NotFount.vue";
 
 const routes = [
   {
@@ -18,6 +19,9 @@ const routes = [
   },
   {
     path: "/admin/chat", name: 'ChatAdmin', component: ChatAdmin
+  },
+  {
+    path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFount
   }
 ]
 

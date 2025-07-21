@@ -134,12 +134,6 @@ export default {
     background: var(--azul-suave);
     border-radius: 0.5rem;
     box-shadow: var(--shadow-xl);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-2xl);
-    }
 
     &>.titulo_joyas {
       width: 100%;
