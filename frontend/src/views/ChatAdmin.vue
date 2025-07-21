@@ -45,10 +45,10 @@ export default {
   },
 
   beforeUnmount() {
-    // ✅ Limpiar todos los listeners
     this.socket.off('nuevaSala');
     this.socket.off('salaCerrada');
     this.socket.off('mensajePrivado');
+    this.socket.off('actualizarNombreSala')
   },
 
   methods: {
@@ -77,6 +77,14 @@ export default {
             this.salaActivaPendiente = null;
           }
 
+          this.guardarEstadoLocal();
+        }
+      });
+
+      this.socket.on('actualizarNombreSala', ({ salaId, nombre }) => {
+        console.log('Actualizando nombre de sala:', { salaId, nombre });
+        if (this.salas[salaId]) {
+          this.salas[salaId] = nombre;
           this.guardarEstadoLocal();
         }
       });
@@ -163,13 +171,15 @@ export default {
     },
 
     salasFiltradas() {
+      console.log('Calculando salas filtradas:', this.salas);
+
       const result = {};
 
       Object.keys(this.salas).forEach(salaId => {
-        const tieneMensajes = this.mensajesPorSala[salaId] && this.mensajesPorSala[salaId].length > 0;
-        const esUsuarioReal = this.salas[salaId] && this.salas[salaId] !== salaId; // Tiene nombre personalizado
+        // const tieneMensajes = this.mensajesPorSala[salaId] && this.mensajesPorSala[salaId].length > 0;
+        // const esUsuarioReal = this.salas[salaId] && this.salas[salaId] !== salaId; // Tiene nombre personalizado
 
-        if (tieneMensajes || esUsuarioReal) {
+        if (salaId || this.socket?.id) {
           result[salaId] = this.salas[salaId];
         }
       });
