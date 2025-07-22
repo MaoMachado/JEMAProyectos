@@ -1,5 +1,6 @@
 <script>
-import { onMounted, onBeforeUnmount, ref, nextTick } from 'vue';
+import { onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { useFadeIn } from '@/utils/useFadeIn';
 
 import ImageCompare from '@/components/ImageCompare.vue';
 import antes from '@/assets/img/imgComparacion/antes.webp';
@@ -13,8 +14,6 @@ export default {
   },
 
   setup() {
-    const isVisible = ref(false)
-
 
     const imagenes = {
       antes,
@@ -65,12 +64,13 @@ export default {
     onMounted(async () => {
       setupSEO()
       await nextTick()
-      isVisible.value = true
     });
 
     onBeforeUnmount(() => {
       restoreTitle()
     });
+
+    const { isVisible } = useFadeIn();
 
     return {
       isVisible,
@@ -167,8 +167,8 @@ export default {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(30px);
+  transition: all 0.6s ease-in-out;
 }
 
 .inicio-container.fade-in {
@@ -250,9 +250,9 @@ export default {
 }
 
 .section {
-  /* margin-bottom: 3rem; */
-  /* opacity: 0;
-  transform: translateY(30px); */
+  margin-bottom: 3rem;
+  /* opacity: 0; */
+  transform: translateY(30px);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

@@ -1,5 +1,6 @@
 <script>
-import { onMounted, onBeforeUnmount, ref, nextTick } from 'vue'
+import { onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useFadeIn } from '@/utils/useFadeIn';
 
 import Joya from '@/assets/img/joya.png'
 import CardProducto from '@/components/CardProducto.vue';
@@ -15,14 +16,13 @@ export default {
   name: 'JoyasJemaView',
 
   setup() {
-    const isVisible = ref(false);
 
     const pageData = {
       titulo: 'NUESTRAS JOYAS',
       joyaIcon: Joya,
       imagenPrincipal: img1,
       galeria: [img1, img2, img3, img4, img5],
-      numCell: 3169274523
+      numCell: "3169274523"
     };
 
     const caracteristicas = [
@@ -73,37 +73,36 @@ export default {
       document.title = 'JEMA - Joyas Personalizadas y Únicas | Diseño Artesanal'
     };
 
+    const scrollToProductos = () => {
+      const seccion = document.getElementById("productos");
+      if (seccion) {
+        seccion.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
     onMounted(async () => {
       setupSEO()
       await nextTick()
-      isVisible.value = true
     });
 
     onBeforeUnmount(() => {
       restoreTitle()
     });
 
+    const { isVisible } = useFadeIn();
+
     return {
       isVisible,
       pageData,
       caracteristicas,
-      estadisticas
+      estadisticas,
+      scrollToProductos
     }
 
   },
 
   components: {
     CardProducto
-  },
-
-  mounted() {
-    document.title = 'JEMA - Joyas Únicas y Exclusivas | Venta de Joyas';
-    document.querySelector('meta[name="description"]').setAttribute('content',
-      'JEMA - Joyas únicas y exclusivas. Descubre nuestra colección de joyas especiales. Venta de joyas únicas.');
-  },
-
-  beforeUnmount() {
-    document.title = 'JEMA - Joyas Personalizadas y Únicas | Diseño Artesanal';
   }
 }
 </script>
@@ -133,20 +132,20 @@ export default {
         </div>
 
         <div class="cta-buttons">
-          <button class="btn-primary">
+          <button class="btn-primary" @click="scrollToProductos">
             <span>Ver Colección</span>
             <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </button>
-          <button class="btn-secondary">
+          <!-- <button class="btn-secondary">
             <span>Contactar</span>
             <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
               </path>
             </svg>
-          </button>
+          </button> -->
         </div>
       </div>
     </header>
@@ -190,7 +189,7 @@ export default {
       </div>
     </section>
 
-    <section class="productos-section" aria-labelledby="productos-title">
+    <section id="productos" class="productos-section" aria-labelledby="productos-title">
       <div class="section-header">
         <h2 class="section-title" id="productos-title">
           Nuestra Colección
@@ -227,7 +226,7 @@ export default {
 
 .joyas-container.fade-in {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0); 
 }
 
 /* Sección Hero */
@@ -247,6 +246,9 @@ export default {
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm10 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: scroll;
   animation: float 15s ease-in-out infinite;
 }
 
@@ -411,6 +413,10 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+}
+
+.producto-showcase {
+  position: relative;
 }
 
 /* Grid de caracteristicas */

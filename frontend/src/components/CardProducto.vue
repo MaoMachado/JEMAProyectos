@@ -21,7 +21,7 @@ export default {
 
     numeroContacto: {
       type: String,
-      default: '3165124487',
+      default: '',
     },
 
     descripcion: {
@@ -36,8 +36,24 @@ export default {
     },
 
     contactar() {
-      const whatsappURL = `https://wa.me/${this.numeroContacto.startsWith('57') ? this.numeroContacto : '57' + this.numeroContacto}?text=Hola%20estoy%20interesado%20en%20${encodeURIComponent(this.titulo)}`
-      window.open(whatsappURL, '_blank')
+      if (!this.numeroContacto || typeof this.numeroContacto !== "string") {
+        console.error("Numero de contacto inválido");
+        return;
+      }
+
+      let numeroLimpio = this.numeroContacto.replace(/\D/g, "");
+
+      numeroLimpio = numeroLimpio.replace(/^0+/, "");
+
+      if (!numeroLimpio.startsWith("57")) {
+        numeroLimpio = "57" + numeroLimpio;
+      }
+
+      console.log(numeroLimpio)
+
+      const mensaje = `Hola, estoy interesado en ${this.titulo}`;
+      const whatsappURL = `https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`;
+      window.open(whatsappURL, "_blank");
     },
 
     handleKeyDown(e) {
@@ -118,7 +134,6 @@ export default {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   text-align: center;
   background: var(--blanco);
-  z-index: 50;
 
   &:hover>.titulo>.icono_sell {
     filter: grayscale(0);
@@ -184,24 +199,16 @@ export default {
   }
 
   &>.modal_overlay {
-    position: fixed;
-    top: 0;
+    position: absolute;
+    bottom: 5rem;
     left: 0;
-    width: 100%;
-    height: 100%;
-    place-content: center;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
 
     &>.modal_contenido {
-      inline-size: clamp(300px, 100%, 1000px);
-      max-block-size: 100%;
-      margin-inline: auto;
-      overflow-y: auto;
-      padding: 2rem;
-      background: var(--blanco);
-      border-radius: 0.5rem;
-      text-align: center;
+      max-width: fit-content;
+      background: lightblue;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 2px solid black;
 
       &>h4 {
         font-size: 2em;

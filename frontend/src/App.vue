@@ -117,7 +117,6 @@ export default {
 .app_container {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
 
   &>.nav_principal_container {
     /* position: sticky;
