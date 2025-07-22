@@ -6,7 +6,7 @@ import NavbarComponent from './components/Navbar.vue';
 import iconoMenuMobil from '@/assets/img/menu_mobile.png';
 import JemaLogo from '@/assets/img/Jema.png';
 import iconoCerrarMenu from '@/assets/img/cerrar.gif';
-import BurbujaChat from './components/BurbujaChat.vue';
+// import BurbujaChat from './components/BurbujaChat.vue';
 
 
 export default {
@@ -22,7 +22,7 @@ export default {
 
   components: {
     NavbarComponent,
-    BurbujaChat
+    // BurbujaChat
   },
 
   setup() {
@@ -100,33 +100,28 @@ export default {
     </main>
 
     <!-- Chat solo en mobile -->
-    <BurbujaChat v-if="!esRutaAdmin && !esDesktop" />
+    <!-- <BurbujaChat v-if="!esRutaAdmin && !esDesktop" /> -->
 
     <!-- Chat fijo en escritorio -->
-    <div v-if="!ChatCliente && !esRutaAdmin && esDesktop" class="chat-loading">
+    <!-- <div v-if="!ChatCliente && !esRutaAdmin && esDesktop" class="chat-loading">
       <p>Cargando chat...</p>
     </div>
     <component :is="ChatCliente" v-show="!esRutaAdmin && esDesktop" />
     <div v-if="errorCargandoChat" class="chat-error">
       <p>Error al cargar el chat.</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <style>
 .app_container {
   display: flex;
-  flex-wrap: wrap;
-  background-color: var(--gris-claro);
-  inline-size: 100dvw;
+  flex-direction: column;
+  row-gap: 1rem;
 
   &>.nav_principal_container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100dvh;
-    background-color: var(--azul-suave);
+    /* position: sticky;
+    top: 0; */
 
     &>.menu_mobil {
       display: none;
@@ -138,11 +133,6 @@ export default {
   }
 
   &>.app_main {
-    margin-left: 250px;
-    width: calc(100vw - 250px);
-    height: 100dvh;
-    overflow-y: auto;
-    position: relative;
 
     &>.menu_mobil {
       display: none;
@@ -162,16 +152,18 @@ export default {
     .nav_principal_container {
       width: 100%;
       background: var(--azul-suave-50);
-      backdrop-filter: blur(5px);
-      padding-top: 1rem;
+      backdrop-filter: blur(8px);
+      position: fixed;
+      z-index: 100;
 
       &>.menu_cerrar_container {
         display: block;
-        position: absolute;
-        right: 5px;
         cursor: pointer;
         border: none;
         border-radius: 0.25rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
         transition: background 0.2s ease;
 
         &:hover {

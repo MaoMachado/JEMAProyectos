@@ -87,6 +87,50 @@
   --leading-tight: 1.25;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
+
+  /* Componente Inicio */
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --accent-color: #3b82f6;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-light: #f8fafc;
+  --bg-card: #ffffff;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --border-radius: 12px;
+  --border-radius-lg: 16px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Componente JoyasJema */
+  --jewelry-primary: #8b5cf6;
+  --jewelry-secondary: #a855f7;
+  --jewelry-accent: #c084fc;
+  --jewelry-gold: #fbbf24;
+  --jewelry-rose-gold: #f472b6;
+  --jewelry-silver: #e5e7eb;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-light: #fafafa;
+  --bg-card: #ffffff;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-jewelry: 0 25px 50px -12px rgb(139 92 246 / 0.25);
+  --border-radius: 16px;
+  --border-radius-lg: 20px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
 }
 
 /* ===== FONT FACES ===== */

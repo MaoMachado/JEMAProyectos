@@ -231,7 +231,7 @@ onUnmounted(() => {
 
 <template>
   <div class="image-compare-container">
-    <h3 class="compare-title">Mira la comparación de un proyecto</h3>
+    <!-- <h3 class="compare-title">Mira la comparación de un proyecto</h3> -->
 
     <!-- Indicador de carga -->
     <div v-if="isLoading" class="loading-indicator">
@@ -327,10 +327,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1rem;
-  background: var(--blanco, #fff);
-  border-radius: 0.5rem;
+  padding-block: 1rem;
   user-select: none;
 }
 

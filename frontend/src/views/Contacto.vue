@@ -214,7 +214,7 @@ export default {
   display: flex;
   gap: 2rem;
   flex-direction: column;
-  inline-size: clamp(300px, 100vw, 100%);
+  inline-size: clamp(300px, 100%, 1400px);
   padding: 1rem;
   position: relative;
   animation: fadeIn 0.5s ease-in-out;
@@ -247,6 +247,7 @@ export default {
         width: 50px;
         height: 50px;
         object-fit: cover;
+        margin-inline-start: 2.5rem;
       }
     }
 

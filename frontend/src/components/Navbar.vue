@@ -80,14 +80,16 @@ export default {
 <style scoped>
 .nav_container {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 1);
+  width: 100%;
+  padding-inline: 1rem;
+  backdrop-filter: blur(5px);
 
   &>.logo_container {
     inline-size: 200px;
-    border-block-end: 2px solid var(--verde-50);
-    padding-block-end: 0.5rem;
+    margin-inline-start: 2.5rem;
 
     &:hover {
       transform: scale(1.02);
@@ -111,12 +113,9 @@ export default {
     list-style: none;
     display: flex;
     gap: 0.5rem;
-    flex-direction: column;
-    inline-size: 100%;
 
     &>.nav_item {
       font-family: var(--fuente-titulo);
-      inline-size: 100%;
       animation: slideInLeft 0.3s ease-out;
       animation-fill-mode: both;
 
@@ -133,15 +132,15 @@ export default {
       }
 
       &>.nav_link {
-        gap: 0.5rem;
         display: flex;
+        gap: 0.5rem;
         align-items: center;
         color: var(--azul-principal);
         text-decoration: none;
         font-size: 1.2em;
-        padding: 0.5rem;
-        border-radius: 0.3rem;
-        line-height: 1.4;
+        padding: 10px 15px;
+        border-radius: 0.8rem;
+        overflow: hidden;
         transition: background 0.2s ease, color 0.2s ease;
 
         &:focus {
@@ -155,16 +154,18 @@ export default {
         }
 
         &.active {
-          background: var(--azul-oscuro-50);
+          background: var(--azul-principal-50);
           color: var(--blanco);
           font-weight: bold;
-          transform: translateX(2px);
+          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+          transform: translateY(-2px);
         }
 
         &:hover {
-          background: var(--azul-claro);
+          background: linear-gradient(135deg, #667eea, #764ba2);
           color: var(--blanco);
-          transform: translateX(5px);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         &>img {
@@ -178,6 +179,9 @@ export default {
 
 @media screen and (max-width: 767px) {
   .nav_container {
+    flex-direction: column;
+    justify-content: start;
+    height: 100dvh;
     padding: 0;
 
     .logo_container {
@@ -188,6 +192,8 @@ export default {
     }
 
     .nav_menu {
+      flex-direction: column;
+      width: 100%;
       padding: 0.5rem;
 
       &>.nav_item {
