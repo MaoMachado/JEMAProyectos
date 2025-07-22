@@ -188,7 +188,7 @@ export default {
       </div>
     </header>
 
-    <section class="formulario-section" aria-labelledby="formulario-title">
+    <section v-scroll-fade-right class="formulario-section" aria-labelledby="formulario-title">
       <div class="section-header">
         <h2 class="section-title" id="formulario-title">
           Envianos un mensaje
@@ -256,7 +256,7 @@ export default {
       </form>
     </section>
 
-    <section class="redes-section" aria-labelledby="redes-title">
+    <section v-scroll-fade-right class="redes-section" aria-labelledby="redes-title">
 
       <div class="section-header">
         <h2 class="section-title" id="redes-title">
@@ -306,7 +306,7 @@ export default {
       </div>
     </section>
 
-    <div class="modal-overlay" v-if="enviado" @clik.self="cerrarDialogo">
+    <div v-scroll-fade-right class="modal-overlay" v-if="enviado" @clik.self="cerrarDialogo">
       <section class="modal-exito">
         <div class="check-container">
           <svg class="check-icon" viewBox="0 0 52 52">

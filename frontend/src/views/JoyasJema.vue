@@ -150,7 +150,7 @@ export default {
       </div>
     </header>
 
-    <section class="caracteristicas-section" aria-labelledby="caracteristicas-title">
+    <section v-scroll-fade-right class="caracteristicas-section" aria-labelledby="caracteristicas-title">
 
       <article class="section-header">
         <h2 id="caracteristicas-title" class="section-title">
@@ -179,7 +179,7 @@ export default {
       </article>
     </section>
 
-    <section class="estadisticas-section">
+    <section v-scroll-fade-right class="estadisticas-section">
       <div class="estadisticas-wrapper">
         <div class="stat-card" v-for="(stat, i) in estadisticas" :key="i">
           <div class="stat-icon">{{ stat.icon }}</div>
@@ -189,7 +189,7 @@ export default {
       </div>
     </section>
 
-    <section id="productos" class="productos-section" aria-labelledby="productos-title">
+    <section v-scroll-fade-right id="productos" class="productos-section" aria-labelledby="productos-title">
       <div class="section-header">
         <h2 class="section-title" id="productos-title">
           Nuestra Colección
@@ -226,7 +226,7 @@ export default {
 
 .joyas-container.fade-in {
   opacity: 1;
-  transform: translateY(0); 
+  transform: translateY(0);
 }
 
 /* Sección Hero */

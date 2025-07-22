@@ -4,9 +4,12 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import router from './router'
 import App from './App.vue'
+import scrollFadeRight from './utils/scrollFadeRight'
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
+app.directive('scroll-fade-right', scrollFadeRight);
+app.use(createPinia());
+app.use(router);
 
-app.use(router).mount('#app')
+app.mount('#app');

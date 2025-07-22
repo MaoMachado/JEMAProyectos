@@ -98,7 +98,7 @@ export default {
 
     <section class="content-wrapper">
 
-      <article class="section quien-soy-section" aria-labelledby="quien-soy-title">
+      <article v-scroll-fade-right class="section quien-soy-section" aria-labelledby="quien-soy-title">
 
         <div class="article-header">
           <h2 id="quien-soy-title" class="article-title">¿Quién Soy?</h2>
@@ -123,7 +123,7 @@ export default {
         </div>
       </article>
 
-      <article class="section servicios-section" aria-labelledby="que-hago-title">
+      <article v-scroll-fade-right class="section servicios-section" aria-labelledby="que-hago-title">
         <div class="article-header">
           <h2 id="que-hago-title" class="article-title">¿Qué Hago?</h2>
           <div class="title-underline"></div>
@@ -144,7 +144,8 @@ export default {
         </div>
       </article>
 
-      <article class="section comparacion-section" aria-label="Comparación de diseño antes y después">
+      <article v-scroll-fade-right class="section comparacion-section"
+        aria-label="Comparación de diseño antes y después">
         <div class="article-header">
           <h2 class="article-title">Resultados Comprobados</h2>
           <div class="title-underline"></div>
