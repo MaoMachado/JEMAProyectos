@@ -1,5 +1,6 @@
 <script>
 import { getSocketAdmin } from '@/services/chatService';
+import DialogTableCards from '@/components/DialogTableCards.vue';
 
 import user from '@/assets/img/usuario_registro.png';
 import eliminarChat from '@/assets/img/cerrar.gif';
@@ -15,7 +16,8 @@ export default {
       mensaje: '',
       mensajesPorSala: {},
       user,
-      eliminarChat
+      eliminarChat,
+      showCardsDialog: false
     }
   },
 
@@ -187,6 +189,10 @@ export default {
       return result;
     }
   },
+
+  components: {
+    DialogTableCards
+  }
 }
 </script>
 
@@ -221,6 +227,13 @@ export default {
           aria-label="Escribe una respuesta" />
         <button type="button" @click="enviarMensaje" aria-label="Enviar mensaje">Enviar</button>
       </div>
+    </section>
+
+    <section class="section-new-cards">
+      <button @click="showCardsDialog = true" class="btn-show-dialog">
+        Gestionar Cards
+      </button>
+      <DialogTableCards :showCardsDialog=showCardsDialog />
     </section>
   </main>
 </template>
@@ -335,6 +348,26 @@ export default {
       border: none;
     }
   }
+}
+
+.btn-show-dialog {
+  padding: 10px 15px;
+  border: 1px solid var(--verde);
+  border-radius: 20px;
+  background: var(--verde-50);
+  font-size: 1em;
+  font-family: var(--fuente-titulo);
+  cursor: pointer;
+  transition: background 0.1s ease-in, box-shadow 0.1s ease-in;
+}
+
+.btn-show-dialog:hover {
+  background: var(--verde);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-show-dialog:active {
+  transform: translateY(-2px);
 }
 
 @media screen and (max-width: 767px) {

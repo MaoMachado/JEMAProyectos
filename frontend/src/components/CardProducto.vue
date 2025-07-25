@@ -7,30 +7,30 @@ export default {
   data() {
     return {
       mostrarGaleria: false,
-      SellJoya
+      indiceActual: 0,
+      SellJoya,
+      direccionTransicion: 'fade-slide-next'
     }
   },
 
   props: {
     titulo: String,
-    imagen: String,
-    galeria: {
-      type: Array,
-      default: () => [],
-    },
-
-    numeroContacto: {
-      type: String,
-      default: '',
-    },
-
-    descripcion: {
-      type: String,
-      default: ''
-    }
+    descripcion: String,
+    portada: String,
+    galeria: Array
   },
 
   methods: {
+    siguienteImagen() {
+      this.direccionTransicion = 'fade-slide-next';
+      this.indiceActual = (this.indiceActual + 1) % this.galeria.length;
+    },
+
+    anteriorImagen() {
+      this.direccionTransicion = 'fade-slide-prev';
+      this.indiceActual = (this.indiceActual - 1 + this.galeria.length) % this.galeria.length;
+    },
+
     cerrarGaleria() {
       this.mostrarGaleria = false
     },
@@ -88,10 +88,11 @@ export default {
 
 <template>
   <section class="card_producto">
-    <h3 class="titulo">{{ titulo }}
+    <h3 class="titulo">
+      {{ titulo }}
       <img class="icono_sell" :src="SellJoya" alt="Icono de sell" loading="lazy">
     </h3>
-    <img :src="imagen" :alt="`Imagen principal de ${titulo}`" class=" imagen_principal" loading="lazy" />
+    <img :src="portada" :alt="`Imagen principal de ${titulo}`" class=" imagen_principal" loading="lazy" />
     <p v-if="descripcion" class="descripcion">
       {{ descripcion }}
     </p>
@@ -110,9 +111,17 @@ export default {
         <section class="modal_contenido">
           <h4 id="galeria-titulo">Galería de {{ titulo }}</h4>
 
-          <article class="galeria">
-            <img v-for="(img, index) in galeria" :key="index" :src="img"
-              :alt="`Vista ${index + 1} de la galeria de ${titulo}`" class="img_miniatura" loading="lazy" />
+          <article class="galeria-carrusel">
+            <button class="btn" @click.stop="anteriorImagen">⟨</button>
+
+            <div class="carrusel-imagen-wrapper">
+              <transition :name="direccionTransicion">
+                <img v-if="galeria.length" :src="galeria[indiceActual]" :key="indiceActual"
+                  :alt="`Imagen ${indiceActual + 1} de ${titulo}`" class="img-carrusel" loading="lazy" />
+              </transition>
+            </div>
+
+            <button class="btn" @click.stop="siguienteImagen">⟩</button>
           </article>
 
           <button type="button" @click="cerrarGaleria" class="btn btn_cerrar"
@@ -197,72 +206,88 @@ export default {
       background: var(--verde);
     }
   }
-
-  &>.modal_overlay {
-    position: absolute;
-    bottom: 5rem;
-    left: 0;
-
-    &>.modal_contenido {
-      max-width: fit-content;
-      background: lightblue;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      border: 2px solid black;
-
-      &>h4 {
-        font-size: 2em;
-      }
-
-      &>.galeria {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-
-        &>.img_miniatura {
-          width: 300px;
-          height: 150px;
-          object-fit: cover;
-          border-radius: 0.5rem;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-
-          &:hover {
-            scale: 1.1;
-          }
-        }
-      }
-
-      &>.btn_cerrar {
-        margin-top: 1rem;
-        background: var(--azul-principal);
-        color: white;
-        border: none;
-        padding: 0.6rem 1.2rem;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 1em;
-      }
-    }
-  }
 }
 
-.fade-modal-enter-active,
-.fade-modal-leave-active {
-  transition: opacity 0.3s cubic-bezier(.4, 0, .2, 1), transform 0.3s cubic-bezier(.4, 0, .2, 1);
+.modal_overlay {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border: 2px solid #0000008c;
+  border-radius: 10px;
+  overflow: auto;
+  z-index: 1;
 }
 
-.fade-modal-enter-from,
-.fade-modal-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
+.modal_contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.fade-modal-enter-to,
-.fade-modal-leave-from {
-  opacity: 1;
-  transform: scale(1);
+.modal_contenido h4 {
+  margin: 0;
+  color: var(--blanco);
+  font-size: 2em;
+}
+
+.galeria-carrusel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.carrusel-imagen-wrapper {
+  position: relative;
+  width: 600px;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.galeria-carrusel .img-carrusel {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.galeria-carrusel .btn {
+  padding: 10px;
+  background: var(--azul-suave);
+  border: 1px solid var(--azul-oscuro-50);
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.galeria-carrusel .btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px hsla(0, 0%, 96%, 0.5);
+}
+
+.modal_contenido .btn_cerrar {
+  padding: var(--spacing-xs);
+  border: 1px solid var(--azul-oscuro-50);
+  border-radius: var(--radius-md);
+  font-size: 1em;
+  font-family: var(--fuente-titulo);
+  font-weight: bold;
+}
+
+.modal_contenido .btn_cerrar:hover {
+  background: var(--azul-principal);
+  color: var(--blanco);
 }
 
 @media screen and (max-width: 767px) {
@@ -333,5 +358,50 @@ export default {
       }
     }
   }
+}
+
+/* Animaciones */
+.fade-slide-next-enter-active,
+.fade-slide-next-leave-active,
+.fade-slide-prev-enter-active,
+.fade-slide-prev-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-slide-next-enter-from {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.fade-slide-next-leave-to {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.fade-slide-prev-enter-from {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.fade-slide-prev-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.fade-modal-enter-active,
+.fade-modal-leave-active {
+  transition: opacity 0.3s cubic-bezier(.4, 0, .2, 1), transform 0.3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.fade-modal-enter-from,
+.fade-modal-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.fade-modal-enter-to,
+.fade-modal-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 </style>

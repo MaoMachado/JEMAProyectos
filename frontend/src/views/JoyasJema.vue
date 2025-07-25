@@ -1,11 +1,11 @@
 <script>
 import { onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useFadeIn } from '@/utils/useFadeIn';
-
-import Joya from '@/assets/img/joya.png'
+import { getCards } from '@/services/cardServicies';
 import CardProducto from '@/components/CardProducto.vue';
 
 //Imagenes
+import Joya from '@/assets/img/joya.png'
 import img1 from '@/assets/img/fotosFloresta/img_1.jpg';
 import img2 from '@/assets/img/fotosFloresta/img_2.jpg';
 import img3 from '@/assets/img/fotosFloresta/img_3.jpg';
@@ -14,6 +14,26 @@ import img5 from '@/assets/img/fotosFloresta/img_5.jpg';
 
 export default {
   name: 'JoyasJemaView',
+
+  data() {
+    return {
+      cards: [],
+      loading: true,
+      error: null
+    }
+  },
+
+  async mounted() {
+    try {
+      this.cards = await getCards();
+      console.log('Info enviada: ', this.cards)
+    } catch (err) {
+      this.error = 'Error al cargar los productos'
+      console.error('Este es el error: ', err)
+    } finally {
+      this.loading = false
+    }
+  },
 
   setup() {
 
@@ -201,8 +221,12 @@ export default {
       </div>
 
       <div class="producto-showcase">
-        <CardProducto titulo="Floresta" descripcion="Casa ubicada en el barrio La Floresta - Venta de joyas únicas"
-          :imagen="pageData.imagenPrincipal" :galeria="pageData.galeria" :numeroContacto="pageData.numCell" />
+        <div v-if="loading">Cargando...</div>
+        <div v-else-if="error">{{ error }}</div>
+        <div v-else class="grid-cards">
+          <CardProducto v-for="card in cards" :key="card.id" :titulo="card.title" :descripcion="card.description"
+            :portada="card.img_portada" :galeria="card.galeria" />
+        </div>
       </div>
     </section>
 
@@ -415,8 +439,11 @@ export default {
   line-height: 1.6;
 }
 
-.producto-showcase {
-  position: relative;
+.producto-showcase .grid-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 /* Grid de caracteristicas */
