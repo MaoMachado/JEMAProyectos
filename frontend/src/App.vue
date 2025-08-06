@@ -99,17 +99,6 @@ export default {
       <router-view />
     </main>
 
-    <!-- Chat solo en mobile -->
-    <!-- <BurbujaChat v-if="!esRutaAdmin && !esDesktop" /> -->
-
-    <!-- Chat fijo en escritorio -->
-    <!-- <div v-if="!ChatCliente && !esRutaAdmin && esDesktop" class="chat-loading">
-      <p>Cargando chat...</p>
-    </div>
-    <component :is="ChatCliente" v-show="!esRutaAdmin && esDesktop" />
-    <div v-if="errorCargandoChat" class="chat-error">
-      <p>Error al cargar el chat.</p>
-    </div> -->
   </div>
 </template>
 
@@ -119,8 +108,9 @@ export default {
   flex-direction: column;
 
   &>.nav_principal_container {
-    /* position: sticky;
-    top: 0; */
+    position: sticky;
+    top: 0;
+    z-index: 100;
 
     &>.menu_mobil {
       display: none;

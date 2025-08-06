@@ -83,14 +83,15 @@ export default {
 
 <template>
   <main class="inicio-container" role="main" aria-labelledby="inicio-title" :class="{ 'fade-in': isVisible }">
+
     <header class="hero-section" aria-labelledby="inicio-title">
       <div class="hero-content">
         <h1 id="inicio-title" class="hero-title">
           <span class="highlight">JEMA</span> PROYECTOS
         </h1>
-        <p class="hero-subtitle">Ingeniería industrial al servicio de tus ideas</p>
+        <p class="hero-subtitle">Ingeniería civil al servicio de tus ideas</p>
         <div class="hero-badge">
-          <span class="badge-text">+10 años de experiencia</span>
+          <span class="badge-text">¡Cómo podemos ayudarte!</span>
         </div>
       </div>
       <div class="hero-decoration"></div>
@@ -165,7 +166,9 @@ export default {
 
 <style scoped>
 .inicio-container {
+  width: 1100px;
   min-height: 100vh;
+  margin-inline: auto;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   opacity: 0;
   transform: translateY(30px);
@@ -186,6 +189,7 @@ export default {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   color: white;
   overflow: hidden;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .hero-content {
@@ -245,14 +249,13 @@ export default {
 
 .content-wrapper {
   max-width: 1200px;
-  margin: 0 auto;
   margin-top: 2.5rem;
-  padding: 3px 2px;
+  padding-inline: 1rem;
 }
 
 .section {
   margin-bottom: 3rem;
-  /* opacity: 0; */
+  opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }

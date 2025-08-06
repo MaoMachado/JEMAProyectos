@@ -332,7 +332,9 @@ export default {
 
 <style scoped>
 .contacto-container {
+  inline-size: 1100px;
   min-height: 100vh;
+  margin-inline: auto;
   background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
   position: relative;
   opacity: 0;
@@ -352,10 +354,11 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 60vh;
-  background: linear-gradient(135deg, var(--jewelry-primary) 0%, var(--jewelry-secondary) 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   color: white;
   overflow: hidden;
   margin-bottom: var(--spacing-xl);
+  border-radius: 0 0 1rem 1rem;
 }
 
 .hero-background {
@@ -370,7 +373,6 @@ export default {
 .hero-content {
   text-align: center;
   z-index: 2;
-  max-width: 900px;
   padding: var(--spacing-xl);
 }
 

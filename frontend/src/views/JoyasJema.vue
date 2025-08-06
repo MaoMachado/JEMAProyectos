@@ -26,7 +26,6 @@ export default {
   async mounted() {
     try {
       this.cards = await getCards();
-      console.log('Info enviada: ', this.cards)
     } catch (err) {
       this.error = 'Error al cargar los productos'
       console.error('Este es el error: ', err)
@@ -158,14 +157,6 @@ export default {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </button>
-          <!-- <button class="btn-secondary">
-            <span>Contactar</span>
-            <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-              </path>
-            </svg>
-          </button> -->
         </div>
       </div>
     </header>
@@ -199,7 +190,7 @@ export default {
       </article>
     </section>
 
-    <section v-scroll-fade-right class="estadisticas-section">
+    <!-- <section v-scroll-fade-right class="estadisticas-section">
       <div class="estadisticas-wrapper">
         <div class="stat-card" v-for="(stat, i) in estadisticas" :key="i">
           <div class="stat-icon">{{ stat.icon }}</div>
@@ -207,7 +198,7 @@ export default {
           <div class="stat-text">{{ stat.texto }}</div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section v-scroll-fade-right id="productos" class="productos-section" aria-labelledby="productos-title">
       <div class="section-header">
@@ -240,7 +231,9 @@ export default {
 
 <style scoped>
 .joyas-container {
+  inline-size: 1100px;
   min-height: 100vh;
+  margin-inline: auto;
   background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
   position: relative;
   opacity: 0;
@@ -260,10 +253,11 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 70vh;
-  background: linear-gradient(135deg, var(--jewelry-primary) 0%, var(--jewelry-secondary) 100%);
-  color: white;
-  overflow: hidden;
   margin-bottom: var(--spacing-xl);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: white;
+  border-radius: 0 0 1rem 1rem;
+  overflow: hidden;
 }
 
 .hero-background {
@@ -360,8 +354,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.btn-primary,
-.btn-secondary {
+.btn-primary {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -386,18 +379,6 @@ export default {
   box-shadow: 0 12px 35px rgba(251, 191, 36, 0.4);
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
 .btn-icon {
   width: 18px;
   height: 18px;
@@ -405,7 +386,6 @@ export default {
 
 .caracteristicas-section,
 .productos-section {
-  max-width: 1200px;
   margin: 0 auto var(--spacing-xl);
   padding: 0 var(--spacing-lg);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -451,6 +431,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg);
+  justify-content: center;
 }
 
 .caracteristica-card {
