@@ -231,9 +231,10 @@ export default {
 
 <style scoped>
 .joyas-container {
-  inline-size: 1100px;
+  inline-size: 80%;
   min-height: 100vh;
   margin-inline: auto;
+  padding-block-end: 2rem;
   background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
   position: relative;
   opacity: 0;
@@ -674,6 +675,11 @@ export default {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+  .joyas-container{
+    width: 100%;
+    padding-inline: 0.5rem;
+  }
+
   .hero-joyas {
     min-height: 60vh;
     padding: var(--spacing-lg) var(--spacing-sm);

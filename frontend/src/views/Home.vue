@@ -166,9 +166,10 @@ export default {
 
 <style scoped>
 .inicio-container {
-  width: 1100px;
+  width: 80%;
   min-height: 100vh;
   margin-inline: auto;
+  padding-block-end: 2rem;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   opacity: 0;
   transform: translateY(30px);
@@ -430,7 +431,7 @@ export default {
 }
 
 .image-compare-wrapper {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -480,6 +481,11 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
+  .inicio-container {
+    width: 100%;
+    padding-inline: 0.5rem;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
@@ -494,6 +500,10 @@ export default {
 
   .servicio-card {
     padding: var(--spacing-md);
+  }
+
+  .comparacion-section{
+    padding: 24px;
   }
 }
 

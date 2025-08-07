@@ -71,7 +71,7 @@ export default {
 
     <section class="navbar-container" ref="heroSection">
       <div class="logo_container">
-        <RouterLink to="/"><img :src="logoJema" alt="logoJema" loading="lazy" /></RouterLink>
+        <RouterLink to="/"><img class="logo-img" :src="logoJema" alt="logoJema" loading="lazy" /></RouterLink>
       </div>
 
       <ul class="nav_menu" role="menubar">
@@ -136,7 +136,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1100px;
+  width: 80%;
   padding-inline: 0.5rem;
   margin-inline: auto;
 }
@@ -226,41 +226,27 @@ p {
 
 
 @media screen and (max-width: 767px) {
-  .nav_container {
-    flex-direction: column;
-    justify-content: start;
+  .navbar {
+    position: fixed;
+    width: 200px;
     height: 100dvh;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    row-gap: 2.5rem;
     padding: 0;
+  }
 
-    .logo_container {
-      width: 100%;
-      margin-inline: auto;
-      padding: 0.5rem;
-      border: none;
-    }
+  .logo-img {
+    width: 100%;
+  }
 
-    .nav_menu {
-      flex-direction: column;
-      width: 100%;
-      padding: 0.5rem;
-
-      &>.nav_item {
-        animation: slideInLeft 0.3s ease-out;
-        animation-fill-mode: both;
-
-        &:nth-child(1) {
-          animation-delay: 0.1s;
-        }
-
-        &:nth-child(2) {
-          animation-delay: 0.2s;
-        }
-
-        &:nth-child(3) {
-          animation-delay: 0.3s;
-        }
-      }
-    }
+  .nav_menu {
+    width: 100%;
+    flex-direction: column;
+    row-gap: 1rem;
   }
 }
 

@@ -593,7 +593,6 @@ onUnmounted(() => {
 /* Responsive */
 @media (max-width: 768px) {
   .image-compare-container {
-    padding: 1rem;
     gap: 1rem;
   }
 
@@ -614,22 +613,6 @@ onUnmounted(() => {
   .button-group {
     width: 100%;
     justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .image-compare {
-    height: 200px;
-  }
-
-  .image-label {
-    font-size: 0.8em;
-    padding: 0.3rem 0.8rem;
-  }
-
-  .control-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9em;
   }
 }
 </style>

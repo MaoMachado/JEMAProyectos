@@ -332,9 +332,10 @@ export default {
 
 <style scoped>
 .contacto-container {
-  inline-size: 1100px;
+  inline-size: 80%;
   min-height: 100vh;
   margin-inline: auto;
+  padding-block-end: 2rem;
   background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
   position: relative;
   opacity: 0;
@@ -351,6 +352,7 @@ export default {
 .hero-contacto {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   min-height: 60vh;
@@ -890,6 +892,27 @@ export default {
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .contacto-container{
+    width: 100%;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .hero-contacto{
+    padding: 0.5rem;
+  }
+
+  .hero-content{
+    padding: 0;
+  }
+
+  .formulario-section{
+    padding: 0;
   }
 }
 </style>

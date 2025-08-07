@@ -6,8 +6,7 @@ import NavbarComponent from './components/Navbar.vue';
 import iconoMenuMobil from '@/assets/img/menu_mobile.png';
 import JemaLogo from '@/assets/img/Jema.png';
 import iconoCerrarMenu from '@/assets/img/cerrar.gif';
-// import BurbujaChat from './components/BurbujaChat.vue';
-
+import FooterContainer from './components/Footer.vue';
 
 export default {
   name: 'App',
@@ -22,7 +21,7 @@ export default {
 
   components: {
     NavbarComponent,
-    // BurbujaChat
+    FooterContainer
   },
 
   setup() {
@@ -99,6 +98,7 @@ export default {
       <router-view />
     </main>
 
+    <FooterContainer />
   </div>
 </template>
 
@@ -106,26 +106,26 @@ export default {
 .app_container {
   display: flex;
   flex-direction: column;
+}
 
-  &>.nav_principal_container {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.nav_principal_container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-    &>.menu_mobil {
-      display: none;
-    }
-
-    &>.menu_cerrar_container {
-      display: none;
-    }
+  &>.menu_mobil {
+    display: none;
   }
 
-  &>.app_main {
+  &>.menu_cerrar_container {
+    display: none;
+  }
+}
 
-    &>.menu_mobil {
-      display: none;
-    }
+.app_main {
+
+  &>.menu_mobil {
+    display: none;
   }
 }
 
@@ -136,86 +136,36 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-  .app_container {
+  .nav_principal_container {}
 
-    .nav_principal_container {
+  .header_menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: var(--azul-suave-50);
+    backdrop-filter: blur(5px );
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .menu_mobil {
+    width: 40px;
+    height: 40px;
+    padding: 2.5px;
+    background: transparent;
+    border: 2px solid var(--azul-principal-50);
+    border-radius: 10px;
+
+    &>img {
       width: 100%;
-      background: var(--azul-suave-50);
-      backdrop-filter: blur(8px);
-      position: fixed;
-      z-index: 100;
-
-      &>.menu_cerrar_container {
-        display: block;
-        cursor: pointer;
-        border: none;
-        border-radius: 0.25rem;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        transition: background 0.2s ease;
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
-      }
-    }
-
-    .app_main {
-      inline-size: 100%;
-      margin: 0;
-
-      &>.header_menu {
-        position: sticky;
-        top: 0;
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
-        background: var(--azul-suave-50);
-        backdrop-filter: blur(5px);
-        z-index: 10;
-
-        &>.menu_mobil {
-          /* display: block; */
-          width: 35px;
-          height: 35px;
-          padding: 0.25rem;
-          border: none;
-          border-radius: 0.5rem;
-
-          &>img {
-            width: 100%;
-            height: 100%;
-          }
-        }
-
-        &>.logo_jema {
-          width: 40%;
-          margin-inline: auto;
-        }
-      }
-
     }
   }
 
-  /* Animación del menú */
-  .slide-menu-enter-active,
-  .slide-menu-leave-active {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+  .logo_jema {
+    width: 120px;
   }
-
-  .slide-menu-enter-from,
-  .slide-menu-leave-to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  .slide-menu-enter-to,
-  .slide-menu-leave-from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
