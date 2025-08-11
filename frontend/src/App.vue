@@ -188,7 +188,7 @@ export default {
 .nav_principal_container {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10;
   animation: slideDown 0.3s ease-out;
 }
 

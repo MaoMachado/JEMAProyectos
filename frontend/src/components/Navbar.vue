@@ -182,8 +182,7 @@ export default {
 
 .navbar.scrolled {
   height: 70px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 4px 30px rgba(30, 73, 113, 0.15);
 }
 
