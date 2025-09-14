@@ -1,0 +1,8 @@
+<script setup>
+const title = "Joyas"
+</script>
+<template>
+  <section>
+    <h2>{{ title }}</h2>
+  </section>
+</template>

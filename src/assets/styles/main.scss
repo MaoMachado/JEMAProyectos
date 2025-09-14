@@ -5,5 +5,11 @@
   --color2: rgb(59, 130, 246);
   --color3: rgba(30, 64, 175, 0.8);
   --color4: rgba(59, 130, 246, 0.8);
+  --color5: rgb(3, 13, 46);
+  --width-1200: clamp(300px, 100%, 1200px)
+}
 
+body{
+  background: rgb(1, 5, 20);
+  color: #ccc;
 }
