@@ -1,7 +1,7 @@
 <script setup>
 import HeaderJema from './components/HeaderJema.vue';
 import HeroJema from './views/HeroJema.vue';
-import ProyectosJema from './views/ProyectosJema.vue';
+import QueHacemos from './views/QueHacemosJema.vue';
 
 </script>
 
@@ -9,6 +9,6 @@ import ProyectosJema from './views/ProyectosJema.vue';
   <HeaderJema />
   <main>
     <HeroJema />
-    <ProyectosJema />
+    <QueHacemos />
   </main>
 </template>

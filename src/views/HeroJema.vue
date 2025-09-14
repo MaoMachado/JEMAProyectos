@@ -3,16 +3,15 @@ import J from '@/assets/img/J.png';
 </script>
 
 <template>
-  <section class="hero">
+  <section class="hero" >
     <header class="hero-header">
-      <p>Ingeniero Civil</p>
+      <h2 class="font-sans">GEMA INMOBILIARIA</h2>
       <img :src="J" alt="Logo de JemaProyectos" loading="lazy" />
     </header>
     <article class="hero-article font-sans">
       <div>
         <p>
-          En Gema Inmobiliaria nos especializamos en captar propiedades con verdadero potencial. Nuestro equipo analiza
-          a fondo cada inmueble evaluando:
+          Aquí no encuentras propiedades, encuentras joyas del mercado inmobiliario
         </p>
       </div>
     </article>
@@ -28,20 +27,36 @@ import J from '@/assets/img/J.png';
   margin-inline: auto;
   padding-inline: 2rem;
   background: rgba(59, 131, 246, 0.25);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    width: 400px;
+    height: 400px;
+    background: rgba(30, 64, 175, 0.2);
+    position: absolute;
+    top: 15%;
+    left: -15%;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(5px);
+    box-shadow: 0 0 20px hsla(0, 0%, 80%, 0.3);
+  }
 
   & .hero-header {
     display: flex;
+    align-items: start;
     justify-content: center;
 
     & img {
-      width: 100px;
+      width: 80px;
+      height: 80px;
     }
 
-    & p {
+    & h2 {
       font-size: 4em;
-      font-family: sans-serif;
       text-shadow: 0 0 20px #ccc;
     }
   }
@@ -60,6 +75,5 @@ import J from '@/assets/img/J.png';
       text-align: center;
     }
   }
-
 }
 </style>

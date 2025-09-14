@@ -12,7 +12,7 @@ import Jema from "@/assets/img/Jema.png"
     <section class="header-navbar">
       <nav class="header-container">
         <a href="">Inicio</a>
-        <a href="">Proyectos</a>
+        <a href="#que-hacemos">¿Qué Hacemos?</a>
         <a href="">Contactémonos</a>
       </nav>
     </section>
