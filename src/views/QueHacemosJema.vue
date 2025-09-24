@@ -27,13 +27,13 @@ const listDetails = [
 </script>
 
 <template>
-  <section class="proyectos font-sans" id="que-hacemos">
-    <header class="proyectos-header">
-      <h2>{{ title }}</h2>
+  <section class="que-hacemos font-sans" id="que-hacemos">
+    <header class="que-hacemos-header">
       <img :src="J" alt="Logo de JemaProyectos" loading="lazy">
+      <h2>{{ title }}</h2>
     </header>
 
-    <article class="proyectos-article">
+    <article class="que-hacemos-article">
       <p>
         En <strong class="text-blue-500">Gema Inmobiliaria</strong> nos especializamos en <strong
           class="text-blue-500">captar propiedades con verdadero potencial</strong>. Nuestro equipo analiza a fondo cada
@@ -71,9 +71,10 @@ const listDetails = [
 </template>
 
 <style scoped lang="scss">
-.proyectos {
+.que-hacemos {
   display: grid;
   place-content: center;
+  gap: 1rem;
   width: var(--width-1200);
   min-height: 100dvh;
   margin-inline: auto;
@@ -93,7 +94,7 @@ const listDetails = [
     transform: translate(-50%, -50%);
   }
 
-  & .proyectos-header {
+  & .que-hacemos-header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,25 +103,26 @@ const listDetails = [
 
     &::before {
       content: "";
-      width: 100px;
+      width: 300px;
       height: 5px;
-      background: linear-gradient(to right, rgba(59, 131, 246, 0.1), rgb(59, 130, 246));
+      background: linear-gradient(to right, transparent, rgba(59, 131, 246, 0.25));
       position: absolute;
-      bottom: -0.5rem;
+      bottom: 0;
       border-radius: 1rem;
     }
 
     & h2 {
-      font-size: 3em;
+      font-size: clamp(1em, 5vw, 3.5em);
+      transform: translateY(-25px);
     }
 
     & img {
-      width: 50px;
-      height: 50px;
+      width: 70px;
+      height: 70px;
     }
   }
 
-  & .proyectos-article {
+  & .que-hacemos-article {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -141,21 +143,29 @@ const listDetails = [
   }
 }
 
+.list-details .list-details-item:hover .list-details-item-header span {
+  opacity: 1;
+}
+
 .list-details {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  align-items: center;
+  height: 100dvh;
 
   & .list-details-item {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    height: 200px;
     padding: 0.5rem;
-    border: 2px solid rgba(59, 131, 246, 0.2);
+    border: 2px solid rgba(59, 131, 246, 0.1);
     border-radius: 10px;
 
     &:hover {
-      box-shadow: 0 0 10px rgb(59, 130, 246);
+      box-shadow: 0 0 5px rgba(59, 131, 246, 0.3), 0 0 10px rgba(59, 131, 246, 0.5), 0 0 15px rgba(59, 131, 246, 0.8);
+      border-color: rgb(59, 130, 246);
     }
 
     & .list-details-item-header {
@@ -164,7 +174,7 @@ const listDetails = [
         padding: 2.5px;
         background: rgba(59, 131, 246, 0.2);
         border-radius: 5px;
-        opacity: 0.5;
+        opacity: 0.25;
         font-size: 0.8em;
         letter-spacing: 5px;
       }

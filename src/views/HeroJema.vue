@@ -3,7 +3,7 @@ import J from '@/assets/img/J.png';
 </script>
 
 <template>
-  <section class="hero" >
+  <section class="hero" id="hero">
     <header class="hero-header">
       <h2 class="font-sans">GEMA INMOBILIARIA</h2>
       <img :src="J" alt="Logo de JemaProyectos" loading="lazy" />
@@ -26,8 +26,8 @@ import J from '@/assets/img/J.png';
   width: var(--width-1200);
   margin-inline: auto;
   padding-inline: 2rem;
-  background: rgba(59, 131, 246, 0.25);
-  border-radius: 0.5rem;
+  background: linear-gradient(to right, transparent 30%, rgba(59, 131, 246, 0.1) 70%, rgba(59, 131, 246, 0.5) 100%);
+  border-radius: 1rem;
   position: relative;
   overflow: hidden;
 
