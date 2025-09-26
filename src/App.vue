@@ -1,17 +1,14 @@
 <script setup>
 import FooterJema from './components/FooterJema.vue';
 import HeaderJema from './components/HeaderJema.vue';
-import HeroJema from './views/HeroJema.vue';
-import JoyasJema from './views/JoyasJema.vue';
-import QueHacemos from './views/QueHacemosJema.vue';
+import ToastGlobal from './components/ToastGlobal.vue';
 </script>
 
 <template>
   <HeaderJema />
   <main>
-    <HeroJema />
-    <QueHacemos />
-    <JoyasJema />
+    <ToastGlobal />
+    <router-view />
   </main>
   <FooterJema />
 </template>

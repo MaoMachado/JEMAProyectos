@@ -1,14 +1,46 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { RouterLink, useRouter } from "vue-router";
+import { supabase } from '../../supabase.config';
 import { toggleTheme } from "@/utils/theme";
 import Jema from "@/assets/img/Jema.png"
+import { useToastStore } from '@/utils/toastStore';
+
+const router = useRouter();
+const isLoggedIn = ref(false);
+const toast = useToastStore();
+
+onMounted(async () => {
+  // Revisamos localStorage
+  const localUser = JSON.parse(localStorage.getItem("jema_user"));
+  if (localUser) {
+    isLoggedIn.value = true;
+    return;
+  }
+
+  // Revisamos sesión activa en Supabase
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    isLoggedIn.value = true;
+  }
+});
+
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+  localStorage.removeItem("jema_user");
+  toast.triggerToast("👋 Sesión cerrada correctamente", "info");
+  isLoggedIn.value = false;
+  router.push("/login");
+};
+
 </script>
 
 <template>
   <header class="flex items-center">
 
-    <a class="font-sans" href="#hero">
+    <RouterLink to="/">
       <img class="w-full h-15" :src="Jema" alt="Logo de JemaProyectos" loading="lazy">
-    </a>
+    </RouterLink>
 
     <section class="header-navbar flex-1 flex justify-end items-center gap-6">
       <div class="flex items-center">
@@ -18,6 +50,11 @@ import Jema from "@/assets/img/Jema.png"
         <a href="https://wa.me/573123456789" target="_blank" rel="noopener noreferrer">
           <img src="@/assets/img/icons/facebook.svg" alt="Facebook">
         </a>
+
+        <button v-if="isLoggedIn" @click="handleLogout"
+          class="ml-4 px-3 py-1 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
+          Cerrar sesión
+        </button>
       </div>
       <nav class="header-container font-sans font-normal text-lg">
         <a href="#que-hacemos">¿Qué Hacemos?</a>

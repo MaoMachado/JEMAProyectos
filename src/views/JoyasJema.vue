@@ -1,23 +1,37 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { supabase } from '../../supabase.config';
 import ModalJema from '@/components/ModalJema.vue';
+import GaleriaJema from '@/components/GaleriaJema.vue';
+
 import joyaImg from '@/assets/img/joya.png'
 import portadaImg from '@/assets/img/fotosFloresta/img_5.jpg'
-import GaleriaJema from '@/components/GaleriaJema.vue';
 
 const title = ref("Nuestras Joyas");
 const showModal = ref(false);
 const selectedJoya = ref(null)
 
-const joyas = reactive([
-  {
-    id: 1,
-    portadaImg: portadaImg,
-    barrio: "FLORESTA-CASA",
-    title: "Casa En Barrio Tranquilo",
-    description: "Casa en excelente estado, ubicada en el barrio de Floresta, con 3 dormitorios y 2 baños.",
+const joyas = ref([]);
+const loading = ref(true);
+const errorMessage = ref(null);
+
+const fetchCards = async () => {
+  loading.value = true;
+
+  const { data, error } = await supabase
+    .from('cards')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    errorMessage.value = "Error cargando joyas";
+    console.error(error);
+  } else {
+    joyas.value = data;
   }
-])
+
+  loading.value = false;
+};
 
 const openModal = (joya) => {
   selectedJoya.value = joya;
@@ -28,6 +42,10 @@ const closeModal = () => {
   showModal.value = false;
   selectedJoya.value = null;
 };
+
+onMounted(() => {
+  fetchCards();
+})
 </script>
 
 <template>
@@ -38,11 +56,21 @@ const closeModal = () => {
     </header>
 
     <article class="joyas-article">
-      <div class="joyas-item" v-for="joya in joyas" :key="joya">
+      <div v-if="loading">
+        <p>Cargando Joyas...</p>
+      </div>
+
+      <div v-else-if="joyas.length === 0" class="flex place-content-center">
+        <p class="w-fit text-center text-2xl font-sans bg-blue-900/50 p-2 text-white rounded-xl">
+          No hay joyas disponibles
+        </p>
+      </div>
+
+      <div class="joyas-item" v-for="joya in joyas" :key="joya.id">
         <figure @click="openModal(joya)">
-          <img :src="joya.portadaImg" alt="Portada de la casa" loading="lazy" />
+          <img :src="joya.images?.[0] || portadaImg" alt="Portada de la casa" loading="lazy" />
           <figcaption class="">
-            <span>{{ joya.barrio }}</span>
+            <span>{{ joya.barrio || "Sin Barrio" }}</span>
             <h3>{{ joya.title }}</h3>
             <p>{{ joya.description }}</p>
           </figcaption>
@@ -54,13 +82,7 @@ const closeModal = () => {
     <ModalJema :show="showModal" :title="selectedJoya?.title" @close="closeModal">
       <template #content>
         <div class="modal-card-content p-5">
-          <GaleriaJema :images="[
-            '/src/assets/img/fotosFloresta/img_1.jpg',
-            '/src/assets/img/fotosFloresta/img_2.jpg',
-            '/src/assets/img/fotosFloresta/img_3.jpg',
-            '/src/assets/img/fotosFloresta/img_4.jpg',
-            '/src/assets/img/fotosFloresta/img_5.jpg',
-          ]" :interval="4000" />
+          <GaleriaJema v-if="selectedJoya?.images?.length" :images="selectedJoya.images" :interval="4000" />
           <div class="description-content">
             <p class="font-bolder text-xl font-sans text-center text-white">{{ selectedJoya?.description }}</p>
           </div>

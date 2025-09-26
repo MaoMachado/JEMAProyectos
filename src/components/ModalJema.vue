@@ -33,7 +33,7 @@ onBeforeUnmount(() => {
             <h2 class="text-3xl font-light">{{ props.title }}</h2>
             <button class="close-btn" @click="emit('close')">✖️</button>
           </header>
-          <div class="modal-body">
+          <div class="modal-body p-5">
             <slot name="content"></slot>
           </div>
         </div>
@@ -58,17 +58,19 @@ onBeforeUnmount(() => {
   & .modal-content {
     width: var(--width-1200);
     min-height: 80dvh;
-    background: rgb(59, 130, 246);
     margin-inline: auto;
     border-radius: 1rem;
-    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+    background: rgb(3, 13, 46);
+    color: white;
+    position: relative;
 
     .dark & {
-      background: rgb(3, 13, 46);
+      background: rgb(133, 177, 247);
+      color: black;
     }
 
     & .modal-header {
-      color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -80,7 +82,6 @@ onBeforeUnmount(() => {
       border: none;
       font-size: 1.2rem;
       cursor: pointer;
-      color: white;
     }
   }
 }
