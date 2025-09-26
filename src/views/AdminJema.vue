@@ -18,7 +18,7 @@ const newCard = ref({
 const isEditing = ref(false);
 const selectedCard = ref(null)
 const cards = ref([]);
-const files = ref([]); // imágenes seleccionadas
+const files = ref([]);
 const showModal = ref(false);
 
 const handleFileChange = (e) => {
@@ -31,11 +31,11 @@ const uploadImages = async () => {
   for (const file of files.value) {
     const fileName = `card-${Date.now()}-${file.name}`
 
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from("cards-images")
       .upload(fileName, file)
 
-    if (error) throw error
+    if (error) throw error;
 
     // obtener URL pública
     const { data: { publicUrl } } = supabase.storage
@@ -52,21 +52,23 @@ const saveCard = async () => {
   try {
     const imageUrls = await uploadImages()
 
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    if (userError) throw userError;
+    if (!user) throw new Error("No hay usuario logueado")
+
     const { error } = await supabase
       .from("cards")
       .insert({
         title: newCard.value.title,
         description: newCard.value.description,
         barrio: newCard.value.barrio,
-        images: imageUrls // guardamos array de URLs
+        images: imageUrls,
+        user_id: user.id
       })
 
-    if (error) throw error
+    if (error) throw error;
 
-    const { data: { user } } = await supabase.auth.getUser()
-    console.log("Usuario logeado:", user)
-
-    await fetchCards();
+    await fetchCards()
     alert("Card guardada con éxito ✅")
     showModal.value = false
   } catch (err) {
@@ -76,24 +78,26 @@ const saveCard = async () => {
 }
 
 async function updateCard() {
-  const { data, error } = await supabase
-    .from("cards")
-    .update({
-      title: newCard.value.title,
-      barrio: newCard.value.barrio,
-      description: newCard.value.description,
-      images: newCard.value.images
-    })
-    .eq("id", selectedCard.value.id)
+  try {
+    const { error } = await supabase
+      .from("cards")
+      .update({
+        title: newCard.value.title,
+        barrio: newCard.value.barrio,
+        description: newCard.value.description,
+        images: newCard.value.images
+      })
+      .eq("id", selectedCard.value.id)
 
-  if (error) {
-    console.error("Error actualizando card:", error.message)
-    return
+    if (error) throw error;
+
+    await fetchCards()
+    closeModal()
+    alert("Card actualizada ✅")
+  } catch (err) {
+    console.error("Error actualizando card:", err.message)
+    alert("Error al actualizar ❌")
   }
-
-  // refrescar lista
-  await fetchCards()
-  closeModal()
 }
 
 // Eliminar card
