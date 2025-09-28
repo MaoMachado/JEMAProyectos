@@ -29,8 +29,10 @@ const listDetails = [
 <template>
   <section class="que-hacemos font-sans" id="que-hacemos">
     <header class="que-hacemos-header">
-      <img :src="J" alt="Logo de JemaProyectos" loading="lazy">
       <h2>{{ title }}</h2>
+      <figure>
+        <img :src="J" alt="Logo de JemaProyectos" loading="lazy" />
+      </figure>
     </header>
 
     <article class="que-hacemos-article">
@@ -72,54 +74,62 @@ const listDetails = [
 
 <style scoped lang="scss">
 .que-hacemos {
-  display: grid;
-  place-content: center;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
   width: var(--width-1200);
-  min-height: 100dvh;
+  min-height: 100vh;
   margin-inline: auto;
+  margin-bottom: 10rem;
   position: relative;
 
   &::before {
     content: "";
     width: 200px;
     height: 200px;
-    background: rgba(30, 64, 175, 0.1);
+    background: rgba(3, 13, 46, 0.1);
     border-radius: 50%;
-    filter: blur(5px);
+    filter: blur(15px);
     position: absolute;
     z-index: -1;
-    top: 70%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
   & .que-hacemos-header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
+    justify-content: center;
     position: relative;
+    margin-bottom: 2rem;
 
     &::before {
       content: "";
-      width: 300px;
+      width: 475px;
       height: 5px;
-      background: linear-gradient(to right, transparent, rgba(59, 131, 246, 0.25));
+      background: linear-gradient(to right, transparent, rgba(3, 13, 46, 0.25));
       position: absolute;
       bottom: 0;
       border-radius: 1rem;
     }
 
     & h2 {
-      font-size: clamp(1em, 5vw, 3.5em);
-      transform: translateY(-25px);
+      font-size: clamp(1em, 5vw, 4em);
+      font-weight: lighter;
     }
 
-    & img {
-      width: 70px;
-      height: 70px;
+    & figure {
+      display: grid;
+      place-content: center;
+      width: 100px;
+      height: 100px;
+
+      & img {
+        width: 50px;
+        height: 50px;
+      }
     }
+
   }
 
   & .que-hacemos-article {
@@ -129,65 +139,70 @@ const listDetails = [
     width: clamp(300px, 80%, 1000px);
     margin-inline: auto;
 
-    & p {
-      font-size: 1.25em;
+    & p,
+    ul {
+      font-size: clamp(1em, 5vw, 1.5em);
       font-weight: lighter;
       text-align: center;
-    }
+      color: var(--color5);
 
-    & ul {
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: lighter;
+      .dark & {
+        color: white;
+      }
     }
   }
-}
 
-.list-details .list-details-item:hover .list-details-item-header span {
-  opacity: 1;
-}
+  & .list-details {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: center;
+    margin-block: 2.5rem;
 
-.list-details {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  align-items: center;
-  height: 100dvh;
+    & .list-details-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 250px;
+      padding: 0.5rem;
+      border: 2px solid rgba(59, 131, 246, 0.1);
+      border-radius: 10px;
 
-  & .list-details-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    height: 200px;
-    padding: 0.5rem;
-    border: 2px solid rgba(59, 131, 246, 0.1);
-    border-radius: 10px;
-
-    &:hover {
-      box-shadow: 0 0 5px rgba(59, 131, 246, 0.3), 0 0 10px rgba(59, 131, 246, 0.5), 0 0 15px rgba(59, 131, 246, 0.8);
-      border-color: rgb(59, 130, 246);
-    }
-
-    & .list-details-item-header {
-
-      & span {
-        padding: 2.5px;
-        background: rgba(59, 131, 246, 0.2);
-        border-radius: 5px;
-        opacity: 0.25;
-        font-size: 0.8em;
-        letter-spacing: 5px;
+      &:hover {
+        box-shadow: 0 0 5px rgba(59, 131, 246, 0.3), 0 0 10px rgba(59, 131, 246, 0.5), 0 0 15px rgba(59, 131, 246, 0.8);
+        border-color: rgb(59, 130, 246);
       }
 
-      & h3 {
-        font-size: 2em;
-        line-height: 28px;
+      &:hover .list-details-item-header span {
+        opacity: 1;
       }
-    }
 
-    p {
-      font-weight: lighter;
-      text-wrap: balance;
+      & .list-details-item-header {
+
+        & span {
+          padding: 5px;
+          background: rgba(59, 131, 246, 0.2);
+          border-radius: 5px;
+          opacity: 0.25;
+          font-size: 0.75em;
+          letter-spacing: 2.5px;
+        }
+
+        & h3 {
+          margin-top: 0.5rem;
+          font-size: clamp(1em, 5vw, 1.75em);
+          line-height: 30px;
+          text-align: center;
+        }
+      }
+
+      p {
+        font-weight: lighter;
+        text-wrap: balance;
+        text-align: justify;
+        font-size: clamp(1em, 5vw, 1.05em);
+      }
     }
   }
 }

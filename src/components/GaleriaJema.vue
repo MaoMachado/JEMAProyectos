@@ -96,15 +96,10 @@ onUnmounted(() => {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0);
-    border-radius: 1rem;
     border: none;
-    color: white;
     font-size: 2rem;
-    padding: 0.5rem 1rem;
     cursor: pointer;
     z-index: 2;
-    transition: background 0.1s ease;
 
     &.prev {
       left: 10px;
@@ -112,10 +107,6 @@ onUnmounted(() => {
 
     &.next {
       right: 10px;
-    }
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.5);
     }
   }
 

@@ -5,7 +5,8 @@ import ModalJema from '@/components/ModalJema.vue';
 import GaleriaJema from '@/components/GaleriaJema.vue';
 
 import joyaImg from '@/assets/img/joya.png'
-import portadaImg from '@/assets/img/fotosFloresta/img_5.jpg'
+import iconWhatsapp from '@/assets/img/icons/whatsapp.svg'
+import galleryImgs from '@/assets/img/icons/fotos.png'
 
 const title = ref("Nuestras Joyas");
 const showModal = ref(false);
@@ -49,10 +50,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="joyas font-sans" id="joyas">
+  <section class="joyas" id="joyas">
     <header class="joyas-header">
-      <img :src="joyaImg" alt="Joyas de JemaProyectos" loading="lazy">
       <h2>{{ title }}</h2>
+      <figure>
+        <img :src="joyaImg" alt="Joyas de JemaProyectos" loading="lazy">
+      </figure>
     </header>
 
     <article class="joyas-article">
@@ -60,19 +63,28 @@ onMounted(() => {
         <p>Cargando Joyas...</p>
       </div>
 
-      <div v-else-if="joyas.length === 0" class="flex place-content-center">
-        <p class="w-fit text-center text-2xl font-sans bg-blue-900/50 p-2 text-white rounded-xl">
-          No hay joyas disponibles
+      <div class="joyas-not-found" v-else-if="joyas.length === 0">
+        <p class="text-4xl font-light text-yellow-800 text-center">
+          No Hay Joyas Disponibles
         </p>
       </div>
 
       <div class="joyas-item" v-for="joya in joyas" :key="joya.id">
-        <figure @click="openModal(joya)">
-          <img :src="joya.images?.[0] || portadaImg" alt="Portada de la casa" loading="lazy" />
-          <figcaption class="">
+        <figure title="Ver mas info en el icono de la imagen">
+          <img class="joyas-img-portada" :src="joya.images?.[0] || portadaImg" alt="Portada de la casa"
+            loading="lazy" />
+          <figcaption>
             <span>{{ joya.barrio || "Sin Barrio" }}</span>
             <h3>{{ joya.title }}</h3>
             <p>{{ joya.description }}</p>
+            <div class="joyas-btn">
+              <a href="https://api.whatsapp.com/send?phone=573165124487" target="_blank" rel="noopener noreferrer">
+                <img :src="iconWhatsapp" alt="" loading="lazy">
+              </a>
+              <button type="button" @click="openModal(joya)" aria-label="Abrir galería de imágenes">
+                <img :src="galleryImgs" alt="" loading="lazy" />
+              </button>
+            </div>
           </figcaption>
         </figure>
       </div>
@@ -82,9 +94,9 @@ onMounted(() => {
     <ModalJema :show="showModal" :title="selectedJoya?.title" @close="closeModal">
       <template #content>
         <div class="modal-card-content p-5">
-          <GaleriaJema v-if="selectedJoya?.images?.length" :images="selectedJoya.images" :interval="4000" />
+          <GaleriaJema v-if="selectedJoya?.images?.length" :images="selectedJoya.images" :interval="5000" />
           <div class="description-content">
-            <p class="font-bolder text-xl font-sans text-center text-white">{{ selectedJoya?.description }}</p>
+            <p>{{ selectedJoya?.description }}</p>
           </div>
         </div>
       </template>
@@ -94,81 +106,109 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .joyas {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
   width: var(--width-1200);
   min-height: 100dvh;
   margin-inline: auto;
-  padding-inline: 1rem;
   position: relative;
-  background: linear-gradient(to bottom, rgba(59, 131, 246, 0.2), rgba(59, 131, 246, 0.1), transparent 75%);
-  border-radius: 1rem;
 
-  &::before {
+  &::after {
     content: "";
     position: absolute;
-    top: 50%;
-    right: 20%;
-    /* transform: translateY(50%); */
+    top: 10%;
+    left: 10%;
     width: 200px;
     height: 200px;
     background: linear-gradient(to right, transparent, rgba(25, 69, 139, 0.25));
     border-radius: 50%;
     z-index: -1;
-    filter: blur(10px);
+    filter: blur(15px);
+    animation: float 10s ease-in-out infinite alternate;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to right, transparent, rgba(25, 69, 139, 0.25));
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(15px);
+    animation: float 10s ease-in-out infinite alternate;
   }
 
   & .joyas-header {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     position: relative;
 
     &::before {
       content: "";
-      width: 300px;
+      width: 475px;
       height: 5px;
-      background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.25));
+      background: linear-gradient(to right, transparent, rgba(3, 13, 46, 0.25));
       position: absolute;
+      bottom: 0;
       border-radius: 1rem;
-      bottom: 2rem;
-    }
-
-    & img {
-      width: 200px;
-      height: 200px;
     }
 
     & h2 {
-      font-size: clamp(1em, 5vw, 3.5em);
-      transform: translateY(-60px);
+      font-size: clamp(1em, 5vw, 4em);
+      font-weight: lighter;
+    }
+
+    & figure {
+      display: grid;
+      place-content: center;
+      width: 100px;
+      height: 100px;
+
+      & img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
 
 .joyas-article {
 
+  & .joyas-not-found {
+    & p {
+      .dark & {
+        color: white;
+      }
+    }
+  }
+
   & .joyas-item {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
 
     & figure {
       width: 300px;
-      border-radius: 1rem 1rem 0 0;
       position: relative;
-      cursor: pointer;
-      transition: background 0.1s linear;
+      cursor: context-menu;
 
-      &:hover {
-        background: linear-gradient(to bottom, rgba(59, 131, 246, 0.2), transparent 100%);
-      }
-
-      &:hover img {
-        transform: translateY(-5px);
+      &:hover .joyas-img-portada {
+        transform: scale(1.02);
       }
 
       & img {
         width: 100%;
-        border-radius: 1rem;
-        margin-bottom: 1rem;
+        border-radius: 5px;
         transition: transform 0.1s linear;
       }
 
@@ -178,15 +218,11 @@ onMounted(() => {
         row-gap: 0.5rem;
         transition: transform 0.1s linear;
 
-        &:hover {
-          transform: translateX(0.5rem);
-        }
-
         & span {
-          font-size: 1.25em;
-          letter-spacing: 5px;
-          color: #333;
-          opacity: 0.5;
+          color: rgba(3, 13, 46, 0.4);
+          font-size: 1.05em;
+          font-weight: bold;
+          text-align: right;
 
           .dark & {
             color: #ccc; // Dark mode
@@ -194,18 +230,33 @@ onMounted(() => {
         }
 
         & h3 {
-          font-size: 1.5em;
+          font-size: clamp(1em, 5vw, 2em);
+          text-align: center;
+          font-weight: 400;
         }
 
         & p {
-          font-weight: lighter;
-          text-wrap: balance;
-          color: #333;
+          color: rgb(3, 13, 46);
+          text-align: center;
 
           .dark & {
             color: #ccc; // Dark mode
           }
         }
+
+        & .joyas-btn {
+          display: flex;
+          justify-content: flex-end;
+
+          & a,
+          img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+          }
+        }
+
       }
     }
   }
@@ -215,15 +266,23 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: var(--width-1200);
-
-  & img {
-    width: 50%;
-    margin-top: 0 !important;
-  }
+  width: clamp(300px, 100%, 500px);
 
   & .description-content {
-    width: 450px;
+
+    & p {
+      text-align: center;
+    }
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(20px, -30px) scale(1.1);
   }
 }
 </style>

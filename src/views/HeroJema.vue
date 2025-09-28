@@ -1,48 +1,52 @@
 <script setup>
-import J from '@/assets/img/J.png';
 </script>
 
 <template>
   <section class="hero" id="hero">
-    <header class="hero-header">
-      <h2 class="font-sans">GEMA INMOBILIARIA</h2>
-      <img :src="J" alt="Logo de JemaProyectos" loading="lazy" />
-    </header>
-    <article class="hero-article font-sans">
-      <div>
-        <p>
-          Aquí no encuentras propiedades, encuentras joyas del mercado inmobiliario
-        </p>
-      </div>
-    </article>
+    <div class="hero-overlay">
+      <header class="hero-header">
+        <h2 class="font-sans">GEMA INMOBILIARIA</h2>
+      </header>
+      <article class="hero-article font-sans">
+        <div>
+          <p>
+            Aquí no encuentras propiedades, encuentras joyas del mercado inmobiliario
+          </p>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 
 <style scoped lang="scss">
 .hero {
-  display: grid;
-  place-content: center;
-  height: 80dvh;
-  width: var(--width-1200);
-  margin-inline: auto;
-  padding-inline: 2rem;
-  background: linear-gradient(to right, transparent 30%, rgba(59, 131, 246, 0.1) 70%, rgba(59, 131, 246, 0.5) 100%);
-  border-radius: 1rem;
-  position: relative;
-  overflow: hidden;
+  height: 100vh;
+  padding-block: 10px;
+  transform: translateY(-90px);
+  z-index: -5;
 
-  &::before {
-    content: "";
-    width: 400px;
-    height: 400px;
-    background: rgba(30, 64, 175, 0.2);
-    position: absolute;
-    top: 15%;
-    left: -15%;
-    z-index: -1;
-    border-radius: 50%;
-    filter: blur(5px);
-    box-shadow: 0 0 20px hsla(0, 0%, 80%, 0.3);
+  & .hero-overlay {
+    place-content: center;
+    width: var(--width-1200);
+    height: 100%;
+    margin-inline: auto;
+    background: linear-gradient(to right, transparent 30%, rgba(59, 131, 246, 0.25) 100%);
+    border-radius: 1rem;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(to right, transparent 50%, rgba(59, 131, 246, 0.25) 100%);
+      position: absolute;
+      top: 15%;
+      left: -15%;
+      z-index: -5;
+      border-radius: 50%;
+      filter: blur(15px);
+      animation: pulse 5s ease-in-out infinite;
+    }
   }
 
   & .hero-header {
@@ -50,14 +54,14 @@ import J from '@/assets/img/J.png';
     align-items: start;
     justify-content: center;
 
-    & img {
-      width: 80px;
-      height: 80px;
-    }
-
     & h2 {
-      font-size: 4em;
-      text-shadow: 0 0 20px #ccc;
+      font-weight: 100;
+      font-size: clamp(1em, 5vw, 4em);
+      text-shadow: 0 0 20px rgba(3, 13, 46, 0.5);
+
+      .dark & {
+        text-shadow: 0 0 20px #ccc;
+      }
     }
   }
 }
@@ -71,9 +75,28 @@ import J from '@/assets/img/J.png';
 
     & p {
       font-size: 1.5em;
-      font-weight: lighter;
+      font-weight: 500;
       text-align: center;
+      color: var(--color5);
+
+      .dark &{
+        color: #ccc;
+      }
     }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.1;
+  }
+
+  100% {
+    scale: 1;
   }
 }
 </style>

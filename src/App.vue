@@ -17,7 +17,6 @@ import ToastGlobal from './components/ToastGlobal.vue';
 main {
   display: flex;
   flex-direction: column;
-  row-gap: 2.5rem;
   margin-bottom: 1rem;
 }
 </style>
