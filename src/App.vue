@@ -1,4 +1,5 @@
 <script setup>
+import FloatingButtons from './components/FloatingButtons.vue';
 import FooterJema from './components/FooterJema.vue';
 import HeaderJema from './components/HeaderJema.vue';
 import ToastGlobal from './components/ToastGlobal.vue';
@@ -10,6 +11,7 @@ import ToastGlobal from './components/ToastGlobal.vue';
     <ToastGlobal />
     <router-view />
   </main>
+  <FloatingButtons />
   <FooterJema />
 </template>
 
