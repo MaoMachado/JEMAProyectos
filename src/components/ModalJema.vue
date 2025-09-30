@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted, watch } from 'vue'
 
 
 const props = defineProps({
@@ -15,12 +15,21 @@ const handleKeydown = (e) => {
   }
 }
 
+watch(() => props.show, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+}, { immediate: true });
+
 onMounted(() => {
-  window.addEventListener("keydown", handleKeydown)
+  window.addEventListener("keydown", handleKeydown);
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener("keydown", handleKeydown)
+  window.removeEventListener("keydown", handleKeydown);
+  document.body.style.overflow = "auto"
 })
 </script>
 
@@ -82,6 +91,22 @@ onBeforeUnmount(() => {
       border: none;
       font-size: 1.2rem;
       cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .modal{
+
+    & .modal-content{
+      width: 100dvw;
+      height: 100dvh;
+      border-radius: 0;
+      overflow: auto;
+
+      & .modal-body{
+        padding: 0;
+      }
     }
   }
 }

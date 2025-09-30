@@ -1,19 +1,55 @@
 :root {
-  --color1: rgb(30, 63, 174);
-  --color2:   ;
-  --color3: rgba(30, 64, 175, 0.8);
-  --color4: rgba(59, 130, 246, 0.8);
-  --color5: rgb(3, 13, 46);
-  --width-1200: clamp(300px, 100%, 1200px);
+  --wide-1200: clamp(300px, 100%, 1200px);
+
+  --blanco: #fff;
+  --negro: #000;
+
+  --azul-oscuro: rgb(30, 63, 174);
+  --azul-claro: rgb(59, 130, 246);
+
+  --azul-oscuro-80: rgba(30, 63, 174, 0.8);
+  --azul-claro-80: rgba(59, 130, 246, 0.8);
+  --azul-oscuro-60: rgba(30, 63, 174, 0.6);
+  --azul-claro-60: rgba(59, 130, 246, 0.6);
+  --azul-oscuro-40: rgba(30, 63, 174, 0.4);
+  --azul-claro-40: rgba(59, 130, 246, 0.4);
+  --azul-oscuro-20: rgba(30, 63, 174, 0.2);
+  --azul-claro-20: rgba(59, 130, 246, 0.2);
+  --azul-oscuro-10: rgba(30, 63, 174, 0.1);
+  --azul-claro-10: rgba(59, 130, 246, 0.1);
+
+  --azul-dark: rgb(3, 13, 46);
+  --azul-light: rgb(59, 130, 246);
+
+  --azul-dark-80: rgba(3, 13, 46, 0.8);
+  --azul-light-80: rgba(59, 130, 246, 0.8);
+  --azul-dark-60: rgba(3, 13, 46, 0.6);
+  --azul-light-60: rgba(59, 130, 246, 0.6);
+  --azul-dark-40: rgba(3, 13, 46, 0.4);
+  --azul-light-40: rgba(59, 130, 246, 0.4);
+  --azul-dark-20: rgba(3, 13, 46, 0.2);
+  --azul-light-20: rgba(59, 130, 246, 0.2);
+  --azul-dark-10: rgba(3, 13, 46, 0.1);
+  --azul-light-10: rgba(59, 130, 246, 0.1);
+
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1200px;
 }
+
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1200px;
+
+$ancho-1200: clamp(300px, 100%, 1200px);
 
 body {
   background: #d8e6ec;
-  color: #000;
+  color: var(--negro);
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .dark body {
-  background: rgb(3, 13, 46);
-  color: #ccc;
+  background: var(--azul-dark);
+  color: var(--blanco);
 }

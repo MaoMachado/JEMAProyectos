@@ -4,6 +4,8 @@ import { toggleTheme } from "@/utils/theme";
 
 const show = ref(false);
 
+defineEmits(['toggleHeader'])
+
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
@@ -38,51 +40,74 @@ onMounted(() => {
     <button class="btn up" @click="scrollToTop">
       <img src="@/assets/img/icons/up.png" alt="Ir arriba" />
     </button>
+
+    <button class="btn menu" @click="$emit('toggleHeader')">
+      <img src="@/assets/img/icons/menu.svg" alt="Menu" />
+    </button>
   </span>
 </template>
 
 <style scoped lang="scss">
 .floating-btn {
   position: fixed;
-  top: 20px;
-  right: 10px;
+  top: 50%;
+  right: 15px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(20px);
+  transform: translateX(20px) translateY(-50%);
   transition: all 0.15s ease;
   z-index: 20;
 
   &.show {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: translateX(0) translateY(-50%);
   }
 
   & .btn {
+    display: grid;
+    place-content: center;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 
-    .dark &{
+    .dark & {
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
     }
 
-    &:hover{
+    &:hover {
       background: rgba(59, 130, 246, 0.8);
     }
 
     & img {
       width: 30px;
       height: 30px;
+    }
+  }
+
+  & .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-btn {
+    flex-direction: row;
+    top: 95%;
+    right: 22%;
+
+    & .btn {
+      background: var(--azul-oscuro-40);
+    }
+
+    & .menu{
+      display: grid;
     }
   }
 }

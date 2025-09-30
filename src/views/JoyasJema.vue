@@ -109,7 +109,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   row-gap: 5rem;
-  width: var(--width-1200);
+  width: var(--wide-1200);
   min-height: 100dvh;
   margin-inline: auto;
   position: relative;
@@ -283,6 +283,33 @@ onMounted(() => {
 
   to {
     transform: translate(20px, -30px) scale(1.1);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .joyas {
+
+    & .joyas-header {
+      flex-direction: column;
+
+      &::before {
+        display: none;
+      }
+
+      & h2 {
+        font-size: 3em;
+      }
+
+      & figure {
+        width: 100px;
+        height: 100px;
+
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
 }
 </style>

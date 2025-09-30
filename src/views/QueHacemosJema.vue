@@ -27,7 +27,7 @@ const listDetails = [
 </script>
 
 <template>
-  <section class="que-hacemos font-sans" id="que-hacemos">
+  <section class="que-hacemos" id="que-hacemos">
     <header class="que-hacemos-header">
       <h2>{{ title }}</h2>
       <figure>
@@ -77,7 +77,7 @@ const listDetails = [
   display: flex;
   flex-direction: column;
   row-gap: 2.5rem;
-  width: var(--width-1200);
+  width: var(--wide-1200);
   min-height: 100vh;
   margin-inline: auto;
   margin-bottom: 10rem;
@@ -203,6 +203,45 @@ const listDetails = [
         text-align: justify;
         font-size: clamp(1em, 5vw, 1.05em);
       }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .que-hacemos{
+    min-height: 100dvh;
+    margin-bottom: 0;
+
+    &::before{
+      top: 10%;
+    }
+
+    & .que-hacemos-header{
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0;
+
+      &::before{
+        display: none;
+      }
+
+      & h2{
+        font-size: 3em;
+      }
+
+      & figure{
+        width: 70px;
+        height: 70px;
+
+        & img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    & .que-hacemos-article{
+      width: 100%;
     }
   }
 }

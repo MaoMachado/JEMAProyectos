@@ -7,7 +7,7 @@
       <header class="hero-header">
         <h2 class="font-sans">GEMA INMOBILIARIA</h2>
       </header>
-      <article class="hero-article font-sans">
+      <article class="hero-article">
         <div>
           <p>
             Aquí no encuentras propiedades, encuentras joyas del mercado inmobiliario
@@ -22,14 +22,14 @@
 .hero {
   height: 100vh;
   padding-block: 10px;
-  transform: translateY(-90px);
+  transform: translateY(-80px);
   z-index: -5;
 
   & .hero-overlay {
     place-content: center;
-    width: var(--width-1200);
-    height: 100%;
+    width: var(--wide-1200);
     margin-inline: auto;
+    height: 100%;
     background: linear-gradient(to right, transparent 30%, rgba(59, 131, 246, 0.25) 100%);
     border-radius: 1rem;
     position: relative;
@@ -69,9 +69,6 @@
 .hero-article {
 
   & div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 
     & p {
       font-size: 1.5em;
@@ -79,7 +76,7 @@
       text-align: center;
       color: var(--color5);
 
-      .dark &{
+      .dark & {
         color: #ccc;
       }
     }
@@ -97,6 +94,45 @@
 
   100% {
     scale: 1;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .hero {
+    height: 100dvh;
+    transform: translateY(0);
+    padding: 0;
+
+    & .hero-overlay {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.25rem;
+      background: rgba(59, 131, 246, 0.25);
+
+      &::before {
+        display: none;
+      }
+    }
+
+    & .hero-header {
+
+      & h2 {
+        font-size: 3em;
+        text-align: center;
+        line-height: 3rem;
+      }
+    }
+
+    & .hero-article {
+      padding-inline: 1rem;
+
+      & p {
+        font-size: 1.2em;
+        text-wrap: balance;
+        text-align: center;
+        font-weight: normal;
+      }
+    }
   }
 }
 </style>

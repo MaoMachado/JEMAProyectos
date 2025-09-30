@@ -22,7 +22,7 @@ footer {
   & div {
     display: flex;
     column-gap: 2.5rem;
-    width: var(--width-1200);
+    width: var(--wide-1200);
     margin-inline: auto;
 
     & h2 {
@@ -31,6 +31,16 @@ footer {
       .dark & {
         color: #ccc;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  footer{
+
+    & div{
+      justify-content: center;
+      column-gap: 1rem;
     }
   }
 }
