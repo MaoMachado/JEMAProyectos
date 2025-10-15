@@ -34,7 +34,7 @@ onMounted(() => {
     </a>
 
     <button class="btn darkmode" @click="toggleTheme">
-      <img src="@/assets/img/icons/dark-theme.svg" alt="Modo oscuro" />
+      <img src="@/assets/img/icons/img-oscuro.png" alt="Modo oscuro" />
     </button>
 
     <button class="btn up" @click="scrollToTop">
@@ -70,8 +70,8 @@ onMounted(() => {
   & .btn {
     display: grid;
     place-content: center;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
@@ -98,12 +98,11 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .floating-btn {
-    flex-direction: row;
-    top: 95%;
-    right: 22%;
+    flex-direction: column;
+    right: 1rem;
 
     & .btn {
-      background: var(--azul-oscuro-40);
+      background: var(--azul-claro-40);
     }
 
     & .menu{

@@ -97,40 +97,41 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .hero {
+    inline-size: 100%;
     height: 100dvh;
+    padding: 1rem;
     transform: translateY(0);
-    padding: 0;
 
     & .hero-overlay {
       display: flex;
       flex-direction: column;
       row-gap: 1.25rem;
-      background: rgba(59, 131, 246, 0.25);
+      padding-inline: 0.85rem;
+      background: linear-gradient(to bottom, transparent, rgba(59, 131, 246, 0.1));
 
       &::before {
-        display: none;
+        transform: translateX(-170px);
       }
     }
 
     & .hero-header {
 
       & h2 {
-        font-size: 3em;
-        text-align: center;
         line-height: 3rem;
+        text-align: center;
+        font-size: clamp(2.5em, 8vw, 4em);
+        font-weight: 400;
       }
     }
 
     & .hero-article {
-      padding-inline: 1rem;
 
       & p {
         font-size: 1.2em;
-        text-wrap: balance;
         text-align: center;
-        font-weight: normal;
+        font-weight: 800;
       }
     }
   }

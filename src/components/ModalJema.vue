@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, watch } from 'vue'
-
+import btnClose from "@/assets/img/icons/cerrar.svg"
 
 const props = defineProps({
   show: Boolean,
@@ -40,7 +40,9 @@ onBeforeUnmount(() => {
         <div class="modal-content">
           <header class="modal-header">
             <h2 class="text-3xl font-light">{{ props.title }}</h2>
-            <button class="close-btn" @click="emit('close')">✖️</button>
+            <button class="close-btn" @click="emit('close')">
+              <img :src="btnClose" alt="Botón de cerrar el modal" loading="lazy" />
+            </button>
           </header>
           <div class="modal-body p-5">
             <slot name="content"></slot>
@@ -75,8 +77,8 @@ onBeforeUnmount(() => {
     position: relative;
 
     .dark & {
-      background: rgb(133, 177, 247);
-      color: black;
+      background: var(--azul-oscuro-80);
+      color: var(--blanco);
     }
 
     & .modal-header {
@@ -95,17 +97,15 @@ onBeforeUnmount(() => {
   }
 }
 
-@media screen and (max-width: 425px){
-  .modal{
+@media screen and (max-width: 768px) {
+  .modal {
 
-    & .modal-content{
-      width: 100dvw;
-      height: 100dvh;
-      border-radius: 0;
-      overflow: auto;
+    & .modal-content {
+      width: clamp(400px, 100dvw, 700px);
 
-      & .modal-body{
+      & .modal-body {
         padding: 0;
+        margin-inline: auto;
       }
     }
   }

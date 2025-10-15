@@ -27,6 +27,7 @@ footer {
 
     & h2 {
       place-self: center;
+      opacity: 0.25;
 
       .dark & {
         color: #ccc;
@@ -35,12 +36,17 @@ footer {
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   footer{
 
     & div{
+      align-items: center;
       justify-content: center;
       column-gap: 1rem;
+
+      & h2{
+        text-align: center;
+      }
     }
   }
 }

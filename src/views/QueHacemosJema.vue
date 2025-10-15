@@ -207,31 +207,32 @@ const listDetails = [
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .que-hacemos{
-    min-height: 100dvh;
+    row-gap: 1rem;
+    inline-size: 100%;
+    min-block-size: 100dvh;
+    padding: 1rem;
     margin-bottom: 0;
 
     &::before{
-      top: 10%;
+      top: 0;
     }
 
     & .que-hacemos-header{
-      flex-direction: column;
+      flex-wrap: wrap;
       align-items: center;
-      margin-bottom: 0;
-
-      &::before{
-        display: none;
-      }
+      gap: 1rem;
 
       & h2{
-        font-size: 3em;
+        font-size: clamp(2em, 8vw, 3em);
+        font-weight: 500;
+        text-shadow: 0 0 10px var(--azul-claro-80);
       }
 
       & figure{
-        width: 70px;
-        height: 70px;
+        width: 10%;
+        height: 10%;
 
         & img{
           width: 100%;
@@ -242,6 +243,15 @@ const listDetails = [
 
     & .que-hacemos-article{
       width: 100%;
+      padding: 0.5rem;
+
+      & p, ul{
+        text-align: justify;
+
+        & li{
+          text-align: center;
+        }
+      }
     }
   }
 }

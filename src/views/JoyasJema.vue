@@ -286,18 +286,20 @@ onMounted(() => {
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .joyas {
+    inline-size: 100%;
+    block-size: 100dvh;
+    place-content: center;
+    gap: 1rem;
 
     & .joyas-header {
-      flex-direction: column;
-
-      &::before {
-        display: none;
-      }
+      flex-wrap: wrap;
 
       & h2 {
-        font-size: 3em;
+        font-size: clamp(2em, 8vw, 3em);
+        font-weight: 500;
+        text-shadow: 0 0 10px var(--azul-claro-80);
       }
 
       & figure {
@@ -308,6 +310,47 @@ onMounted(() => {
           width: 100%;
           height: 100%;
         }
+      }
+    }
+
+    & .joyas-article {
+
+      & .joyas-item {
+        flex-direction: row;
+
+        & figure {
+          padding: 0.5rem;
+          background: var(--azul-claro-20);
+          border-radius: 0.5rem;
+          border: 2px solid var(--azul-claro-40);
+
+          & figcaption{
+            gap: 0;
+
+            & span{
+              color: var(--azul-claro-80);
+            }
+
+            & h3{
+              font-size: 1.5em;
+              margin-bottom: 1rem;
+            }
+
+            & p{
+              margin-bottom: 2rem;
+            }
+          }
+        }
+      }
+    }
+
+    & .modal-card-content{
+      margin-inline: auto;
+      padding: 0;
+      gap: 0.5rem;
+
+      & p{
+        font-size: clamp(1.25em, 3vw, 2.5em);
       }
     }
   }
