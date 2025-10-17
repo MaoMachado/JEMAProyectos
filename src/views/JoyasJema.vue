@@ -93,7 +93,7 @@ onMounted(() => {
     <!-- Modal -->
     <ModalJema :show="showModal" :title="selectedJoya?.title" @close="closeModal">
       <template #content>
-        <div class="modal-card-content p-5">
+        <div class="modal-card-content">
           <GaleriaJema v-if="selectedJoya?.images?.length" :images="selectedJoya.images" :interval="5000" />
           <div class="description-content">
             <p>{{ selectedJoya?.description }}</p>
@@ -108,9 +108,10 @@ onMounted(() => {
 .joyas {
   display: flex;
   flex-direction: column;
-  row-gap: 5rem;
-  width: var(--wide-1200);
-  min-height: 100dvh;
+  place-content: center;
+  row-gap: 1rem;
+  inline-size: var(--wide-1200);
+  min-block-size: 100vh;
   margin-inline: auto;
   position: relative;
 
@@ -146,26 +147,27 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2.5rem;
     position: relative;
-
-    &::before {
-      content: "";
-      width: 475px;
-      height: 5px;
-      background: linear-gradient(to right, transparent, rgba(3, 13, 46, 0.25));
-      position: absolute;
-      bottom: 0;
-      border-radius: 1rem;
-    }
 
     & h2 {
       font-size: clamp(1em, 5vw, 4em);
-      font-weight: lighter;
+      font-weight: 400;
+      position: relative;
+      text-shadow: 0 0 20px var(--azul-claro-80);
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right, transparent, var(--azul-oscuro-40));
+        position: absolute;
+        bottom: 0;
+        border-radius: 1rem;
+      }
     }
 
     & figure {
-      display: grid;
-      place-content: center;
       width: 100px;
       height: 100px;
 
@@ -175,106 +177,109 @@ onMounted(() => {
       }
     }
   }
-}
 
-.joyas-article {
+  & .joyas-article {
 
-  & .joyas-not-found {
-    & p {
-      .dark & {
-        color: white;
+    & .joyas-not-found {
+      & p {
+
+        .dark & {
+          color: white;
+        }
+      }
+    }
+
+    & .joyas-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 1rem;
+      overflow: hidden;
+
+      & figure {
+        width: 320px;
+        padding: 0.85rem;
+        position: relative;
+        cursor: context-menu;
+        box-shadow: 0 4px 12px var(--azul-oscuro-40);
+        border-radius: 1rem;
+
+        &:hover .joyas-img-portada {
+          transform: scale(1.02);
+        }
+
+        & img {
+          width: 100%;
+          transition: transform 0.1s linear;
+        }
+
+        & figcaption {
+          display: flex;
+          flex-direction: column;
+          row-gap: 1rem;
+          transition: transform 0.1s linear;
+
+          & span {
+            color: var(--azul-claro);
+            font-size: 1.05em;
+            font-weight: lighter;
+            text-align: right;
+            text-shadow: 0 0 20px var(--blanco);
+          }
+
+          & h3 {
+            font-size: 1.85em;
+            text-align: center;
+            line-height: 2rem;
+            font-weight: 500;
+          }
+
+          & p {
+            text-align: center;
+            font-weight: lighter;
+            font-size: 1.25em;
+          }
+
+          & .joyas-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-block-start: 1.25rem;
+
+            & a,
+            img {
+              width: 40px;
+              height: 40px;
+              cursor: pointer;
+            }
+          }
+
+        }
       }
     }
   }
 
-  & .joyas-item {
+  & .modal-card-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-    overflow: hidden;
+    gap: 2rem;
+    width: 500px;
 
-    & figure {
-      width: 300px;
-      position: relative;
-      cursor: context-menu;
+    & .description-content {
 
-      &:hover .joyas-img-portada {
-        transform: scale(1.02);
-      }
-
-      & img {
-        width: 100%;
-        border-radius: 5px;
-        transition: transform 0.1s linear;
-      }
-
-      & figcaption {
-        display: flex;
-        flex-direction: column;
-        row-gap: 0.5rem;
-        transition: transform 0.1s linear;
-
-        & span {
-          color: rgba(3, 13, 46, 0.4);
-          font-size: 1.05em;
-          font-weight: bold;
-          text-align: right;
-
-          .dark & {
-            color: #ccc; // Dark mode
-          }
-        }
-
-        & h3 {
-          font-size: clamp(1em, 5vw, 2em);
-          text-align: center;
-          font-weight: 400;
-        }
-
-        & p {
-          color: rgb(3, 13, 46);
-          text-align: center;
-
-          .dark & {
-            color: #ccc; // Dark mode
-          }
-        }
-
-        & .joyas-btn {
-          display: flex;
-          justify-content: flex-end;
-
-          & a,
-          img {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
-          }
-        }
-
+      & p {
+        text-align: center;
+        font-size: 1.25em;
+        font-weight: lighter;
       }
     }
   }
 }
 
-.modal-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: clamp(300px, 100%, 500px);
 
-  & .description-content {
 
-    & p {
-      text-align: center;
-    }
-  }
-}
+
 
 @keyframes float {
   from {
@@ -324,19 +329,19 @@ onMounted(() => {
           border-radius: 0.5rem;
           border: 2px solid var(--azul-claro-40);
 
-          & figcaption{
+          & figcaption {
             gap: 0;
 
-            & span{
+            & span {
               color: var(--azul-claro-80);
             }
 
-            & h3{
+            & h3 {
               font-size: 1.5em;
               margin-bottom: 1rem;
             }
 
-            & p{
+            & p {
               margin-bottom: 2rem;
             }
           }
@@ -344,12 +349,12 @@ onMounted(() => {
       }
     }
 
-    & .modal-card-content{
+    & .modal-card-content {
       margin-inline: auto;
       padding: 0;
       gap: 0.5rem;
 
-      & p{
+      & p {
         font-size: clamp(1.25em, 3vw, 2.5em);
       }
     }

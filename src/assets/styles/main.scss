@@ -1,5 +1,5 @@
 :root {
-  --wide-1200: clamp(300px, 100%, 1200px);
+  --wide-1200: clamp(300px, 100vw, 1200px);
 
   --blanco: #fff;
   --negro: #000;

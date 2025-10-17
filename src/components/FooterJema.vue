@@ -21,6 +21,7 @@ footer {
 
   & div {
     display: flex;
+    justify-content: center;
     column-gap: 2.5rem;
     width: var(--wide-1200);
     margin-inline: auto;

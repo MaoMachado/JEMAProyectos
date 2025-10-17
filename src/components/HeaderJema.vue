@@ -92,7 +92,10 @@ header {
   justify-content: space-between;
   width: var(--wide-1200);
   margin-inline: auto;
-  padding: 1rem;
+  padding-inline: 2.5rem;
+  position: relative;
+  z-index: 10;
+  transform: translateY(20px);
 
   & .btn-close {
     display: none;
@@ -131,7 +134,8 @@ header {
   }
 
   & .header-logo {
-    height: 50px;
+    height: 60px;
+    transform: translateX(50px);
 
     & img {
       width: 100%;
@@ -146,42 +150,37 @@ header {
       gap: 1rem;
 
       & a {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 100;
-        font-size: 1.1em;
+        font-weight: 400;
+        font-size: 1.35em;
         position: relative;
 
         &::before {
           content: "";
           position: absolute;
-          width: 100%;
-          height: 3px;
-          background: var(--color1);
-          bottom: -2px;
           left: 0;
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.3s ease;
-          border-radius: 2rem;
+          bottom: 0;
+          width: 0;
+          height: 3.5px;
+          transform: translateY(5px);
+          border-radius: 1rem;
+          background: linear-gradient(to right, var(--azul-claro-20), var(--azul-claro-40));
+          transition: width 0.25s linear;
+          box-shadow: 0 0 10px hsla(0, 0%, 80%, 0.2);
+        }
+
+        &:hover::before {
+          width: 100%;
         }
 
         &:hover {
-          color: var(--color5);
-          transform: translateY(-1px);
-
-          .dark & {
-            color: var(--color2);
-          }
-
-          &::before {
-            transform: scaleX(1);
-          }
+          color: var(--azul-claro);
+          text-shadow: 0 0 10px hsla(0, 0%, 80%, 0.5);
         }
       }
 
       & .btn-theme {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         cursor: pointer;
         position: relative;
 
@@ -197,6 +196,7 @@ header {
           width: 100%;
           height: 100%;
           background: url('@/assets/img/icons/img-oscuro.png') center no-repeat;
+          background-size: contain;
           transition: transform 0.3s ease;
         }
       }
@@ -213,13 +213,14 @@ header {
     top: 5px;
     left: 5px;
     z-index: 100;
-    inline-size: 30dvw;
+    inline-size: 40dvw;
     min-inline-size: 300px;
     min-block-size: 98dvh;
     background: var(--azul-light-40);
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
     box-shadow: 0 0 20px var(--azul-light-60);
+    transform: translateY(0);
 
     & .btn-close {
       display: inline-block;
@@ -239,6 +240,7 @@ header {
 
     & .header-logo {
       height: 80px;
+      transform: translateX(0);
       filter: drop-shadow(0 0 10px hsla(0, 0%, 100%, 0.5));
     }
 

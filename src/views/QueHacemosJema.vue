@@ -77,56 +77,58 @@ const listDetails = [
   display: flex;
   flex-direction: column;
   row-gap: 2.5rem;
-  width: var(--wide-1200);
-  min-height: 100vh;
+  inline-size: var(--wide-1200);
+  min-block-size: 100vh;
   margin-inline: auto;
-  margin-bottom: 10rem;
+  padding: 1rem;
   position: relative;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px var(--azul-oscuro-20);
 
   &::before {
     content: "";
-    width: 200px;
-    height: 200px;
-    background: rgba(3, 13, 46, 0.1);
-    border-radius: 50%;
-    filter: blur(15px);
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(to bottom, var(--azul-claro-40), transparent 50%);
+    border-radius: 100%;
+    filter: blur(40px);
     position: absolute;
     z-index: -1;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-100%) translateY(100%);
+    right: 0;
   }
 
   & .que-hacemos-header {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
     position: relative;
-    margin-bottom: 2rem;
-
-    &::before {
-      content: "";
-      width: 475px;
-      height: 5px;
-      background: linear-gradient(to right, transparent, rgba(3, 13, 46, 0.25));
-      position: absolute;
-      bottom: 0;
-      border-radius: 1rem;
-    }
 
     & h2 {
       font-size: clamp(1em, 5vw, 4em);
-      font-weight: lighter;
+      font-weight: 400;
+      position: relative;
+      text-shadow: 0 0 20px var(--azul-claro-80);
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right, transparent, var(--azul-oscuro-40));
+        position: absolute;
+        bottom: 0;
+        border-radius: 1rem;
+      }
     }
 
     & figure {
-      display: grid;
-      place-content: center;
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
 
       & img {
-        width: 50px;
-        height: 50px;
+        width: 100%;
+        height: 100%;
       }
     }
 
@@ -141,7 +143,7 @@ const listDetails = [
 
     & p,
     ul {
-      font-size: clamp(1em, 5vw, 1.5em);
+      font-size: clamp(1em, 5vw, 1.85em);
       font-weight: lighter;
       text-align: center;
       color: var(--color5);
@@ -155,9 +157,7 @@ const listDetails = [
   & .list-details {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    align-items: center;
-    margin-block: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
     & .list-details-item {
       display: flex;
@@ -165,7 +165,7 @@ const listDetails = [
       justify-content: space-between;
       gap: 1rem;
       min-height: 250px;
-      padding: 0.5rem;
+      padding: 0.85rem;
       border: 2px solid rgba(59, 131, 246, 0.1);
       border-radius: 10px;
 
@@ -190,65 +190,69 @@ const listDetails = [
         }
 
         & h3 {
-          margin-top: 0.5rem;
-          font-size: clamp(1em, 5vw, 1.75em);
-          line-height: 30px;
+          font-size: clamp(1em, 5vw, 2em);
           text-align: center;
+          font-weight: bold;
         }
       }
 
       p {
         font-weight: lighter;
         text-wrap: balance;
-        text-align: justify;
-        font-size: clamp(1em, 5vw, 1.05em);
+        text-align: center;
+        font-size: clamp(1em, 5vw, 1.25em);
       }
     }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .que-hacemos{
+  .que-hacemos {
     row-gap: 1rem;
     inline-size: 100%;
     min-block-size: 100dvh;
     padding: 1rem;
     margin-bottom: 0;
 
-    &::before{
+    &::before {
+      width: 200px;
+      height: 200px;
+      transform: translateX(0) translateY(0);
+      right: 0;
       top: 0;
     }
 
-    & .que-hacemos-header{
+    & .que-hacemos-header {
       flex-wrap: wrap;
       align-items: center;
       gap: 1rem;
 
-      & h2{
+      & h2 {
         font-size: clamp(2em, 8vw, 3em);
         font-weight: 500;
         text-shadow: 0 0 10px var(--azul-claro-80);
       }
 
-      & figure{
+      & figure {
         width: 10%;
         height: 10%;
 
-        & img{
+        & img {
           width: 100%;
           height: 100%;
         }
       }
     }
 
-    & .que-hacemos-article{
+    & .que-hacemos-article {
       width: 100%;
       padding: 0.5rem;
 
-      & p, ul{
+      & p,
+      ul {
         text-align: justify;
 
-        & li{
+        & li {
           text-align: center;
         }
       }

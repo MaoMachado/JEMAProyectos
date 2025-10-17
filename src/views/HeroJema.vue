@@ -5,14 +5,17 @@
   <section class="hero" id="hero">
     <div class="hero-overlay">
       <header class="hero-header">
-        <h2 class="font-sans">GEMA INMOBILIARIA</h2>
+        <h1 class="font-sans">GEMA INMOBILIARIA</h1>
       </header>
+
       <article class="hero-article">
-        <div>
-          <p>
-            Aquí no encuentras propiedades, encuentras joyas del mercado inmobiliario
-          </p>
-        </div>
+        <p>
+          Aquí no encuentras propiedades, encuentras joyas del mercado inmobiliario
+        </p>
+      </article>
+
+      <article class="hero-joyas-enlace">
+        <a href="#joyas" class="ultimas-joyas">Conoce Las Ultimas Joyas</a>
       </article>
     </div>
   </section>
@@ -20,12 +23,14 @@
 
 <style scoped lang="scss">
 .hero {
+  width: 100%;
   height: 100vh;
   padding-block: 10px;
-  transform: translateY(-80px);
-  z-index: -5;
+  transform: translateY(-65px);
+  z-index: 5;
 
   & .hero-overlay {
+    display: grid;
     place-content: center;
     width: var(--wide-1200);
     margin-inline: auto;
@@ -36,43 +41,40 @@
 
     &::before {
       content: "";
-      width: 500px;
-      height: 500px;
+      width: 600px;
+      height: 600px;
       background: linear-gradient(to right, transparent 50%, rgba(59, 131, 246, 0.25) 100%);
       position: absolute;
       top: 15%;
       left: -15%;
       z-index: -5;
       border-radius: 50%;
-      filter: blur(15px);
+      filter: blur(20px);
       animation: pulse 5s ease-in-out infinite;
     }
   }
 
   & .hero-header {
-    display: flex;
-    align-items: start;
-    justify-content: center;
+    text-align: center;
 
-    & h2 {
-      font-weight: 100;
+    & h1 {
+      font-weight: 500;
       font-size: clamp(1em, 5vw, 4em);
       text-shadow: 0 0 20px rgba(3, 13, 46, 0.5);
+      letter-spacing: 5px;
+      line-height: 4rem;
 
       .dark & {
         text-shadow: 0 0 20px #ccc;
       }
     }
   }
-}
 
-.hero-article {
-
-  & div {
+  & .hero-article {
 
     & p {
-      font-size: 1.5em;
-      font-weight: 500;
+      font-size: 1.85em;
+      font-weight: 400;
       text-align: center;
       color: var(--color5);
 
@@ -80,6 +82,29 @@
         color: #ccc;
       }
     }
+  }
+
+  & .hero-joyas-enlace {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+
+    & .ultimas-joyas {
+      padding: 5px 8.5px;
+      cursor: pointer;
+      border: 2px solid var(--azul-oscuro-80);
+      border-radius: 1rem;
+      background: linear-gradient(to right, transparent, var(--azul-oscuro-20));
+      font-size: 1.25em;
+      font-weight: 100;
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+      &:hover {
+        transform: translateY(-2.5px);
+        box-shadow: 0 0 20px var(--azul-oscuro-20);
+      }
+    }
+
   }
 }
 
@@ -107,31 +132,43 @@
     & .hero-overlay {
       display: flex;
       flex-direction: column;
-      row-gap: 1.25rem;
       padding-inline: 0.85rem;
-      background: linear-gradient(to bottom, transparent, rgba(59, 131, 246, 0.1));
+      background: linear-gradient(to bottom, transparent, rgba(59, 131, 246, 0.1), transparent);
 
       &::before {
-        transform: translateX(-170px);
+        width: 500px;
+        height: 500px;
+        transform: translateX(-125px);
       }
     }
 
     & .hero-header {
 
-      & h2 {
-        line-height: 3rem;
+      & h1 {
+        line-height: 5rem;
+        letter-spacing: 2.5px;
         text-align: center;
-        font-size: clamp(2.5em, 8vw, 4em);
-        font-weight: 400;
+        font-size: clamp(2.5em, 8vw, 3.5em);
+        font-weight: 500;
       }
     }
 
     & .hero-article {
-
       & p {
         font-size: 1.2em;
         text-align: center;
-        font-weight: 800;
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero {
+    & .hero-header {
+
+      & h1 {
+        line-height: 3rem;
       }
     }
   }
