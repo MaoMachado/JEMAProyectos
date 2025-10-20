@@ -74,11 +74,11 @@ onMounted(() => {
     height: 40px;
     border-radius: 50%;
     border: none;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    filter: drop-shadow(0 0 8px var(--azul-oscuro-40));
     cursor: pointer;
 
     .dark & {
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+      filter: drop-shadow(0 0 8px var(--azul-claro-60));
     }
 
     &:hover {
@@ -101,12 +101,49 @@ onMounted(() => {
     flex-direction: column;
     right: 1rem;
 
-    & .btn {
-      background: var(--azul-claro-40);
+    & .darkmode,
+    .up,
+    .menu {
+      & img {
+        filter: brightness(0);
+      }
     }
 
-    & .menu{
+    .dark & {
+
+      & .darkmode,
+      .up,
+      .menu {
+        & img {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+
+    & .menu {
       display: grid;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .floating-btn {
+    flex-direction: row;
+    top: 2rem;
+
+    &.show {
+      gap: 0;
+      opacity: 0.3;
+    }
+
+    & .btn {
+      width: 35px;
+      height: 35px;
+
+      & img {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 }

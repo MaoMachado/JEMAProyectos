@@ -5,7 +5,7 @@
   <section class="hero" id="hero">
     <div class="hero-overlay">
       <header class="hero-header">
-        <h1 class="font-sans">GEMA INMOBILIARIA</h1>
+        <h1>GEMA INMOBILIARIA</h1>
       </header>
 
       <article class="hero-article">
@@ -26,7 +26,7 @@
   width: 100%;
   height: 100vh;
   padding-block: 10px;
-  transform: translateY(-65px);
+  transform: translateY(-60px);
   z-index: 5;
 
   & .hero-overlay {
@@ -35,8 +35,7 @@
     width: var(--wide-1200);
     margin-inline: auto;
     height: 100%;
-    background: linear-gradient(to right, transparent 30%, rgba(59, 131, 246, 0.25) 100%);
-    border-radius: 1rem;
+    background: linear-gradient(to right, transparent 30%, var(--azul-claro-20) 70%, transparent);
     position: relative;
 
     &::before {
@@ -60,12 +59,12 @@
     & h1 {
       font-weight: 500;
       font-size: clamp(1em, 5vw, 4em);
-      text-shadow: 0 0 20px rgba(3, 13, 46, 0.5);
+      text-shadow: 0 0 20px var(--azul-oscuro-60);
       letter-spacing: 5px;
       line-height: 4rem;
 
       .dark & {
-        text-shadow: 0 0 20px #ccc;
+        text-shadow: 0 0 20px var(--azul-claro-80);
       }
     }
   }
@@ -124,21 +123,20 @@
 
 @media screen and (max-width: 768px) {
   .hero {
-    inline-size: 100%;
+    inline-size: 100dvw;
     height: 100dvh;
-    padding: 1rem;
     transform: translateY(0);
 
     & .hero-overlay {
       display: flex;
       flex-direction: column;
       padding-inline: 0.85rem;
-      background: linear-gradient(to bottom, transparent, rgba(59, 131, 246, 0.1), transparent);
+      background: linear-gradient(to bottom, transparent 30%, var(--azul-claro-20) 70%, transparent);
 
       &::before {
         width: 500px;
         height: 500px;
-        transform: translateX(-125px);
+        transform: translateX(0);
       }
     }
 
@@ -165,9 +163,36 @@
 
 @media screen and (max-width: 480px) {
   .hero {
+
+    & .hero-overlay {
+      overflow: hidden;
+
+      &::before {
+        width: 300px;
+        height: 300px;
+        transform: translateX(-150px);
+        top: 0;
+      }
+
+      &::after {
+        content: "";
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(to left, rgba(59, 131, 246, 0.25) 50%, transparent 100%);
+        position: absolute;
+        bottom: 2.5rem;
+        right: 0;
+        z-index: -5;
+        border-radius: 50%;
+        filter: blur(20px);
+        transform: translateX(200px)
+      }
+    }
+
     & .hero-header {
 
       & h1 {
+        font-size: 2em;
         line-height: 3rem;
       }
     }

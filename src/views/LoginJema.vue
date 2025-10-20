@@ -53,9 +53,9 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <section class="w-full min-h-[70vh] grid place-content-center">
+  <section class="login">
     <div class="login-container">
-      <h2 class="font-sans font-bold text-3xl text-center">Inicia La Sesión</h2>
+      <h2 class="font-sans font-bold text-3xl text-center mb-5">Inicia La Sesión</h2>
       <form @submit.prevent="handleLogin">
         <div class="input-container">
           <label for="email">👷</label>
@@ -73,69 +73,75 @@ const handleLogin = async () => {
 </template>
 
 <style scoped lang="scss">
-.login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
+.login {
+  inline-size: 100%;
+  block-size: 77vh;
+  place-content: center;
 
-  & form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
+  & .login-container {
     width: fit-content;
-    position: relative;
+    margin-inline: auto;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: -110%;
-      width: 100%;
-      height: 50px;
-      background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.2));
-      border-radius: 200px;
-      z-index: -1;
-      filter: blur(10px);
-    }
-
-    & input {
-      border: 1px solid rgba(59, 131, 246, 0.5);
-      border-radius: 1rem;
-      padding: 0.5rem;
-      transition: border-color 0.2s ease-in-out;
-
-      &:focus {
-        outline: none;
-        border-color: rgb(3, 13, 46);
-      }
-
-      .dark & {
-        border-color: rgba(255, 255, 255, 0.5);
-      }
-    }
-
-    & label {
-      font-size: 2.2rem;
-    }
-
-    & .btn-primary {
-      padding: 0.5rem 1rem;
-      border: 1px solid rgba(59, 131, 246, 0.5);
-      border-radius: 1rem;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 1.1rem;
-
-      &:hover {
-        background-color: rgba(59, 131, 246, 0.5);
-      }
-    }
-
-    & .input-container {
+    & form {
       display: flex;
+      flex-direction: column;
+      gap: 1rem;
       align-items: center;
+      position: relative;
+
+      & input {
+        border: 1px solid rgba(59, 131, 246, 0.5);
+        border-radius: 1rem;
+        padding: 0.5rem;
+        transition: border-color 0.2s ease-in-out;
+
+        &:focus {
+          outline: none;
+          border-color: rgb(3, 13, 46);
+        }
+
+        .dark & {
+          border-color: rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      & label {
+        font-size: 2.2rem;
+      }
+
+      & .btn-primary {
+        padding: 0.5rem 1rem;
+        border: 1px solid rgba(59, 131, 246, 0.5);
+        border-radius: 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1.1rem;
+
+        &:hover {
+          background-color: rgba(59, 131, 246, 0.5);
+        }
+      }
+
+      & .input-container {
+        display: flex;
+        align-items: center;
+      }
     }
   }
+}
+
+
+@media screen and (max-width: 480px) {
+  .login {
+    inline-size: 100dvw;
+    block-size: 100dvh;
+    place-content: center;
+
+    & .login-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
 }
 </style>

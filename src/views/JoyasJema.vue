@@ -263,8 +263,8 @@ onMounted(() => {
   & .modal-card-content {
     display: flex;
     flex-direction: column;
+    place-content: center;
     gap: 2rem;
-    width: 500px;
 
     & .description-content {
 
@@ -276,10 +276,6 @@ onMounted(() => {
     }
   }
 }
-
-
-
-
 
 @keyframes float {
   from {
@@ -293,9 +289,8 @@ onMounted(() => {
 
 @media screen and (max-width: 768px) {
   .joyas {
-    inline-size: 100%;
+    inline-size: 100dvw;
     block-size: 100dvh;
-    place-content: center;
     gap: 1rem;
 
     & .joyas-header {
@@ -350,8 +345,7 @@ onMounted(() => {
     }
 
     & .modal-card-content {
-      margin-inline: auto;
-      padding: 0;
+      padding: 1rem;
       gap: 0.5rem;
 
       & p {

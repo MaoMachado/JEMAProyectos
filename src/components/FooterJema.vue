@@ -51,4 +51,15 @@ footer {
     }
   }
 }
+
+@media screen and (max-width: 468px) {
+  footer{
+
+    & div{
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+  }
+}
 </style>

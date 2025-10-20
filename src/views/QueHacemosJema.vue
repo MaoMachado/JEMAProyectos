@@ -82,8 +82,6 @@ const listDetails = [
   margin-inline: auto;
   padding: 1rem;
   position: relative;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px var(--azul-oscuro-20);
 
   &::before {
     content: "";
@@ -209,17 +207,17 @@ const listDetails = [
 @media screen and (max-width: 768px) {
   .que-hacemos {
     row-gap: 1rem;
-    inline-size: 100%;
+    inline-size: 100dvw;
     min-block-size: 100dvh;
     padding: 1rem;
     margin-bottom: 0;
 
     &::before {
-      width: 200px;
-      height: 200px;
-      transform: translateX(0) translateY(0);
-      right: 0;
-      top: 0;
+      width: 300px;
+      height: 300px;
+      transform: translateX(50%) translateY(0);
+      right: 50%;
+      top: 300px;
     }
 
     & .que-hacemos-header {
@@ -251,6 +249,7 @@ const listDetails = [
       & p,
       ul {
         text-align: justify;
+        font-size: clamp(1em, 5vw, 1.35em);
 
         & li {
           text-align: center;

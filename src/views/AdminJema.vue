@@ -147,26 +147,26 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="w-full h-screen">
+  <section class="w-full h-[77vh] place-content-center px-4">
     <div class="admin-container">
       <header class="admin-header">
-        <h2 class="text-center text-3xl font-semibold">{{ datos.title }}</h2>
+        <h2 class="text-center text-5xl font-semibold">{{ datos.title }}</h2>
         <p class="text-center text-xl font-light text-sky-800">{{ datos.subtitle }}</p>
       </header>
 
-      <article class="w-full flex flex-col gap-4">
-        <div>
+      <article class="w-full flex flex-col admin-info-table">
+        <div class="my-4 ml-auto px-4">
           <button @click="openAddModal" class="bg-blue-500 text-white p-2 rounded-xl font-bold">
             Agregar Joya Card
           </button>
         </div>
 
-        <section class="w-full">
+        <section class="w-full admin-table-container">
           <h2 class="text-2xl font-semibold text-center mb-5">Lista de Joya Cards</h2>
 
           <table class="w-full border-collapse">
-            <thead class="bg-sky-100">
-              <tr>
+            <thead>
+              <tr class="text-2xl">
                 <th class="border p-2 text-left">Título</th>
                 <th class="border p-2 text-left">Barrio</th>
                 <th class="border p-2 text-left">Descripción</th>
@@ -176,7 +176,7 @@ onMounted(async () => {
             </thead>
 
             <tbody>
-              <tr v-for="card in cards" :key="card.id" class="hover:bg-gray-100">
+              <tr v-for="card in cards" :key="card.id">
                 <td class="border p-2">{{ card.title }}</td>
                 <td class="border p-2">{{ card.barrio }}</td>
                 <td class="border p-2 truncate max-w-xs">{{ card.description }}</td>
@@ -235,30 +235,9 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
   width: var(--width-1200);
-  min-height: 30dvh;
-  margin-inline: auto;
   padding: 0.5rem;
-  border: 2px solid rgba(30, 64, 175, 0.25);
   border-radius: 1rem;
-
-  & .admin-header {
-    position: relative;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50%;
-      height: 5px;
-      background: linear-gradient(to right, transparent, rgba(3, 13, 46, 0.5));
-      border-radius: 1rem;
-      bottom: 2rem;
-    }
-  }
 }
 
 form {
@@ -268,7 +247,6 @@ form {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-
 
     & label {
       font-weight: 400;
@@ -290,6 +268,24 @@ form {
     border-radius: 1rem;
     position: absolute;
     bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .admin-container{
+
+    & .admin-table-container{
+      overflow-x: auto;
+
+      & table{
+        min-width: 600px;
+
+        & td, th{
+          font-size: 0.8em;
+          font-weight: lighter;
+        }
+      }
+    }
   }
 }
 </style>

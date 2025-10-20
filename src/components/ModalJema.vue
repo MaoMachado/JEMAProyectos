@@ -35,11 +35,11 @@ onBeforeUnmount(() => {
 
 <template>
   <transition name="fade">
-    <section class="modal" v-if="props.show" @click.self="emit('close')">
+    <section class="modal" v-if="props.show" @click.self="emit('close')" role="dialog" aria-modal="true">
       <transition name="slide-right">
-        <div class="modal-content">
+        <div v-if="props.show" class="modal-content">
           <header class="modal-header">
-            <h2 class="text-3xl font-light">{{ props.title }}</h2>
+            <h2 class="text-4xl max-md:text-xl">{{ props.title }}</h2>
             <button class="close-btn" @click="emit('close')">
               <img :src="btnClose" alt="Botón de cerrar el modal" loading="lazy" />
             </button>
@@ -57,27 +57,26 @@ onBeforeUnmount(() => {
 .modal {
   display: grid;
   place-content: center;
-  width: 100%;
-  height: 100%;
-  background: hsla(0, 0%, 0%, 0.2);
-  backdrop-filter: blur(5px);
+  inline-size: 100vw;
+  block-size: 100vh;
+  background: hsla(0, 0%, 0%, 0.4);
+  backdrop-filter: blur(5px) saturate(120%);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
 
   & .modal-content {
-    width: var(--width-1200);
-    min-height: 80dvh;
-    margin-inline: auto;
-    border-radius: 1rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-    background: rgb(3, 13, 46);
-    color: white;
+    width: min(50vw, 1200px);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem var(--azul-oscuro-60);
+    background: var(--azul-claro-60);
+    color: var(--negro);
     position: relative;
 
     .dark & {
-      background: var(--azul-oscuro-80);
+      box-shadow: 0 0 1rem var(--azul-claro-40);
+      background: var(--azul-oscuro-60);
       color: var(--blanco);
     }
 
@@ -89,10 +88,16 @@ onBeforeUnmount(() => {
     }
 
     & .close-btn {
+      width: 40px;
+      height: 40px;
       background: transparent;
       border: none;
-      font-size: 1.2rem;
       cursor: pointer;
+
+      & img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
@@ -101,7 +106,8 @@ onBeforeUnmount(() => {
   .modal {
 
     & .modal-content {
-      width: clamp(400px, 100dvw, 700px);
+      width: 95dvw;
+      margin-inline: auto;
 
       & .modal-body {
         padding: 0;
@@ -128,7 +134,7 @@ onBeforeUnmount(() => {
 
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: all 0.4s ease;
+  transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .slide-right-enter-from {
