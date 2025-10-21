@@ -80,7 +80,6 @@ const listDetails = [
   inline-size: var(--wide-1200);
   min-block-size: 100vh;
   margin-inline: auto;
-  padding: 1rem;
   position: relative;
 
   &::before {

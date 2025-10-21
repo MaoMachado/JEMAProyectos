@@ -1,6 +1,7 @@
 <script setup>
 const title = "Copyright © 2025 gemainmobiliaria.com"
 import imgJ from "@/assets/img/J.png"
+import SuscripcionJema from "./SuscripcionJema.vue";
 </script>
 
 <template>
@@ -10,19 +11,23 @@ import imgJ from "@/assets/img/J.png"
       <RouterLink to="/login">
         <img class="w-8 h-8 brightness-50" :src="imgJ" alt="Logo de JemaProyectos" loading="lazy">
       </RouterLink>
+      <SuscripcionJema />
     </div>
   </footer>
 </template>
 
 <style scoped lang="scss">
 footer {
+  inline-size: 100%;
+  min-block-size: 200px;
   place-content: center;
-  min-height: 100px;
+  padding-block: 2rem;
 
   & div {
     display: flex;
-    justify-content: center;
-    column-gap: 2.5rem;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
     width: var(--wide-1200);
     margin-inline: auto;
 
@@ -38,14 +43,17 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-  footer{
+  footer {
+    width: 100%;
 
-    & div{
+    & div {
+      width: 100%;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       column-gap: 1rem;
 
-      & h2{
+      & h2 {
         text-align: center;
       }
     }
@@ -53,12 +61,12 @@ footer {
 }
 
 @media screen and (max-width: 468px) {
-  footer{
+  footer {
+    padding-inline: 1rem;
 
-    & div{
+    & div {
       flex-direction: column;
       gap: 1rem;
-      padding: 1rem;
     }
   }
 }

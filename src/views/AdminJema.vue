@@ -137,9 +137,27 @@ function openAddModal() {
 function editCard(card) {
   isEditing.value = true
   selectedCard.value = card
-  newCard.value = { ...card } // clonar datos
+  newCard.value = { ...card }
   showModal.value = true
 }
+
+const enviarNewsletter = async () => {
+  try {
+    const response = await fetch("https://yjuoxhayeiktnnhsoeqw.supabase.co/functions/v1/newsletter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_KEY}`,
+      },
+    });
+
+    const text = await response.text();
+    alert(text); // “✅ Correos enviados exitosamente” o “No hay suscriptores aún.”
+  } catch (err) {
+    console.error("Error al enviar newsletter:", err);
+    alert("❌ Error al enviar el newsletter.");
+  }
+};
 
 onMounted(async () => {
   fetchCards()
@@ -155,9 +173,13 @@ onMounted(async () => {
       </header>
 
       <article class="w-full flex flex-col admin-info-table">
-        <div class="my-4 ml-auto px-4">
-          <button @click="openAddModal" class="bg-blue-500 text-white p-2 rounded-xl font-bold">
+        <div class="admin-btn-container flex gap-4 my-4 ml-auto px-4">
+          <button @click="openAddModal" class="btn btn-agregar-card">
             Agregar Joya Card
+          </button>
+
+          <button @click="enviarNewsletter" class="btn btn-enviar">
+            Enviar Correo 📬
           </button>
         </div>
 
@@ -238,6 +260,25 @@ onMounted(async () => {
   width: var(--width-1200);
   padding: 0.5rem;
   border-radius: 1rem;
+
+  & article {
+
+    & .admin-btn-container {
+
+      & .btn {
+        padding: 0.5rem 0.85rem;
+        background: var(--azul-claro-40);
+        border: 2px solid var(--azul-claro-80);
+        border-radius: 0.5rem;
+        font-size: 1em;
+        font-weight: 500;
+
+        &:hover {
+          background: var(--azul-claro-80);
+        }
+      }
+    }
+  }
 }
 
 form {
@@ -272,15 +313,16 @@ form {
 }
 
 @media screen and (max-width: 480px) {
-  .admin-container{
+  .admin-container {
 
-    & .admin-table-container{
+    & .admin-table-container {
       overflow-x: auto;
 
-      & table{
+      & table {
         min-width: 600px;
 
-        & td, th{
+        & td,
+        th {
           font-size: 0.8em;
           font-weight: lighter;
         }

@@ -5,6 +5,8 @@ import FooterJema from './components/FooterJema.vue';
 import HeaderJema from './components/HeaderJema.vue';
 import ToastGlobal from './components/ToastGlobal.vue';
 
+import { probarConexion } from './utils/testSupabase';
+
 const showHeader = ref(true);
 const isMobile = ref(false);
 
@@ -16,6 +18,8 @@ function updateViewport() {
 onMounted(() => {
   updateViewport();
   window.addEventListener("resize", updateViewport);
+
+  probarConexion();
 });
 
 onBeforeUnmount(() => {
@@ -46,7 +50,7 @@ onBeforeUnmount(() => {
 main {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  inline-size: 100%;
 }
 
 .overlay {
