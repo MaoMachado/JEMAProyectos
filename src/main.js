@@ -14,15 +14,13 @@ initAuthListener(router);
 
 supabase.auth.getSession().then(({ data }) => {
   if (data.session) {
-    console.log("🔄 Sesión recuperada:", data.session.user.email);
     localStorage.setItem("jema_user", JSON.stringify(data.session.user));
   } else {
-    console.log("⚠️ No hay sesión activa");
     localStorage.removeItem("jema_user");
   }
 });
 
-app.use(createPinia())
+app.use(createPinia());
 app.use(router);
 app.mount("#app");
 

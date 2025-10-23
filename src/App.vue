@@ -91,13 +91,13 @@ main {
 
 .slide-left-enter-from,
 .slide-left-leave-to {
-  transform: translateX(-100%);
+  transform: translateY(-100%);
   opacity: 0;
 }
 
 .slide-left-enter-to,
 .slide-left-leave-from {
-  transform: translateX(0);
+  transform: translateY(0);
   opacity: 1;
 }
 </style>

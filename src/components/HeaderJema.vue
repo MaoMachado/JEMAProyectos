@@ -31,6 +31,7 @@ const handleLogout = async () => {
 
 onMounted(async () => {
   const localUser = JSON.parse(localStorage.getItem("jema_user"));
+
   if (localUser) {
     isLoggedIn.value = true;
     return;
@@ -53,49 +54,57 @@ onBeforeUnmount(() => {
 
 <template>
   <header>
-    <button class="btn-close" @click="$emit('close')" aria-label="Botón Cerrar">
-      <img src="@/assets/img/icons/cerrar.svg" />
-    </button>
-
-    <div class="header-icons">
-      <a href="https://wa.me/573123456789" target="_blank" rel="noopener noreferrer" aria-label="Enlace hacia WhatsApp">
-        <img src="@/assets/img/icons/whatsapp.svg" loading="lazy" />
-      </a>
-
-      <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Enlace hacia Facebook">
-        <img src="@/assets/img/icons/facebook.svg" />
-      </a>
-
-      <button v-if="isLoggedIn" @click="handleLogout" class="btn-logout" aria-label="Cerrar Sesión">
-        Cerrar sesión
+    <div class="header-container">
+      <button class="btn-close" @click="$emit('close')" aria-label="Botón Cerrar">
+        <img src="@/assets/img/icons/cerrar.svg" />
       </button>
+
+      <RouterLink to="/" class="header-logo">
+        <img class="w-full h-15" :src="Jema" alt="Logo de JemaProyectos" loading="lazy">
+      </RouterLink>
+
+      <div class="header-icons">
+        <a href="https://wa.me/573123456789" target="_blank" rel="noopener noreferrer"
+          aria-label="Enlace hacia WhatsApp">
+          <img src="@/assets/img/icons/whatsapp.svg" loading="lazy" />
+        </a>
+
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Enlace hacia Facebook">
+          <img src="@/assets/img/icons/facebook.svg" />
+        </a>
+
+        <button v-if="isLoggedIn" @click="handleLogout" class="btn-logout" aria-label="Cerrar Sesión">
+          Cerrar sesión
+        </button>
+      </div>
+
+      <section class="header-navbar">
+        <nav class="navbar-container">
+          <a href="#que-hacemos" @click="handleLinkClick">¿Qué Hacemos?</a>
+          <a href="#joyas" @click="handleLinkClick">Joyas</a>
+          <button class="btn-theme" @click="toggleTheme()" aria-label="Cambiar el tema"></button>
+        </nav>
+      </section>
     </div>
-
-    <RouterLink to="/" class="header-logo">
-      <img class="w-full h-15" :src="Jema" alt="Logo de JemaProyectos" loading="lazy">
-    </RouterLink>
-
-    <section class="header-navbar">
-      <nav class="header-container">
-        <a href="#que-hacemos" @click="handleLinkClick">¿Qué Hacemos?</a>
-        <a href="#joyas" @click="handleLinkClick">Joyas</a>
-        <button class="btn-theme" @click="toggleTheme()" aria-label="Cambiar el tema"></button>
-      </nav>
-    </section>
   </header>
 </template>
 
 <style scoped lang="scss">
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: var(--wide-1200);
-  margin-inline: auto;
-  padding-inline: 2.5rem;
+  width: 100%;
   position: relative;
   z-index: 10;
-  transform: translateY(20px);
+  transform: translateY(25px);
+  animation: slideUp 0.5s ease-out forwards;
+
+  & .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--wide-1200);
+    height: 70px;
+    margin-inline: auto;
+  }
 
   & .btn-close {
     display: none;
@@ -116,11 +125,19 @@ header {
     & a {
       width: 40px;
       height: 40px;
+      padding: 0.25rem;
       transition: filter 0.3s ease;
 
       & img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        border-radius: 100%;
+        filter: drop-shadow(0 0 10px var(--azul-oscuro-40));
+
+        .dark & {
+          filter: drop-shadow(0 0 10px var(--azul-claro-60));
+        }
       }
     }
 
@@ -135,7 +152,6 @@ header {
 
   & .header-logo {
     height: 60px;
-    transform: translateX(50px);
 
     & img {
       width: 100%;
@@ -144,10 +160,16 @@ header {
   }
 
   & .header-navbar {
-    & .header-container {
+    & .navbar-container {
       display: flex;
       align-items: center;
       gap: 1rem;
+
+      .dark & {
+        .btn-theme::before {
+          filter: brightness(0) invert(1);
+        }
+      }
 
       & a {
         font-weight: 400;
@@ -173,7 +195,7 @@ header {
         }
 
         &:hover {
-          color: var(--azul-claro);
+          color: var(--azul-claro-80);
           text-shadow: 0 0 10px hsla(0, 0%, 80%, 0.5);
         }
       }
@@ -191,13 +213,14 @@ header {
         &::before {
           content: "";
           position: absolute;
-          left: -3px;
-          top: 2px;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           background: url('@/assets/img/icons/img-oscuro.png') center no-repeat;
           background-size: contain;
           transition: transform 0.3s ease;
+          filter: brightness(0) invert(0);
         }
       }
     }
@@ -206,32 +229,41 @@ header {
 
 @media screen and (max-width: 768px) {
   header {
-    flex-direction: column;
-    justify-content: center;
-    row-gap: 1rem;
     position: fixed;
-    top: 5px;
-    left: 5px;
+    top: 0;
     z-index: 100;
-    inline-size: 40dvw;
-    min-inline-size: 300px;
-    min-block-size: 98dvh;
-    background: var(--azul-light-40);
-    backdrop-filter: blur(10px);
-    border-radius: 0.5rem;
-    box-shadow: 0 0 20px var(--azul-light-60);
+    inline-size: 100%;
+    min-block-size: 30dvh;
+    padding: 1rem;
+    background: var(--azul-claro-60);
+    backdrop-filter: blur(20px);
+    place-content: center;
     transform: translateY(0);
+
+    .dark & {
+      background: var(--azul-oscuro-20);
+    }
+
+    & .header-container {
+      flex-direction: column;
+      gap: 2.5rem;
+      width: 100%;
+      height: 100%;
+    }
 
     & .btn-close {
       display: inline-block;
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: var(--azul-claro-40);
-      border-radius: 50%;
       border: none;
-      color: var(--blanco);
       padding: 0.25rem;
+
+      & img {
+        width: 100%;
+        height: 100%;
+        filter: brightness(1) invert(1);
+      }
     }
 
     & .header-icons {
@@ -239,25 +271,19 @@ header {
     }
 
     & .header-logo {
-      height: 80px;
-      transform: translateX(0);
-      filter: drop-shadow(0 0 10px hsla(0, 0%, 100%, 0.5));
+      height: 60px;
     }
 
     & .header-navbar {
       width: 100%;
 
-      & .header-container {
+      & .navbar-container {
         flex-direction: column;
-        align-items: start;
-        gap: 0.5rem;
 
         & a {
-          padding-inline-start: 0.5rem;
-          color: var(--blanco);
           font-size: 1.5em;
-          border-radius: 5px 0 0 5px;
-          border-inline-start: 5px solid hsla(0, 0%, 100%, 0.5);
+          text-shadow: 0 0 10px var(--azul-claro-80);
+          color: var(--blanco);
           animation: slideIn 0.3s ease forwards;
         }
 
@@ -278,6 +304,16 @@ header {
       opacity: 1;
       transform: translateX(0);
     }
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 </style>

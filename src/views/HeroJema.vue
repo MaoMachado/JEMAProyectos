@@ -25,9 +25,25 @@
 .hero {
   width: 100%;
   height: 100vh;
-  padding-block: 10px;
-  transform: translateY(-60px);
+  transform: translateY(-70px);
+  background: linear-gradient(to right, transparent 30%, var(--azul-claro-20) 70%, transparent);
+  position: relative;
   z-index: 5;
+  animation: fadeSlide 0.8s ease-out forwards;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, #d8e6ec);
+  }
+
+  .dark &::after {
+    background: linear-gradient(to bottom, transparent, var(--azul-dark));
+  }
 
   & .hero-overlay {
     display: grid;
@@ -35,7 +51,6 @@
     width: var(--wide-1200);
     margin-inline: auto;
     height: 100%;
-    background: linear-gradient(to right, transparent 30%, var(--azul-claro-20) 70%, transparent);
     position: relative;
 
     &::before {
@@ -125,18 +140,18 @@
   .hero {
     inline-size: 100dvw;
     height: 100dvh;
+    background: transparent;
     transform: translateY(0);
 
     & .hero-overlay {
       display: flex;
       flex-direction: column;
       padding-inline: 0.85rem;
-      background: linear-gradient(to bottom, transparent 30%, var(--azul-claro-20) 70%, transparent);
 
       &::before {
         width: 500px;
         height: 500px;
-        transform: translateX(0);
+        transform: translateX(-200px);
       }
     }
 
@@ -170,22 +185,8 @@
       &::before {
         width: 300px;
         height: 300px;
-        transform: translateX(-150px);
-        top: 0;
-      }
-
-      &::after {
-        content: "";
-        width: 300px;
-        height: 300px;
-        background: linear-gradient(to left, rgba(59, 131, 246, 0.25) 50%, transparent 100%);
-        position: absolute;
-        bottom: 2.5rem;
-        right: 0;
-        z-index: -5;
-        border-radius: 50%;
-        filter: blur(20px);
-        transform: translateX(200px)
+        transform: translateX(-100px);
+        top: 25px;
       }
     }
 
@@ -196,6 +197,16 @@
         line-height: 3rem;
       }
     }
+  }
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 </style>
