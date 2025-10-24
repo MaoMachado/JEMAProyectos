@@ -51,7 +51,7 @@ onMounted(() => {
 
 <template>
   <section class="joyas" id="joyas">
-    <header class="joyas-header">
+    <header class="joyas-header" data-aos="fade-up" data-aos-duration="800">
       <h2>{{ title }}</h2>
       <figure>
         <img :src="joyaImg" alt="Joyas de JemaProyectos" loading="lazy">
@@ -69,7 +69,7 @@ onMounted(() => {
         </p>
       </div>
 
-      <div class="joyas-item" v-for="joya in joyas" :key="joya.id">
+      <div class="joyas-item" v-for="joya in joyas" :key="joya.id" data-aos="zoom-in" data-aos-duration="1000">
         <figure title="Ver mas info en el icono de la imagen">
           <img class="joyas-img-portada" :src="joya.images?.[0] || portadaImg" alt="Portada de la casa"
             loading="lazy" />

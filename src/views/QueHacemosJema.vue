@@ -1,5 +1,6 @@
 <script setup>
 import J from "@/assets/img/J.png"
+
 const title = "¿Qué Hacemos?"
 
 const listDetails = [
@@ -28,7 +29,7 @@ const listDetails = [
 
 <template>
   <section class="que-hacemos" id="que-hacemos">
-    <header class="que-hacemos-header">
+    <header class="que-hacemos-header" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out-back">
       <h2>{{ title }}</h2>
       <figure>
         <img :src="J" alt="Logo de JemaProyectos" loading="lazy" />
@@ -36,13 +37,13 @@ const listDetails = [
     </header>
 
     <article class="que-hacemos-article">
-      <p>
+      <p data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out-back">
         En <strong class="text-blue-500">Gema Inmobiliaria</strong> nos especializamos en <strong
           class="text-blue-500">captar propiedades con verdadero potencial</strong>. Nuestro equipo analiza a fondo cada
         inmueble evaluando:
       </p>
 
-      <ul>
+      <ul data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out-back">
         <li>
           <strong class="text-blue-500">Valorización proyectada</strong> de la zona.
         </li>
@@ -54,13 +55,13 @@ const listDetails = [
         </li>
       </ul>
 
-      <p>
+      <p data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out-back">
         De esta manera, garantizamos que cada propiedad que ofrecemos no sea solo un inmueble más, sino una
         <strong class="text-blue-500">inversión sólida y estratégica</strong> para nuestros clientes.
       </p>
     </article>
 
-    <article class="list-details">
+    <article class="list-details" data-aos="fade-up" data-aos-duration="1200" data-aos-easing="ease-out-back">
       <div class="list-details-item" v-for="details in listDetails" :key="details.id">
         <header class="list-details-item-header">
           <span>{{ details.id }}</span>

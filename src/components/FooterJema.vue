@@ -6,7 +6,7 @@ import SuscripcionJema from "./SuscripcionJema.vue";
 
 <template>
   <footer>
-    <div>
+    <div data-aos="slide-up">
       <h2 class="text-lg text-gray-600 font-light">{{ title }}</h2>
       <RouterLink to="/login">
         <img class="w-8 h-8 brightness-50" :src="imgJ" alt="Logo de JemaProyectos" loading="lazy">
